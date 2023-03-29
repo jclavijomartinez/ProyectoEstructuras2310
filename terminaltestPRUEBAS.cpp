@@ -29,12 +29,18 @@ int main() {
   while (true) {
     imprimirSimbolo();
     getline(std::cin, input);
+
+    comandos elComando;
+    movimientos elMov;
+    analisis elAnal;
+    elemento elElem;
+
     
     switch (input[0]) {
         case 'c':
              if (input.substr(0, 14) == "cargar_comandos") {
                 
-                cargar_comando(input);
+                elComando.cargar_comando(input);
 
             }//fin cargar_comandos
              else if (input.substr(0, 15) == "cargar_elementos") {
@@ -50,13 +56,13 @@ int main() {
         case 'a':
              if (input.substr(0, 17) == "agregar_movimiento") {
                 
-                agregar_mov(input);
+                elMov.agregar_mov(input);
 
             }//fin agregar_movimiento
             
               else if (input.substr(0, 16) == "agregar_analisis") {
                 
-                agregar_analisis(input);
+                elAnal.agregar_analisis(input);
 
             }//fin agregar_análisis
             
@@ -64,7 +70,7 @@ int main() {
                 cout << "Opción elegida: agregar_elemento" << endl;
 
 
-                cargar_elemento(input);
+                elElem.cargar_elemento(input);
 
    
     
