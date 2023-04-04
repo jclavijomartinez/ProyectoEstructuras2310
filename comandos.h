@@ -8,7 +8,7 @@ private:
     std::string comando ;
 
 public:
-   comandos(std::string comando);
+   comandos comandos::consstructor(std::string comando);
     
    void cargar_comando(std::string input); //AGREGAR COMANDO
 

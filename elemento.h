@@ -11,7 +11,8 @@ private:
     int coord_x, coord_y;
 
 public:
-   elemento(char tipo, double tamano, char unidad, int x, int y);
+  
+   elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int y);
     
     void cargar_elemento(std::string input);
 
