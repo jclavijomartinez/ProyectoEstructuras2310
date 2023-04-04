@@ -2,7 +2,7 @@
 cout<<"Descripción:"<<endl;
 cout<<"Carga en memoria los comandos de desplazamiento contenidos en el archivo identificado por nombre_archivo, sobrescribiendo cualquier información previamente cargada en memoria"<<endl;
 cout<<"Uso"<<endl;
-cout<<"    - cargar_comandos [nombre_archivo"<<endl;
+cout<<"    - cargar_comandos [nombre_archivo]"<<endl;
 cout<<"Parámetros"<<endl;
 cout<<"    - [nombre_archivo]: el nombre o ruta del archivo que contiene los comandos de desplazamiento"<<endl;
 cout<<"Salida en pantalla"<<endl;
