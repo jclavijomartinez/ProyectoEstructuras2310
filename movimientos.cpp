@@ -3,15 +3,15 @@
 
 using namespace std;
 
-
-movimientos movimientos::consstructor(char tipoMov,float magnitud, char uniMed){
+/*
+movimientos consstructor(char tipoMov,float magnitud, char uniMed){
 
     this->tipoMov=tipoMov;
     this->magnitud=magnitud;
     this->uniMed=uniMed;
 
 }
-
+*/
 
 void agregar_mov (  string input ) {
 	

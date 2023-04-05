@@ -12,7 +12,7 @@ private:
 
 public:
   
-   elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int y);
+  // elemento cosntructor(char tipo, double tamano, char unidad, int x, int y);
     
     void cargar_elemento(std::string input);
 

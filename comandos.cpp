@@ -5,14 +5,14 @@
 #include <sstream>
 
 using namespace std;
-
+/*
 comandos comandos::consstructor(std::string comando){
 
     this->comando=comando;
 
 }
 
-
+*/
 
 void cargar_comando ( string input ) {
 	

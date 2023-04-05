@@ -6,8 +6,8 @@ using namespace std;
 
 
 //Constructor
-
-elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int y){
+/*
+elemento cosntructor(char tipo, double tamano, char unidad, int x, int y){
 
    this ->tipo_componente=tipo;
             this->tamano=tamano;
@@ -15,7 +15,7 @@ elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int
                 this->coord_x=x;
             this->coord_y=y;
 }
-
+*/
 void cargar_elemento( string input ) {
 	
   char tipo_componente;

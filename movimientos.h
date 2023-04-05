@@ -10,7 +10,7 @@ private:
   char uniMed;
 
 public:
-   movimientos movimientos::consstructor(char tipoMov, float magnitud, char uniMed);
+  // movimientos consstructor(char tipoMov, float magnitud, char uniMed);
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
