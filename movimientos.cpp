@@ -1,22 +1,25 @@
 #include "movimientos.h"
 #include <iostream>
+#include <cstring>
+#include <fstream>
 
 using namespace std;
 
-/*
-movimientos consstructor(char tipoMov,float magnitud, char uniMed){
+
+movimientos movimientos::consstructor(char tipoMov,float magnitud, char uniMed){
 
     this->tipoMov=tipoMov;
     this->magnitud=magnitud;
     this->uniMed=uniMed;
 
 }
-*/
+
 
 void agregar_mov (  string input ) {
 	
 	char tipo_movimiento = input[18];
-                double magnitud = stod(input.substr(20, input.find(" ", 20) - 20));
+                double magnitud ;
+              //  magnitud= atof(strtok(input, " "));
                 char unidad = input[input.find(" ", 20) + 1];
 
                 cout << "Opción elegida: agregar_movimiento" << endl;
@@ -40,8 +43,6 @@ void agregar_mov (  string input ) {
                 cout << "Magnitud: " << magnitud << endl;
                 cout << "Unidad de medida: " << unidad << endl;
 
-
-/*movimientos elMovimiento= movimientos::consstructor(tipo_movimiento, magnitud, unidad);*/
 
 
 }

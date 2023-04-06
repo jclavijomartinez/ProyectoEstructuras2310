@@ -10,7 +10,7 @@ private:
     std::string comentario ;
 
 public:
-   //analisis analisis::cosstructor(char tipo, char objeto, std::string comentario);
+   analisis cosstructor(char tipo, char objeto, std::string comentario);
     
    void agregar_analisis(std::string input); //AGREGAR ANALISIS
 

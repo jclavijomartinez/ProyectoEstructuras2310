@@ -17,17 +17,18 @@ private:
 
 public:
 
-   curiosity curiosity::consstructor(char tipoMov,float magnitud, char uniMed);
+   curiosity constructor(std::list<movimientos> listMov,std::list<elemento> listElem ,std::list<analisis> listAnalisis, std::list<comandos> listCum);
     
-   void agregar_mov ( std::string ); //AGREGAR MOVIMIENTO
-
+   
     //Getters y Setters
 
-    char getTipoMov();
+    std::list<movimientos> getMovs();
 
-    float getMagnitud();
+    std::list<elemento> getElems();
 
-    char getUniMed();
+    std::list<analisis> getAnals();
+
+    std::list<comandos> getCums();
     
 
 };

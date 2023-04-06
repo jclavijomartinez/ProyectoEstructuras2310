@@ -2,15 +2,15 @@
 #include <iostream>
 
 using namespace std;
-/*
-analisis::cosstructor(char tipo, char objeto, std::string comentario){
+
+analisis analisis::cosstructor(char tipo, char objeto, std::string comentario){
 
                 this ->tipo_analisis=tipo;
                 this->objeto_analisis=objeto;
                 this->comentario=comentario;
 
 }
-*/
+
 
 void agregar_analisis ( string input ) {
 	
