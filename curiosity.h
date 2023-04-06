@@ -19,7 +19,11 @@ public:
 
    curiosity constructor(std::list<movimientos> listMov,std::list<elemento> listElem ,std::list<analisis> listAnalisis, std::list<comandos> listCum);
     
-   
+
+    void agregar_movimiento(std::string input); 
+
+
+
     //Getters y Setters
 
     std::list<movimientos> getMovs();

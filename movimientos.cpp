@@ -6,7 +6,7 @@
 using namespace std;
 
 
-movimientos movimientos::consstructor(char tipoMov,float magnitud, char uniMed){
+movimientos movimientos::consstructor(string tipoMov,float magnitud, string uniMed){
 
     this->tipoMov=tipoMov;
     this->magnitud=magnitud;
@@ -15,8 +15,20 @@ movimientos movimientos::consstructor(char tipoMov,float magnitud, char uniMed){
 }
 
 
-void agregar_mov (  string input ) {
-	
+void agregar_mov (std::string tipo_mov, double magnitud, std::string unidad_med) {
+
+movimientos Movimiento= Movimiento.consstructor(tipo_mov, magnitud, unidad_med);
+   
+  if (tipo_mov == "avanzar" || tipo_mov == "girar") {
+   
+    Movimiento.push_back(Movimiento(tipo_mov, magnitud, unidad_med));
+    std::cout << "Movimiento agregado correctamente" << std::endl;
+  } else {
+    std::cout << "Error: El tipo de movimiento debe ser 'avanzar' o 'girar'" << std::endl;
+  }
+
+
+/*	
 	char tipo_movimiento = input[18];
                 double magnitud ;
               //  magnitud= atof(strtok(input, " "));
@@ -43,7 +55,7 @@ void agregar_mov (  string input ) {
                 cout << "Magnitud: " << magnitud << endl;
                 cout << "Unidad de medida: " << unidad << endl;
 
-
+*/
 
 }
 

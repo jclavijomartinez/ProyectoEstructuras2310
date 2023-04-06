@@ -5,12 +5,12 @@
 
 class movimientos {
 private:
-   char tipoMov;
+   string tipoMov;
   float magnitud;
-  char uniMed;
+  string uniMed;
 
 public:
-  movimientos consstructor(char tipoMov, float magnitud, char uniMed);
+  movimientos consstructor(string tipoMov, float magnitud, string uniMed);
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
