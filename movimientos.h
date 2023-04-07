@@ -15,9 +15,9 @@ public:
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
     //Getters y Setters
-    char getTipoMov();
+    string getTipoMov();
     float getMagnitud();
-    char getUniMed();
+    string getUniMed();
 };
 
 #endif

@@ -15,17 +15,6 @@ movimientos movimientos::consstructor(string tipoMov,float magnitud, string uniM
 }
 
 
-void agregar_mov (std::string tipo_mov, double magnitud, std::string unidad_med) {
-
-movimientos Movimiento= Movimiento.consstructor(tipo_mov, magnitud, unidad_med);
-   
-  if (tipo_mov == "avanzar" || tipo_mov == "girar") {
-   
-    Movimiento.push_back(Movimiento(tipo_mov, magnitud, unidad_med));
-    std::cout << "Movimiento agregado correctamente" << std::endl;
-  } else {
-    std::cout << "Error: El tipo de movimiento debe ser 'avanzar' o 'girar'" << std::endl;
-  }
 
 
 /*	
@@ -57,11 +46,11 @@ movimientos Movimiento= Movimiento.consstructor(tipo_mov, magnitud, unidad_med);
 
 */
 
-}
 
 
 
-char movimientos::getTipoMov(){
+
+string movimientos::getTipoMov(){
 
 return this->tipoMov;
 
@@ -74,7 +63,7 @@ return this->magnitud;
 
     }
 
-    char movimientos::getUniMed(){
+    string movimientos::getUniMed(){
 
 return this->uniMed;
 

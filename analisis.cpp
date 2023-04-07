@@ -3,7 +3,7 @@
 
 using namespace std;
 
-analisis analisis::cosstructor(char tipo, char objeto, std::string comentario){
+analisis analisis::cosstructor(string tipo, string objeto, std::string comentario){
 
                 this ->tipo_analisis=tipo;
                 this->objeto_analisis=objeto;
@@ -38,11 +38,11 @@ void agregar_analisis ( string input ) {
 
 //Getters Setters
 
-char analisis::getTipo(){
+string analisis::getTipo(){
       return this->tipo_analisis;
     }
 
-    char analisis::getObjeto(){
+    string analisis::getObjeto(){
       return this->objeto_analisis;
     }
 

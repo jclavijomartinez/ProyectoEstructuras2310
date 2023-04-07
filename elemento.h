@@ -5,21 +5,21 @@
 
 class elemento {
 private:
-    char tipo_componente;
+    string tipo_componente;
     double tamano;
-    char unidad_medida;
+    string unidad_medida;
     int coord_x, coord_y;
 
 public:
   
-  elemento cosntructor(char tipo, double tamano, char unidad, int x, int y);
+  elemento cosntructor(string tipo, double tamano, string unidad, int x, int y);
     
     void cargar_elemento(std::string input);
 
     //Getters y Setters
-    char getTipoComponente();
+    string getTipoComponente();
     double getTamano();
-    char getUnidadMedida();
+    string getUnidadMedida();
     int getCoordX();
     int getCoordY();
 };

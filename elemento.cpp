@@ -7,7 +7,7 @@ using namespace std;
 
 //Constructor
 
-elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int y){
+elemento elemento::cosntructor(string tipo, double tamano, string unidad, int x, int y){
 
    this ->tipo_componente=tipo;
             this->tamano=tamano;
@@ -18,10 +18,10 @@ elemento elemento::cosntructor(char tipo, double tamano, char unidad, int x, int
 
 
 void cargar_elemento( string input ) {
-	
-  char tipo_componente;
+	/*
+  string tipo_componente;
                 double tamano;
-                char unidad_medida;
+                string unidad_medida;
                 int coord_x, coord_y;
 
     sscanf(input.c_str(), "%*c %c %lf %c %d %d", &tipo_componente, &tamano, &unidad_medida, &coord_x, &coord_y); //Separar el string
@@ -51,5 +51,7 @@ void cargar_elemento( string input ) {
     }
 
    /*elemento elElemento= elemento::cosntructor(tipo_componente, tamano, coord_x, coord_y );*/
+
+
 
 }

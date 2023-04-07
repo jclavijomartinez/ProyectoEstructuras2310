@@ -10,17 +10,19 @@
 class curiosity {
 private:
 
+
+
+public:
+
   std::list<movimientos>  listMov;
   std::list<elemento> listElem  ;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum; 
 
-public:
-
-   curiosity constructor(std::list<movimientos> listMov,std::list<elemento> listElem ,std::list<analisis> listAnalisis, std::list<comandos> listCum);
+   curiosity constructor();
     
 
-    void agregar_movimiento(std::string input); 
+    list<movimientos> agregar_movimiento(string input); 
 
 
 
