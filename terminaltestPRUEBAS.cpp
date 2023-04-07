@@ -45,6 +45,10 @@ if (funcion=="agregar_movimiento")
 {
   jorgeElCurioso.listMov.push_back(jorgeElCurioso.agregar_movimiento(input));
 }
+if (funcion=="agregar_analisis")
+{
+  jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
+}
 
     
     if (input == "salir")

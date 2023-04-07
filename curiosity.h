@@ -24,6 +24,7 @@ public:
 
     movimientos agregar_movimiento(string input); 
 
+    analisis agregar_analisis(std::string input);
 
 
     //Getters y Setters

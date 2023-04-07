@@ -48,6 +48,39 @@ movimientos agregar_movimiento(string input) {
 }
 
 
+analisis agregar_analisis(std::string input) {
+    std::istringstream ss(input);
+    std::string token;
+
+    string tipo_analisis;
+    std::string objeto;
+    std::string comentario;
+
+    // Tokenización del input
+    std::getline(ss, token, ' ');
+    tipo_analisis = token;
+
+    std::getline(ss, token, ' ');
+    objeto = token;
+
+    std::getline(ss, token, '\'');
+    std::getline(ss, comentario, '\'');
+
+    // Verificación de información completa
+    if (tipo_analisis.empty() || objeto.empty() || comentario.empty()) {
+        std::cout << "Falta información para agregar el comando de análisis." << std::endl;
+        return;
+    }
+
+    // Creación del comando de análisis y agregado a la lista
+    analisis auxAnalisis; 
+    auxAnalisis.cosstructor(tipo_analisis, objeto, comentario);
+    return auxAnalisis;
+   
+}
+
+
+
 
 
 
