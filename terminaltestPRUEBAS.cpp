@@ -7,13 +7,8 @@
 // #include "elemento.h"
 using namespace std;
 
-<<<<<<< HEAD
 
 void imprimirSimbolo() {
-=======
-void imprimirSimbolo()
-{
->>>>>>> origin/Juan
   cout << "$ ";
 }
 
