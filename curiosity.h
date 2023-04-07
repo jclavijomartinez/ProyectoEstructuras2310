@@ -26,6 +26,7 @@ public:
 
     analisis agregar_analisis(std::string input);
 
+    elemento agregar_elemento(string input);
 
     //Getters y Setters
 

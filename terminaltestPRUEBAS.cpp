@@ -50,6 +50,11 @@ if (funcion=="agregar_analisis")
   jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
 }
 
+if (funcion=="agregar_elemento")
+{
+  jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
+}
+
     
     if (input == "salir")
       break;

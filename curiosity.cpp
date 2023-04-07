@@ -80,6 +80,37 @@ analisis agregar_analisis(std::string input) {
 }
 
 
+  elemento agregar_elemento(string input) {
+    string tipo_comp, unidad_med;
+    int tamano, coordX, coordY;
+
+    vector<string> tokens;
+    istringstream iss(input);
+    string token;
+    while (getline(iss, token, ' ')) {
+        tokens.push_back(token);
+    }
+
+    if (tokens.size() != 5) {
+        // Si el input no tiene la información adecuada, no se puede agregar el elemento
+        cout<<"La información del elemento es incompleta o incorrecta."<<endl;
+        return;
+    }
+
+    tipo_comp = tokens[0];
+    tamano = stoi(tokens[1]);
+    unidad_med = tokens[2];
+    coordX = stoi(tokens[3]);
+    coordY = stoi(tokens[4]);
+
+   elemento elem;
+   elem.cosntructor(tipo_comp, tamano, unidad_med, coordX, coordY);
+    return elem;
+}
+
+
+
+
 
 
 
