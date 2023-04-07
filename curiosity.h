@@ -22,7 +22,7 @@ public:
    curiosity constructor();
     
 
-    list<movimientos> agregar_movimiento(string input); 
+    movimientos agregar_movimiento(string input); 
 
 
 
