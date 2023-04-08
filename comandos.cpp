@@ -3,32 +3,6 @@
 #include <fstream>
 
 using namespace std;
-<<<<<<< HEAD
-
-comandos comandos::consstructor(std::string comando){
-
-    this->comando=comando;
-
-}
-
-
-
-void cargar_comando ( string input ) {
-	
-    string nombre_archivo = input.substr(15);
-                cout << "Opción elegida: cargar_comandos" << endl;
-                cout << "Nombre de archivo: " << nombre_archivo << endl;
-	
-
-   // return comandos;
-
-
-}
-
-std::string comandos::getComando() const {
-    return this->comando;
-}
-=======
 
 void cargarComandos(string ruta){
     fstream newfile;
@@ -55,4 +29,3 @@ void cargarComandos(string ruta){
         cout << ruta << " no se encuentra o no puede leerse."<<endl;
     }
 };
->>>>>>> origin/Juan

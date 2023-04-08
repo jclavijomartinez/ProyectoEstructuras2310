@@ -5,6 +5,8 @@
 // #include "comandos.h"
 // #include "analisis.h"
 // #include "elemento.h"
+#include "curiosity.h"
+#include <list>
 using namespace std;
 
 
@@ -18,9 +20,13 @@ int main()
   // movimientos elMov;
   // analisis elAnal;
   // elemento elElem;
+
   string input;
+
+  curiosity jhonnysins ;
   while (true)
   {
+    
     imprimirSimbolo();
     getline(cin, input);
     if (input == "salir")

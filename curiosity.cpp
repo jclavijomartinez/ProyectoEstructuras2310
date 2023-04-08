@@ -13,29 +13,30 @@ comandos comandos::consstructor(std::string comando){
 }
 
 */
-curiosity curiosity::constructor(std::list<movimientos> listMov,std::list<elemento> listElem ,std::list<analisis> listAnalisis, std::list<comandos> listCum)
-  {
-    this->listMov=listMov;
-    this->listElem=listElem;
-    this->listAnalisis=listAnalisis;
-    this->listCum=listCum;
-    
-   }
-
-
-
-std::list<movimientos> curiosity::getMovs(){
-return listMov;
+curiosity curiosity::constructor(std::list<movimientos> listMov, std::list<elemento> listElem, std::list<analisis> listAnalisis, std::list<comandos> listCum)
+{
+    this->listMov = listMov;
+    this->listElem = listElem;
+    this->listAnalisis = listAnalisis;
+    this->listCum = listCum;
 }
 
-    std::list<elemento> curiosity::getElems(){
-        return listElem;
-    }
+std::list<movimientos> curiosity::getMovs()
+{
+    return listMov;
+}
 
-    std::list<analisis> curiosity::getAnals(){
-        return listAnalisis;
-    }
+std::list<elemento> curiosity::getElems()
+{
+    return listElem;
+}
 
-    std::list<comandos> curiosity::getCums(){
-        return listCum;
-    }
+std::list<analisis> curiosity::getAnals()
+{
+    return listAnalisis;
+}
+
+std::list<comandos> curiosity::getCums()
+{
+    return listCum;
+}

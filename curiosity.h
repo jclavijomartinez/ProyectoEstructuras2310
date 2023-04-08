@@ -10,12 +10,13 @@
 class curiosity {
 private:
 
-  std::list<movimientos>  listMov;
+  
+
+public:
+std::list<movimientos>  listMov;
   std::list<elemento> listElem  ;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum; 
-
-public:
 
    curiosity constructor(std::list<movimientos> listMov,std::list<elemento> listElem ,std::list<analisis> listAnalisis, std::list<comandos> listCum);
     
