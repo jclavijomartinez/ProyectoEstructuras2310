@@ -9,10 +9,12 @@
 #include <sstream>
 #include <cstring>
 #include <vector>
+#include <fstream>
+#include <list>
 
 using namespace std;
 /*
-comandos comandos::consstructor(std::string comando){
+co0mandos comandos::consstructor(std::string comando){
 
     this->comando=comando;
 
@@ -25,6 +27,39 @@ curiosity curiosity::constructor()
    }
 
 //Funciones 
+
+list<string> ponerenlista(string comando){
+    std::list<string> listacomandos;
+    listacomandos.push_back(comando);
+    return listacomandos;
+}
+
+void cargar_comandos(string ruta){
+    fstream newfile;
+    newfile.open(ruta, ios::in);
+    if (newfile.peek() == ifstream::traits_type::eof())
+    {
+        cout << ruta << " no contiene elementos (esta vacio)"<<endl;
+    }
+    else if (newfile.is_open())
+    {
+        string infoarch;
+        int contador_comandos = 0;
+        while (getline(newfile, infoarch))
+        {
+            //cout << infoarch << "\n";
+            ponerenlista(infoarch);
+            contador_comandos++;
+        }
+        cout << contador_comandos << " comandos cargados correctamente desde " << ruta <<endl;
+        newfile.close();
+    }
+    else
+    {
+        cout << ruta << " no se encuentra o no puede leerse."<<endl;
+    }
+}
+
 
 movimientos agregar_movimiento(string input) {
   

@@ -7,48 +7,34 @@
 #include "analisis.h"
 #include <list>
 
-class curiosity {
+class curiosity
+{
 private:
-
-
-
 public:
-
-
-
 public:
-
-  
-
 public:
-std::list<movimientos>  listMov;
-  std::list<elemento> listElem  ;
+  std::list<movimientos> listMov;
+  std::list<elemento> listElem;
   std::list<analisis> listAnalisis;
-  std::list<comandos> listCum; 
+  std::list<comandos> listCum;
 
-   curiosity constructor();
-    
+  curiosity constructor();
 
-    movimientos agregar_movimiento(string input); 
+  movimientos agregar_movimiento(string input);
 
-    analisis agregar_analisis(std::string input);
+  analisis agregar_analisis(std::string input);
 
-    elemento agregar_elemento(string input);
+  elemento agregar_elemento(string input);
 
-    //Getters y Setters
+  // Getters y Setters
 
-    std::list<movimientos> getMovs();
+  std::list<movimientos> getMovs();
 
-    std::list<elemento> getElems();
+  std::list<elemento> getElems();
 
-    std::list<analisis> getAnals();
+  std::list<analisis> getAnals();
 
-    std::list<comandos> getCums();
-    
-
+  std::list<comandos> getCums();
 };
-
-
-
 
 #endif
