@@ -143,6 +143,48 @@ analisis agregar_analisis(std::string input) {
     return elem;
 }
 
+void simular_comandos(const string& archivo_entrada, list <comandos> comandos) {
+    ifstream archivo(archivo_entrada);
+    int coordIni = comandos.;
+    int coordFin;
+
+    if (archivo.is_open()) {
+        cout << "Posición inicial: (" << coordI << ", " << coordY << ")" << endl;
+
+        string opcion;
+        while (getline(archivo, opcion)) {
+            list <comandos> :: iterator it;
+
+            for(it= comandos.begin();it!=comandos.end();it++){
+                if (it->getMovimientos().getTipoMov() == "avanzar" || it->getMovimientos().getTipoMov() == "girar")
+            }
+
+
+            if (opcion == "avanzar") {
+                avanzar(coordI, coordY);
+            }
+            else if (opcion == "retroceder") {
+                retroceder(coordI, coordY);
+            }
+            else if (opcion == "girar_izquierda") {
+                girar_izquierda(coordI, coordY);
+            }
+            else if (opcion == "girar_derecha") {
+                girar_derecha(coordI, coordY);
+            }
+            else {
+                cout << "Comando desconocido: " << opcion << endl;
+            }
+        }
+
+        archivo.close();
+        cout << "Nueva posición: (" << coordI << ", " << coordY << ")" << endl;
+    }
+    else {
+        cout << "No se pudo abrir el archivo: " << archivo_entrada << endl;
+    }
+}
+
 
 
 
