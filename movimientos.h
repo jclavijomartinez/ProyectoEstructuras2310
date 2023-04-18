@@ -16,7 +16,6 @@ public:
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
     //Getters y Setters
-    movimientos(std::string c, float f, std::string a);
 	void setTipoMov(std::string c);
 	void setMagnitud(float c);
 	void setUniMed(std::string c);
@@ -25,11 +24,6 @@ public:
 	std::string getUniMed();
 };
 
-movimientos::movimientos(std::string c, float f, std::string a){
-	tipoMov=c;
-	magnitud=f;
-	uniMed=a;
-}
 void movimientos ::setTipoMov(std::string c){
 	tipoMov=c;
 }
