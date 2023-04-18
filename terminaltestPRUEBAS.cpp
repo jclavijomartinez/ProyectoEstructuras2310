@@ -2,62 +2,59 @@
 #include <string>
 #include <sstream>
 #include <cstring>
+#include <string>
 #include "movimientos.h"
 #include "comandos.h"
 #include "analisis.h"
 #include "elemento.h"
 #include "curiosity.h"
-#include <string.h>
-//comentario test
 
 using namespace std;
 
-
-void imprimirSimbolo() {
+void imprimirSimbolo()
+{
   cout << "$ ";
 }
 
-string queQuiereConsola(string input){
-  std::istringstream iss(input);
-    std::string loQueQuiere;
-    iss >> loQueQuiere;
-    return loQueQuiere;
+string queQuiereConsola(string input)
+{
+  istringstream iss(input);
+  string loQueQuiere;
+  iss >> loQueQuiere;
+  return loQueQuiere;
 }
 
 int main()
 {
-  
   string input;
   string funcion;
-  curiosity jorgeElCurioso;
-  jorgeElCurioso.constructor();
-
+  curiosity nave1;
+  nave1.constructor();
 
   while (true)
   {
-    //Conseguir la linea de comandos
+    // Conseguir la linea de comandos
     imprimirSimbolo();
     getline(cin, input);
 
-    //Conseguir identificar lo que quiere la consola
-    funcion=queQuiereConsola(input);
+    // Conseguir identificar lo que quiere la consola
+    funcion = queQuiereConsola(input);
 
-    //Ahora con el función entrar a un Switch o a puros if´s
-if (funcion=="agregar_movimiento")
-{
-  jorgeElCurioso.listMov.push_back(jorgeElCurioso.agregar_movimiento(input));
-}
-if (funcion=="agregar_analisis")
-{
-  jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
-}
+    // Ahora con el función entrar a un Switch o a puros if´s
+    if (funcion == "agregar_movimiento")
+    {
+      nave1.agregar_movimiento(input);
+    }
+    if (funcion == "agregar_analisis")
+    {
+      // jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
+    }
 
-if (funcion=="agregar_elemento")
-{
-  jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
-}
+    if (funcion == "agregar_elemento")
+    {
+      // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
+    }
 
-    
     if (input == "salir")
       break;
   }

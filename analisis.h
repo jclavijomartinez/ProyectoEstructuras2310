@@ -3,21 +3,22 @@
 
 #include <string>
 
-class analisis {
+class analisis
+{
 private:
-    string tipo_analisis;
-    string objeto_analisis;
-    std::string comentario ;
+     std::string tipo_analisis;
+     std::string objeto_analisis;
+     std::string comentario;
 
 public:
-   analisis cosstructor(string tipo, string objeto, std::string comentario);
-    
-   void agregar_analisis(std::string input); //AGREGAR ANALISIS
+    analisis cosstructor( std::string tipo,  std::string objeto,   std::string comentario);
 
-    //Getters y Setters
-    string getTipo();
-    string getObjeto();
-    std::string getComentario() const;
+    void agregar_analisis( std::string input); // AGREGAR ANALISIS
+
+    // Getters y Setters
+     std::string getTipo();
+     std::string getObjeto();
+     std::string getComentario() const;
 };
 
 #endif

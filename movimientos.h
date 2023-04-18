@@ -3,21 +3,22 @@
 
 #include <string>
 
-class movimientos {
+class movimientos
+{
 private:
-   string tipoMov;
+   std::string tipoMov;
   float magnitud;
-  string uniMed;
+   std::string uniMed;
 
 public:
-  movimientos consstructor(string tipoMov, float magnitud, string uniMed);
-    
-   void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
+  movimientos consstructor( std::string tipoMov, float magnitud,  std::string uniMed);
 
-    //Getters y Setters
-    string getTipoMov();
-    float getMagnitud();
-    string getUniMed();
+  void agregar_mov(std::string input); // AGREGAR MOVIMIENTO
+
+  // Getters y Setters
+   std::string getTipoMov();
+  float getMagnitud();
+   std::string getUniMed();
 };
 
 #endif
