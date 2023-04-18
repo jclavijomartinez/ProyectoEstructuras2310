@@ -7,6 +7,7 @@
 #include "analisis.h"
 #include "elemento.h"
 #include "curiosity.h"
+#include <string.h>
 //comentario test
 
 using namespace std;
