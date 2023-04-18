@@ -5,19 +5,19 @@
 
 class movimientos {
 private:
-   string tipoMov;
+   std::string tipoMov;
   float magnitud;
-  string uniMed;
+  std::string uniMed;
 
 public:
-  movimientos consstructor(string tipoMov, float magnitud, string uniMed);
+  movimientos consstructor(std::string tipoMov, float magnitud, std::string uniMed);
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
     //Getters y Setters
-    string getTipoMov();
+    std::string getTipoMov();
     float getMagnitud();
-    string getUniMed();
+    std::string getUniMed();
 };
 
 #endif

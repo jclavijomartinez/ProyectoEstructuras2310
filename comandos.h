@@ -2,6 +2,7 @@
 #define COMANDOS_H
 
 #include <string>
+#include "movimientos.h"
 class comandos {
 private:
     std::string ruta;
@@ -12,6 +13,8 @@ public:
 
     //Getters y Setters
     std::string getComando() const;
+
+    movimientos getMovimientos;
 };
 
 #endif
