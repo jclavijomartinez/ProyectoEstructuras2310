@@ -1,3 +1,4 @@
+//EL CODIGO COMPLETO ESTA EN LECTURADEARCHIVOS/CURIOSITYPABLO.CPP
 #include "curiosity.h"
 #include "movimientos.h"
 #include "comandos.h"
