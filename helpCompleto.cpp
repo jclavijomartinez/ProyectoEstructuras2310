@@ -1,3 +1,4 @@
+/*
 //cargar comandos
 cout<<"Descripción:"<<endl;
 cout<<"Carga en memoria los comandos de desplazamiento contenidos en el archivo identificado por nombre_archivo, sobrescribiendo cualquier información previamente cargada en memoria"<<endl;
@@ -118,3 +119,4 @@ cout<<"    - Si no se tiene la información necesaria: La información requerida
 cout<<"    - Si la simulación es exitosa: La simulación de los comandos, a partir de la posición (coordX,coordY), deja al robot en la nueva posición (nuevoX,nuevoY)."<<endl;
 cout<<"Ejemplo de uso:"<<endl;
 cout<<"    simular_comandos 10 5"<<endl;
+*/

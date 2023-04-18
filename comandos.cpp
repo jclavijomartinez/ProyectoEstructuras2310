@@ -1,11 +1,14 @@
 #include "comandos.h"
 #include <iostream>
+#include <fstream>
+#include <string.h>
+
 
 using namespace std;
 
 comandos comandos::consstructor(std::string comando){
 
-    this->comando=comando;
+    this->ruta=comando;
 
 }
 
@@ -17,12 +20,12 @@ void cargar_comando ( string input ) {
                 cout << "Opción elegida: cargar_comandos" << endl;
                 cout << "Nombre de archivo: " << nombre_archivo << endl;
 	
-//Introducir logica de cargar todos los comandos con archivos
 
+   // return comandos;
 
 
 }
 
 std::string comandos::getComando() const {
-    return this->comando;
+    return this->ruta;
 }

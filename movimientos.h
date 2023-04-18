@@ -1,32 +1,24 @@
 #ifndef MOVIMIENTO_H
 #define MOVIMIENTO_H
 
+#include <string>
 
-
-class movimientos {
+class movimientos
+{
 private:
-   char tipoMov;
+   std::string tipoMov;
   float magnitud;
-  char uniMed;
+   std::string uniMed;
 
 public:
+  movimientos consstructor( std::string tipoMov, float magnitud,  std::string uniMed);
 
-   movimientos movimientos::consstructor(char tipoMov,float magnitud, char uniMed);
-    
-   void agregar_mov ( string ); //AGREGAR MOVIMIENTO
+  void agregar_mov(std::string input); // AGREGAR MOVIMIENTO
 
-    //Getters y Setters
-
-    char getTipoMov();
-
-    float getMagnitud();
-
-    char getUniMed();
-    
-
+  // Getters y Setters
+   std::string getTipoMov();
+  float getMagnitud();
+   std::string getUniMed();
 };
-
-
-
 
 #endif

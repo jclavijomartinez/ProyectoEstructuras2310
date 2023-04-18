@@ -1,34 +1,24 @@
 #ifndef ANALISIS_H
 #define ANALISIS_H
 
+#include <string>
 
-class analisis {
+class analisis
+{
 private:
-   
-                char tipo_analisis;
-                char objeto_analisis;
-                std::string comentario ;
+     std::string tipo_analisis;
+     std::string objeto_analisis;
+     std::string comentario;
 
 public:
+    analisis cosstructor( std::string tipo,  std::string objeto,   std::string comentario);
 
-   analisis cosstructor(char tipo, char objeto, std::string comentario);
-    
-   void agregar_analisis( string ); //AGREGAR ANALISIS
+    void agregar_analisis( std::string input); // AGREGAR ANALISIS
 
-
-
-    //Getters y Setters
-
-    char getTipo();
-
-    char getObjeto();
-
-    std::string getComentario() const;
-
-    
-
+    // Getters y Setters
+     std::string getTipo();
+     std::string getObjeto();
+     std::string getComentario() const;
 };
-
-
 
 #endif
