@@ -6,6 +6,7 @@
 #include "movimientos.h"
 #include "analisis.h"
 #include <list>
+#include <string.h>
 
 class curiosity {
 private:
