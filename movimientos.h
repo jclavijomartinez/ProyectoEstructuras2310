@@ -3,21 +3,52 @@
 
 #include <string>
 
-class movimientos {
+class movimientos
+{
 private:
    std::string tipoMov;
   float magnitud;
-  std::string uniMed;
+  string uniMed;
 
 public:
-  movimientos consstructor(std::string tipoMov, float magnitud, std::string uniMed);
+  movimientos constructor(string tipoMov, float magnitud, string uniMed);
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
     //Getters y Setters
-    std::string getTipoMov();
-    float getMagnitud();
-    std::string getUniMed();
+    movimientos(std::string c, float f, std::string a);
+	void setTipoMov(std::string c);
+	void setMagnitud(float c);
+	void setUniMed(std::string c);
+	std::string getTipoMov();		
+	float getMagnitud();		
+	std::string getUniMed();
 };
+
+movimientos::movimientos(std::string c, float f, std::string a){
+	tipoMov=c;
+	magnitud=f;
+	uniMed=a;
+}
+void movimientos ::setTipoMov(std::string c){
+	tipoMov=c;
+}
+void movimientos ::setMagnitud(float c){
+	magnitud=c;
+}
+void movimientos ::setUniMed(std::string c){
+	uniMed=c;
+}
+
+std::string movimientos ::getTipoMov(){
+	return tipoMov;
+}
+float movimientos ::getMagnitud(){
+	return magnitud;
+}
+std::string movimientos ::getUniMed(){
+	return uniMed;
+}
+
 
 #endif

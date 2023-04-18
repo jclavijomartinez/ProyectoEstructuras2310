@@ -1,5 +1,6 @@
 #include "analisis.h"
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 

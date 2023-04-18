@@ -1,3 +1,4 @@
+//EL CODIGO COMPLETO ESTA EN LECTURADEARCHIVOS/CURIOSITYPABLO.CPP
 #include "curiosity.h"
 #include "movimientos.h"
 #include "comandos.h"
@@ -142,85 +143,6 @@ analisis agregar_analisis(std::string input) {
    elemento elem;
    elem.cosntructor(tipo_comp, tamano, unidad_med, coordX, coordY);
     return elem;
-}
-
-void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
-    ifstream archivo(archivo_entrada);
-    float pi = 3.141592;
-    int cambioA = 0;
-    float grados = 0.0;
-    int num_p;
-    bool validar = true;
-    int nuevas_coor [2]={0,0};
-    list<comandos>::iterator it;
-
-    num_p = archivo_entrada.length();
-
-    try {
-        stoi(archivo_entrada);
-        stoi(archivo_entrada);
-    } 
-    catch (const std::invalid_argument &ex) {
-        validar = false;
-    }
-
-    if (archivo.is_open()) {
-        string opcion;
-        while (getline(archivo, opcion)) { 
-
-            if (num_p == 3 && validar == true) {
-
-                nuevas_coor[0] = stoi(archivo_entrada);
-                nuevas_coor[1] = stoi(archivo_entrada);
-
-                for(it = comando.begin(); it != comando.end(); it++){
-
-                    if (it->getMovimientos.getTipoMov() == "a" && opcion == "a") {
-                        // Si son cm
-                        if (it->getMovimientos.getUniMed() == "c"){   
-                            cambioA = it->getMovimientos.getMagnitud() / 100;
-                        }
-                        // Si son metros
-                        else if (it->getMovimientos.getUniMed() == "m" && opcion == "m"){
-                            cambioA = it->getMovimientos.getMagnitud();
-                        }
-                        else{
-                            cout<<"Error en la unidad de medida";
-                        }
-                        
-                        nuevas_coor[0] +=  cambioA * cos(grados);
-                        nuevas_coor[1] +=  cambioA * sin(grados);
-                    
-                    }
-                    else if (it->getMovimientos.getTipoMov() == "g" && opcion == "g"){
-                        // si son grados
-                        if (it->getMovimientos.getUniMed() == "g"){   
-                            grados += it->getMovimientos.getMagnitud() * (pi/180);
-                        }
-                        else{
-                            cout<<"Error en la unidad de medida";
-                        }
-                    }
-
-                    nuevas_coor[0] +=  cambioA * cos(grados);
-                    nuevas_coor[1] +=  cambioA * sin(grados);   
-                }
-
-                cout << "\nLa simulación de los comandos, a partir de la posición ("
-                <<stoi(archivo_entrada) << ", "<< stoi(archivo_entrada)<< "), deja al robot en la nueva posición ("
-                << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
-                << endl;
-            }
-            else {
-                cout << "\nLa estructura del comando es incorrecta";
-            }
-        }
-
-        archivo.close();
-    }
-    else {
-        cout << "No se pudo abrir el archivo: " << archivo_entrada << endl;
-    }
 }
 
 

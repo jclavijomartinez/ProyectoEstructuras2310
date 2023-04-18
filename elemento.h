@@ -3,25 +3,25 @@
 
 #include <string>
 
-class elemento {
+class elemento
+{
 private:
-    string tipo_componente;
-    double tamano;
-    string unidad_medida;
-    int coord_x, coord_y;
+   std::string tipo_componente;
+  double tamano;
+   std::string unidad_medida;
+  int coord_x, coord_y;
 
 public:
-  
-  elemento cosntructor(string tipo, double tamano, string unidad, int x, int y);
-    
-    void cargar_elemento(std::string input);
+  elemento cosntructor( std::string tipo, double tamano,  std::string unidad, int x, int y);
 
-    //Getters y Setters
-    string getTipoComponente();
-    double getTamano();
-    string getUnidadMedida();
-    int getCoordX();
-    int getCoordY();
+  void cargar_elemento( std::string input);
+
+  // Getters y Setters
+   std::string getTipoComponente();
+  double getTamano();
+   std::string getUnidadMedida();
+  int getCoordX();
+  int getCoordY();
 };
 
 #endif

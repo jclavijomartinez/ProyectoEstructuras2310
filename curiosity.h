@@ -6,12 +6,12 @@
 #include "movimientos.h"
 #include "analisis.h"
 #include <list>
+#include <string>
 
 class curiosity
 {
 private:
-public:
-public:
+
 public:
   std::list<movimientos> listMov;
   std::list<elemento> listElem;
@@ -20,11 +20,11 @@ public:
 
   curiosity constructor();
 
-  movimientos agregar_movimiento(string input);
+  movimientos agregar_movimiento( std::string input);
 
   analisis agregar_analisis(std::string input);
 
-  elemento agregar_elemento(string input);
+  elemento agregar_elemento( std::string input);
 
   // Getters y Setters
 
