@@ -8,10 +8,10 @@ class movimientos
 private:
    std::string tipoMov;
   float magnitud;
-  string uniMed;
+  std::string uniMed;
 
 public:
-  movimientos constructor(string tipoMov, float magnitud, string uniMed);
+  movimientos constructor(std::string tipoMov, float magnitud, std::string uniMed);
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
