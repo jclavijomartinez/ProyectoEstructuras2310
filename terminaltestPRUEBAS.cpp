@@ -2,11 +2,7 @@
 #include <string>
 #include <sstream>
 #include <cstring>
-#include "movimientos.h"
-#include "comandos.h"
-#include "analisis.h"
-#include "elemento.h"
-#include "curiosity.h"
+#include "curiosity.cpp"
 
 using namespace std;
 

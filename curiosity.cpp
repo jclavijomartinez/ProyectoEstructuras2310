@@ -1,8 +1,8 @@
 #include "curiosity.h"
-#include "movimientos.h"
-#include "comandos.h"
-#include "analisis.h"
-#include "elemento.h"
+#include "movimientos.cpp"
+#include "comandos.cpp"
+#include "analisis.cpp"
+#include "elemento.cpp"
 #include <iostream>
 #include <list>
 #include <string>
