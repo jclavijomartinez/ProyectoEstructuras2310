@@ -6,6 +6,7 @@
 class comandos {
 private:
     std::string ruta;
+    movimientos Movimientos;
 public:
    comandos consstructor(std::string comando);
     
@@ -14,7 +15,8 @@ public:
     //Getters y Setters
     std::string getComando() const;
 
-    movimientos getMovimientos;
+    void setMovimientos(movimientos mov);
+    movimientos getMovimientos();
 };
 
 #endif

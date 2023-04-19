@@ -29,3 +29,14 @@ void cargar_comando ( string input ) {
 std::string comandos::getComando() const {
     return this->ruta;
 }
+
+void comandos::setMovimientos(movimientos mov){
+    Movimientos = mov;
+}
+movimientos comandos:: getMovimientos(){
+    return Movimientos;
+}
+
+std::string comandos::getComando() const {
+    return this->ruta;
+}

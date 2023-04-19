@@ -76,7 +76,7 @@ movimientos agregar_movimiento(string input) {
     }
 
   if (tokens[1] == "avanzar" || tokens[1] == "girar") {
-    auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
+    auxMov.constructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
   } else {
@@ -175,14 +175,14 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
 
                 for(it = comando.begin(); it != comando.end(); it++){
 
-                    if (it->getMovimientos.getTipoMov() == "a" && opcion == "a") {
+                    if (it->getMovimientos().getTipoMov() == "a" && opcion == "a") {
                         // Si son cm
-                        if (it->getMovimientos.getUniMed() == "c"){   
-                            cambioA = it->getMovimientos.getMagnitud() / 100;
+                        if (it->getMovimientos().getUniMed() == "c"){   
+                            cambioA = it->getMovimientos().getMagnitud() / 100;
                         }
                         // Si son metros
-                        else if (it->getMovimientos.getUniMed() == "m" && opcion == "m"){
-                            cambioA = it->getMovimientos.getMagnitud();
+                        else if (it->getMovimientos().getUniMed() == "m" && opcion == "m"){
+                            cambioA = it->getMovimientos().getMagnitud();
                         }
                         else{
                             cout<<"Error en la unidad de medida";
@@ -192,10 +192,10 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
                         nuevas_coor[1] +=  cambioA * sin(grados);
                     
                     }
-                    else if (it->getMovimientos.getTipoMov() == "g" && opcion == "g"){
+                    else if (it->getMovimientos().getTipoMov() == "g" && opcion == "g"){
                         // si son grados
-                        if (it->getMovimientos.getUniMed() == "g"){   
-                            grados += it->getMovimientos.getMagnitud() * (pi/180);
+                        if (it->getMovimientos().getUniMed() == "g"){   
+                            grados += it->getMovimientos().getMagnitud() * (pi/180);
                         }
                         else{
                             cout<<"Error en la unidad de medida";
