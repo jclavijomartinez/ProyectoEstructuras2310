@@ -26,7 +26,7 @@ curiosity curiosity::constructor()
 
 //Funciones 
 
-movimientos agregar_movimiento(string input) {
+movimientos curiosity::agregar_movimiento(string input) {
   
   movimientos auxMov;
    
@@ -48,7 +48,7 @@ movimientos agregar_movimiento(string input) {
 }
 
 
-analisis agregar_analisis(std::string input) {
+analisis curiosity::agregar_analisis(std::string input) {
     std::istringstream ss(input);
     std::string token;
 
@@ -80,7 +80,7 @@ analisis agregar_analisis(std::string input) {
 }
 
 
-  elemento agregar_elemento(string input) {
+  elemento curiosity::agregar_elemento(string input) {
     string tipo_comp, unidad_med;
     int tamano, coordX, coordY;
 
