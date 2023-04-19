@@ -7,7 +7,7 @@
 using namespace std;
 
 
-movimientos movimientos::consstructor(std::string tipoMov,float magnitud, std::string uniMed){
+movimientos movimientos::constructor(std::string tipoMov,float magnitud, std::string uniMed){
 
     this->tipoMov=tipoMov;
     this->magnitud=magnitud;
@@ -16,24 +16,23 @@ movimientos movimientos::consstructor(std::string tipoMov,float magnitud, std::s
 }
 
 
-
-
-string movimientos::getTipoMov(){
-
-return this->tipoMov;
-
+void movimientos ::setTipoMov(std::string c){
+	tipoMov=c;
+}
+void movimientos ::setMagnitud(float c){
+	magnitud=c;
+}
+void movimientos ::setUniMed(std::string c){
+	uniMed=c;
 }
 
-
-    float movimientos::getMagnitud(){
-
-return this->magnitud;
-
-    }
-
-    string movimientos::getUniMed(){
-
-return this->uniMed;
-
-    }
+std::string movimientos ::getTipoMov(){
+	return tipoMov;
+}
+float movimientos ::getMagnitud(){
+	return magnitud;
+}
+std::string movimientos ::getUniMed(){
+	return uniMed;
+}
 

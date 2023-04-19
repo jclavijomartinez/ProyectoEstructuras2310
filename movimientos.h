@@ -24,25 +24,4 @@ public:
 	std::string getUniMed();
 };
 
-void movimientos ::setTipoMov(std::string c){
-	tipoMov=c;
-}
-void movimientos ::setMagnitud(float c){
-	magnitud=c;
-}
-void movimientos ::setUniMed(std::string c){
-	uniMed=c;
-}
-
-std::string movimientos ::getTipoMov(){
-	return tipoMov;
-}
-float movimientos ::getMagnitud(){
-	return magnitud;
-}
-std::string movimientos ::getUniMed(){
-	return uniMed;
-}
-
-
 #endif
