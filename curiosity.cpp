@@ -151,55 +151,86 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
     int cambioA = 0;
     float grados = 0.0;
     int num_p;
+    int posX = 0,posY = 0;
+    int posXArch = 0, posYArch = 0;
     bool validar = true;
     int nuevas_coor [2]={0,0};
+    string d1,d2;
     list<comandos>::iterator it;
 
-    try {
-        stoi(archivo_entrada);
-        stoi(archivo_entrada);
-    } 
-    catch (const std::invalid_argument &ex) {
-        validar = false;
+
+    if (comando.empty()){
+        cout<<"Toy vacio";
     }
+    else{
+        // Que existan en la lista
+        for(it = comando.begin(); it != comando.end(); it++){
+            if (it->getMovimientos().getTipoMov() == "a" || it->getMovimientos().getTipoMov() == "g")
+            {
+                validar = false;
+            }
+                        
+        }
+    }
+
+    
 
     if (archivo.is_open()) {
         string opcion;
         while (getline(archivo, opcion)) { 
             
             num_p = opcion.length();
-            cout<<num_p;
-            if (!opcion.empty()) {
-                nuevas_coor[0] = opcion[2]; //stoi(opcion);
-                nuevas_coor[1] = opcion[3]; //stoi(opcion);
+            cout<<"\nTotal: "<<num_p;
+
+            if (!opcion.empty() && validar == true) {
+ 
+                stringstream input_stringstream(opcion);  // Separar datos del archivo despues de un espacio
+                getline(input_stringstream, d1, ' ');
+                getline(input_stringstream, d2, ' ');
+
+                    posXArch = stoi(d1);   // Convertir los datos a enteros 
+                    posYArch = stoi(d2);
+
+                    cout<<"\n Posicion x: "<< posX;
+                    cout<<"\n Posicion y: "<< posY;  
+
+                    cout<<"\n Posicion Archivo x: "<< posXArch;
+                    cout<<"\n Posicion Archivo y: "<< posYArch;             
 
                 for(it = comando.begin(); it != comando.end(); it++){
+                    nuevas_coor[0] = posX;
+                    nuevas_coor[1] = posY;
+                    cout<<"\ncm";
 
-                    if (it->getMovimientos().getTipoMov() == "a" && opcion == "a") {
+                    if (it->getMovimientos().getTipoMov() == "a" ) {
                         // Si son cm
+                        cout<<"\ncm";
                         if (it->getMovimientos().getUniMed() == "c"){   
                             cambioA = it->getMovimientos().getMagnitud() / 100;
                         }
                         // Si son metros
-                        else if (it->getMovimientos().getUniMed() == "m" && opcion == "m"){
+                        else if (it->getMovimientos().getUniMed() == "m"){
                             cambioA = it->getMovimientos().getMagnitud();
                         }
                         else{
                             cout<<"Error en la unidad de medida";
                         }
                         
-                        nuevas_coor[0] +=  cambioA * cos(grados);
-                        nuevas_coor[1] +=  cambioA * sin(grados);
+                        /*nuevas_coor[0] +=  cambioA * cos(grados);
+                        nuevas_coor[1] +=  cambioA * sin(grados);*/
                     
                     }
-                    else if (it->getMovimientos().getTipoMov() == "g" && opcion == "g"){
+                    else if (it->getMovimientos().getTipoMov() == "g"){
                         // si son grados
-                        if (it->getMovimientos().getUniMed() == "g"){   
+                        if (it->getMovimientos().getUniMed() == "g" ){   
                             grados += it->getMovimientos().getMagnitud() * (pi/180);
                         }
                         else{
                             cout<<"Error en la unidad de medida";
                         }
+                    }
+                    else {
+                        cout<<"Error en el tipo de movimiento";
                     }
 
                     nuevas_coor[0] +=  cambioA * cos(grados);
@@ -207,7 +238,7 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
                 }
 
                 cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-                <<opcion[2]<<opcion[3] << ", "<< opcion[3]<< "), deja al robot en la nueva posicion ("
+                <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
                 << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
                 << endl;
             }
@@ -222,6 +253,7 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
         cout << "No se pudo abrir el archivo: " << archivo_entrada << endl;
     }
 }
+
 
 
 
