@@ -5,6 +5,7 @@
 #include "elemento.h"
 #include "movimientos.h"
 #include "analisis.h"
+#include "ArbolGeneralQuad.h"
 #include <list>
 #include <string>
 
@@ -38,6 +39,8 @@ public:
   elemento agregar_elemento(std::string input);
 
   void testfun();
+
+  void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol);
 
   // Getters y Setters
 

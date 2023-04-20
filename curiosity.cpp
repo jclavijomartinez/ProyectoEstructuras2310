@@ -3,6 +3,7 @@
 #include "comandos.cpp"
 #include "analisis.cpp"
 #include "elemento.cpp"
+#include "ArbolGeneralQuad.cpp"
 #include <iostream>
 #include <list>
 #include <string>
@@ -492,4 +493,44 @@ std::list<analisis> curiosity::getAnals()
 std::list<comandos> curiosity::getCums()
 {
   return listCum;
+}
+
+
+
+/// 2ndo Componente Árboles 
+
+void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
+    int num_procesados = 0;
+    int num_fallidos = 0;
+    NodoAGQ* nodo;
+    
+    for (int i = 0; i < elementos.longitud(); i++) {
+        elemento elem = elementos.iesimo(i);
+        nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
+        
+        if (nodo != nullptr) {
+            nodo->agregar_elemento(elem);
+            num_procesados++;
+        } else {
+            std::cout << "No se pudo ubicar el elemento " << i << " en el árbol." << std::endl;
+            num_fallidos++;
+        }
+    }
+    
+    if (num_procesados == 0) {
+        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
+    } else if (num_fallidos > 0) {
+        std::cout << "(Problemas con elementos) Los siguientes elementos no pudieron procesarse adecuadamente:" << std::endl;
+        for (int i = 0; i < elementos.longitud(); i++) {
+            elemento elem = elementos.iesimo(i);
+            nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
+            
+            if (nodo == nullptr) {
+                std::cout << "- " << elem.getTipoComponente() << " " << elem.getTamano() << " " << elem.getUnidadMedida() << " en (" << elem.getCoordX() << ", " << elem.getCoordY() << ")" << std::endl;
+            }
+        }
+        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
+    } else {
+        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
+    }
 }
