@@ -2,11 +2,11 @@
 #include <sstream>
 #include <cstring>
 #include <string>
-//#include "movimientos.h"
-//#include "comandos.h"
-//#include "analisis.h"
-//#include "elemento.h"
-//#include "curiosity.h"
+// #include "movimientos.h"
+// #include "comandos.h"
+// #include "analisis.h"
+// #include "elemento.h"
+// #include "curiosity.h"
 #include "curiosity.cpp"
 
 using namespace std;
@@ -26,12 +26,10 @@ string queQuiereConsola(string input)
 
 int main()
 {
-  
+
   string input;
   string funcion;
   curiosity nave1;
-  //nave1.constructor();
-  //cout<<"llega hasta aca"<<endl;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -44,6 +42,8 @@ int main()
     // Ahora con el función entrar a un Switch o a puros if´s
     if (funcion == "agregar_movimiento")
     {
+      
+      // cout << endl << "llega hasta aca" << endl;
       nave1.testfun();
     }
     if (funcion == "agregar_analisis")

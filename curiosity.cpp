@@ -119,7 +119,7 @@ elemento curiosity::agregar_elemento(string input)
 
 void testfun()
 {
-  cout << "llega hasta aca" << endl;
+  cout << "un superduper texto" << endl;
 }
 
 // Getters y Setters
