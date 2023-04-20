@@ -44,9 +44,12 @@ movimientos curiosity::agregar_movimiento(string input)
 
   if (tokens[1] == "avanzar" || tokens[1] == "girar")
   {
+    //cout<<"tipo: "<<tokens[1]<<"num"<< stoi(tokens[2])<<"tercer"<< tokens[3]<< endl;
+    
     auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
+    
   }
   else
   {

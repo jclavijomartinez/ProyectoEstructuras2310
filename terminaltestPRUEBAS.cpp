@@ -42,8 +42,8 @@ int main()
     // Ahora con el función entrar a un Switch o a puros if´s
     if (funcion == "agregar_movimiento")
     {
-      jorgeElCurioso.testfun();
-      //jorgeElCurioso.agregar_movimiento(input);
+      //jorgeElCurioso.testfun();
+      jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
     {
