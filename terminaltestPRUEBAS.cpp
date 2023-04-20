@@ -39,7 +39,12 @@ int main()
     // Conseguir identificar lo que quiere la consola
     funcion = queQuiereConsola(input);
 
-    // Ahora con el función entrar a un Switch o a puros if´s
+    if (funcion == "cargar_comandos"){
+      
+    }
+    if (funcion == "cargar_elementos"){
+
+    }
     if (funcion == "agregar_movimiento")
     {
       jorgeElCurioso.testfun();
@@ -53,6 +58,9 @@ int main()
     if (funcion == "agregar_elemento")
     {
       // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
+    }
+    if (funcion == "guardar"){
+
     }
 
     if (input == "salir")

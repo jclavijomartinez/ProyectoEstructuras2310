@@ -14,19 +14,52 @@
 #include <list>
 
 using namespace std;
-/*
-comandos comandos::consstructor(std::string comando){
-
-    this->comando=comando;
-
-}
-
-*/
 curiosity curiosity::constructor()
 {
 }
 
 // Funciones
+list<comandos> ponerenlistacomandos(string comando){
+  list<comandos> listacomandos;
+  //listacomandos.push_back(comando);
+  return listacomandos;
+}
+
+void cargar_comandos(std::string ruta){
+  fstream newfile;
+    newfile.open(ruta, ios::in);
+    if (newfile.peek() == ifstream::traits_type::eof())
+    {
+        cout << ruta << " no contiene elementos (esta vacio)" << endl;
+    }
+    else if (newfile.is_open())
+    {
+        string infoarch;
+        int contador_comandos = 0;
+        while (getline(newfile, infoarch))
+        {
+            stringstream ss(infoarch);
+            string primera_palabra;
+            ss >> primera_palabra;
+            if (primera_palabra == "avanzar")
+            {
+                ponerenlistacomandos(infoarch);
+                contador_comandos++;
+            }
+            else if (primera_palabra == "girar")
+            {
+                ponerenlistacomandos(infoarch);
+                contador_comandos++;
+            }
+        }
+        cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
+        newfile.close();
+    }
+    else
+    {
+        cout << ruta << " no se encuentra o no puede leerse." << endl;
+    }
+}
 
 movimientos curiosity::agregar_movimiento(string input)
 {

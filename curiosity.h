@@ -17,6 +17,10 @@ public:
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
 
+  void cargar_comandos(std::string ruta);
+
+  list<comandos> ponerenlistacomandos(string comando);
+
   curiosity constructor();
 
   movimientos agregar_movimiento(std::string input);
