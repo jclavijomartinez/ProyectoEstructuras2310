@@ -47,8 +47,8 @@ int main()
     }
     if (funcion == "agregar_movimiento")
     {
-      jorgeElCurioso.testfun();
-      //jorgeElCurioso.agregar_movimiento(input);
+      //jorgeElCurioso.testfun();
+      jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
     {
