@@ -332,7 +332,7 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
         for(it = comando.begin(); it != comando.end(); it++){
             if (it->getMovimientos().getTipoMov() == "a" || it->getMovimientos().getTipoMov() == "g")
             {
-                validar = false;
+                validar = true;
             }
                         
         }
@@ -343,9 +343,6 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
     if (archivo.is_open()) {
         string opcion;
         while (getline(archivo, opcion)) { 
-            
-            num_p = opcion.length();
-            cout<<"\nTotal: "<<num_p;
 
             if (!opcion.empty() && validar == true) {
  
@@ -363,9 +360,8 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
                     cout<<"\n Posicion Archivo y: "<< posYArch;             
 
                 for(it = comando.begin(); it != comando.end(); it++){
-                    nuevas_coor[0] = posX;
-                    nuevas_coor[1] = posY;
-                    cout<<"\ncm";
+                    nuevas_coor[0] = posX + posXArch;
+                    nuevas_coor[1] = posY + posYArch;
 
                     if (it->getMovimientos().getTipoMov() == "a" ) {
                         // Si son cm
