@@ -2,11 +2,6 @@
 #include <sstream>
 #include <cstring>
 #include <string>
-// #include "movimientos.h"
-// #include "comandos.h"
-// #include "analisis.h"
-// #include "elemento.h"
-// #include "curiosity.h"
 #include "curiosity.cpp"
 
 using namespace std;
@@ -48,19 +43,23 @@ int main()
     }
     if (funcion == "agregar_movimiento")
     {
+      jorgeElCurioso.listMov.clear();
+      cout<<"lista limpiada correctamente"<<endl;
       jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
     {
-      // jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
+      jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
     }
 
     if (funcion == "agregar_elemento")
     {
-      // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
+      jorgeElCurioso.listElem.clear();
+      cout<<"lista limpiada correctamente"<<endl;
+      jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
     }
     if (funcion == "guardar"){
-      //jorgeElCurioso.guardar(input);
+      jorgeElCurioso.guardar(input,jorgeElCurioso.listCum,jorgeElCurioso.listElem);
     }
     if (funcion == "ayuda"){
       jorgeElCurioso.ayuda(input);

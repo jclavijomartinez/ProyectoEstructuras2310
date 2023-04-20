@@ -4,6 +4,7 @@
 #include "analisis.cpp"
 #include "elemento.cpp"
 #include "ArbolGeneralQuad.cpp"
+#include "NodoGeneralQuad.cpp"
 #include <iostream>
 #include <list>
 #include <string>
@@ -11,7 +12,6 @@
 #include <cstring>
 #include <vector>
 #include <fstream>
-#include <list>
 
 using namespace std;
 curiosity curiosity::constructor()
@@ -153,8 +153,8 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
   }
 }
 
-// void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
-/*void guardar(std::string input) {
+//void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
+void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen) {
   std::istringstream iss(input);
   std::vector<std::string> tokens;
   std::string token;
@@ -180,24 +180,24 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
       }
       else
       {
-        for (std::string cmd : listacomandos)
+        for (comandos cmd : listacomandos)
         {
-          file2write << cmd << endl;
+          file2write << cmd.getComando() << endl;
         }
         cout << "La informacion ha sido guardada en " << nombre << endl;
       }
     }
     else if (tipo == "elementos")
     {
-      if (listaelems.empty())
+      if (listaelemen.empty())
       {
         cout << "La informacion requerida no esta almacenada en memoria." << endl;
       }
       else
       {
-        for (std::string elem : listaelems)
+        for (elemento elem : listaelemen)
         {
-          file2write << elem << endl;
+          file2write << elem.getTipoComponente() << " " << elem.getTamano() << " " << elem.getUnidadMedida() << " " << elem.getCoordX() << " " << elem.getCoordY() << endl;
         }
         cout << "La informacion ha sido guardada en " << nombre << endl;
       }
@@ -207,13 +207,12 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
       cout << "tipo de archivo invalido" << endl;
     }
   }
-}*/
+}
 
 movimientos curiosity::agregar_movimiento(std::string input)
 {
 
   movimientos auxMov;
-
   // Separar el input en pedazos
   std::istringstream iss(input);
   std::vector<std::string> tokens;
@@ -499,7 +498,7 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles 
 
-void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
+/*void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
     int num_procesados = 0;
     int num_fallidos = 0;
     NodoAGQ* nodo;
@@ -533,4 +532,4 @@ void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
     } else {
         std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
     }
-}
+}*/
