@@ -72,7 +72,7 @@ analisis curiosity::agregar_analisis(std::string input) {
     // Verificación de información completa
     if (tipo_analisis.empty() || objeto.empty() || comentario.empty()) {
         std::cout << "Falta información para agregar el comando de análisis." << std::endl;
-        return;
+        //return;
     }
 
     // Creación del comando de análisis y agregado a la lista
@@ -97,7 +97,7 @@ analisis curiosity::agregar_analisis(std::string input) {
     if (tokens.size() != 5) {
         // Si el input no tiene la información adecuada, no se puede agregar el elemento
         cout<<"La información del elemento es incompleta o incorrecta."<<endl;
-        return;
+        //return;
     }
 
     tipo_comp = tokens[0];
