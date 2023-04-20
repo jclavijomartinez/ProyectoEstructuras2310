@@ -11,20 +11,25 @@
 class curiosity
 {
 private:
-
 public:
   std::list<movimientos> listMov;
   std::list<elemento> listElem;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
 
+  void cargar_comandos(std::string ruta);
+
+  list<comandos> ponerenlistacomandos(string comando);
+
   curiosity constructor();
 
-  movimientos agregar_movimiento( std::string input);
+  movimientos agregar_movimiento(std::string input);
 
   analisis agregar_analisis(std::string input);
 
-  elemento agregar_elemento( std::string input);
+  elemento agregar_elemento(std::string input);
+
+  void testfun();
 
   //void simular_comandos(const string& archivo_entrada, list <comandos> comando);
 

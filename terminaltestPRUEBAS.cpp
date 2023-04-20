@@ -1,13 +1,13 @@
 #include <iostream>
-#include <string>
 #include <sstream>
 #include <cstring>
 #include <string>
-#include "movimientos.h"
-#include "comandos.h"
-#include "analisis.h"
-#include "elemento.h"
-#include "curiosity.h"
+// #include "movimientos.h"
+// #include "comandos.h"
+// #include "analisis.h"
+// #include "elemento.h"
+// #include "curiosity.h"
+#include "curiosity.cpp"
 
 using namespace std;
 
@@ -26,11 +26,10 @@ string queQuiereConsola(string input)
 
 int main()
 {
+
   string input;
   string funcion;
-  curiosity nave1;
-  nave1.constructor();
-
+  curiosity jorgeElCurioso;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -40,10 +39,16 @@ int main()
     // Conseguir identificar lo que quiere la consola
     funcion = queQuiereConsola(input);
 
-    // Ahora con el función entrar a un Switch o a puros if´s
+    if (funcion == "cargar_comandos"){
+      
+    }
+    if (funcion == "cargar_elementos"){
+
+    }
     if (funcion == "agregar_movimiento")
     {
-      nave1.agregar_movimiento(input);
+      //jorgeElCurioso.testfun();
+      jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
     {
@@ -53,6 +58,9 @@ int main()
     if (funcion == "agregar_elemento")
     {
       // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
+    }
+    if (funcion == "guardar"){
+
     }
 
     if (input == "salir")
