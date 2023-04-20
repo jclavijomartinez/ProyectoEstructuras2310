@@ -26,7 +26,7 @@ public:
 
   elemento agregar_elemento( std::string input);
 
-  void simular_comandos(const string& archivo_entrada, list <comandos> &comando);
+  //void simular_comandos(const string& archivo_entrada, list <comandos> comando);
 
   // Getters y Setters
 

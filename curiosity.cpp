@@ -204,7 +204,7 @@ void simular_comandos(const string& archivo_entrada, list <comandos> &comando) {
 
                     if (it->getMovimientos().getTipoMov() == "a" ) {
                         // Si son cm
-                        cout<<"\ncm";
+                        
                         if (it->getMovimientos().getUniMed() == "c"){   
                             cambioA = it->getMovimientos().getMagnitud() / 100;
                         }
