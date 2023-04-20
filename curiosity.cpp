@@ -1,4 +1,4 @@
-//EL CODIGO COMPLETO ESTA EN LECTURADEARCHIVOS/CURIOSITYPABLO.CPP
+// EL CODIGO COMPLETO ESTA EN LECTURADEARCHIVOS/CURIOSITYPABLO.CPP
 #include "curiosity.h"
 #include "movimientos.cpp"
 #include "comandos.cpp"
@@ -23,115 +23,122 @@ comandos comandos::consstructor(std::string comando){
 
 */
 curiosity curiosity::constructor()
-  {
-        
-   }
+{
+}
 
-//Funciones 
+// Funciones
 
-movimientos curiosity::agregar_movimiento(string input) {
-  
+movimientos curiosity::agregar_movimiento(string input)
+{
+
   movimientos auxMov;
-   
-    //Separar el input en pedazos
-   std::istringstream iss(input);
-    std::vector<std::string> tokens;
-    std::string token;
-    while (iss >> token) {
-        tokens.push_back(token);
-    }
 
-  if (tokens[1] == "avanzar" || tokens[1] == "girar") {
+  // Separar el input en pedazos
+  std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+  }
+
+  if (tokens[1] == "avanzar" || tokens[1] == "girar")
+  {
     auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
-  } else {
+  }
+  else
+  {
     std::cout << "Error: El tipo de movimiento debe ser 'avanzar' o 'girar'" << std::endl;
   }
 }
 
+analisis curiosity::agregar_analisis(std::string input)
+{
+  std::istringstream ss(input);
+  std::string token;
 
-analisis curiosity::agregar_analisis(std::string input) {
-    std::istringstream ss(input);
-    std::string token;
+  string tipo_analisis;
+  std::string objeto;
+  std::string comentario;
 
-    string tipo_analisis;
-    std::string objeto;
-    std::string comentario;
+  // Tokenización del input
+  std::getline(ss, token, ' ');
+  tipo_analisis = token;
 
-    // Tokenización del input
-    std::getline(ss, token, ' ');
-    tipo_analisis = token;
+  std::getline(ss, token, ' ');
+  objeto = token;
 
-    std::getline(ss, token, ' ');
-    objeto = token;
+  std::getline(ss, token, '\'');
+  std::getline(ss, comentario, '\'');
 
-    std::getline(ss, token, '\'');
-    std::getline(ss, comentario, '\'');
+  // Verificación de información completa
+  if (tipo_analisis.empty() || objeto.empty() || comentario.empty())
+  {
+    std::cout << "Falta información para agregar el comando de análisis." << std::endl;
+    // return;
+  }
 
-    // Verificación de información completa
-    if (tipo_analisis.empty() || objeto.empty() || comentario.empty()) {
-        std::cout << "Falta información para agregar el comando de análisis." << std::endl;
-        //return;
-    }
-
-    // Creación del comando de análisis y agregado a la lista
-    analisis auxAnalisis; 
-    auxAnalisis.cosstructor(tipo_analisis, objeto, comentario);
-    return auxAnalisis;
-   
+  // Creación del comando de análisis y agregado a la lista
+  analisis auxAnalisis;
+  auxAnalisis.cosstructor(tipo_analisis, objeto, comentario);
+  return auxAnalisis;
 }
 
+elemento curiosity::agregar_elemento(string input)
+{
+  string tipo_comp, unidad_med;
+  int tamano, coordX, coordY;
 
-  elemento curiosity::agregar_elemento(string input) {
-    string tipo_comp, unidad_med;
-    int tamano, coordX, coordY;
+  vector<string> tokens;
+  istringstream iss(input);
+  string token;
+  while (getline(iss, token, ' '))
+  {
+    tokens.push_back(token);
+  }
 
-    vector<string> tokens;
-    istringstream iss(input);
-    string token;
-    while (getline(iss, token, ' ')) {
-        tokens.push_back(token);
-    }
+  if (tokens.size() != 5)
+  {
+    // Si el input no tiene la información adecuada, no se puede agregar el elemento
+    cout << "La información del elemento es incompleta o incorrecta." << endl;
+    // return;
+  }
 
-    if (tokens.size() != 5) {
-        // Si el input no tiene la información adecuada, no se puede agregar el elemento
-        cout<<"La información del elemento es incompleta o incorrecta."<<endl;
-        //return;
-    }
+  tipo_comp = tokens[0];
+  tamano = stoi(tokens[1]);
+  unidad_med = tokens[2];
+  coordX = stoi(tokens[3]);
+  coordY = stoi(tokens[4]);
 
-    tipo_comp = tokens[0];
-    tamano = stoi(tokens[1]);
-    unidad_med = tokens[2];
-    coordX = stoi(tokens[3]);
-    coordY = stoi(tokens[4]);
-
-   elemento elem;
-   elem.cosntructor(tipo_comp, tamano, unidad_med, coordX, coordY);
-    return elem;
+  elemento elem;
+  elem.cosntructor(tipo_comp, tamano, unidad_med, coordX, coordY);
+  return elem;
 }
 
+void testfun()
+{
+  cout << "llega hasta aca" << endl;
+}
 
+// Getters y Setters
+std::list<movimientos> curiosity::getMovs()
+{
+  return listMov;
+}
 
+std::list<elemento> curiosity::getElems()
+{
+  return listElem;
+}
 
+std::list<analisis> curiosity::getAnals()
+{
+  return listAnalisis;
+}
 
-
-
-
-
-//Getters y Setters
-    std::list<movimientos> curiosity::getMovs(){
-        return listMov;
-    }
-
-    std::list<elemento> curiosity::getElems(){
-        return listElem;
-    }
-
-    std::list<analisis> curiosity::getAnals(){
-        return listAnalisis;
-    }
-
-    std::list<comandos> curiosity::getCums(){
-        return listCum;
-    }
+std::list<comandos> curiosity::getCums()
+{
+  return listCum;
+}

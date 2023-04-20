@@ -11,7 +11,6 @@
 class curiosity
 {
 private:
-
 public:
   std::list<movimientos> listMov;
   std::list<elemento> listElem;
@@ -20,11 +19,13 @@ public:
 
   curiosity constructor();
 
-  movimientos agregar_movimiento( std::string input);
+  movimientos agregar_movimiento(std::string input);
 
   analisis agregar_analisis(std::string input);
 
-  elemento agregar_elemento( std::string input);
+  elemento agregar_elemento(std::string input);
+
+  void testfun();
 
   // Getters y Setters
 
