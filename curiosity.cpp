@@ -23,11 +23,15 @@ std::list<comandos> curiosity::cargar_comandos(std::string ruta)
   fstream newfile;
   std::list<comandos> listadev;
   comandos elCum;
-
-  newfile.open(ruta, ios::in);
-  if (newfile.peek() == ifstream::traits_type::eof())
+  std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
+  newfile.open(nombre_archivo, ios::in);
+  if (!newfile.is_open())
   {
-    cout << ruta << " no contiene elementos (esta vacio)" << endl;
+    cout << "No se pudo abrir el archivo " << ruta << endl;
+  }
+  else if (newfile.peek() == ifstream::traits_type::eof())
+  {
+    cout << ruta << " no contiene elementos (está vacío)" << endl;
   }
   else if (newfile.is_open())
   {
@@ -61,13 +65,18 @@ std::list<comandos> curiosity::cargar_comandos(std::string ruta)
   }
 }
 
-std::list<elemento> cargar_elementos(std::string ruta)
+std::list<elemento> curiosity::cargar_elementos(std::string ruta)
 {
   fstream newfile;
   std::list<elemento> listadev;
   elemento elelem;
-  newfile.open(ruta, ios::in);
-  if (newfile.peek() == ifstream::traits_type::eof())
+  std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
+  newfile.open(nombre_archivo, ios::in);
+  if (!newfile.is_open())
+  {
+    cout << "No se pudo abrir el archivo " << ruta << endl;
+  }
+  else if (newfile.peek() == ifstream::traits_type::eof())
   {
     cout << ruta << " no contiene elementos (esta vacio)" << endl;
   }

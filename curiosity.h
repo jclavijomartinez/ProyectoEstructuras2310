@@ -19,7 +19,7 @@ public:
 
   std::list<comandos> cargar_comandos(std::string ruta);
 
-  void cargar_elementos(std::string ruta);
+  std::list<elemento>cargar_elementos(std::string ruta);
 
   void guardar(std::string tipo, std::string nombre, std::list<comandos> listacomandos, std::list<elemento> listaelems);
 

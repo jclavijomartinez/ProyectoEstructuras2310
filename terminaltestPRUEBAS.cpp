@@ -35,6 +35,7 @@ int main()
     // Conseguir la linea de comandos
     imprimirSimbolo();
     getline(cin, input);
+    //jorgeElCurioso.testfun();
 
     // Conseguir identificar lo que quiere la consola
     funcion = queQuiereConsola(input);
@@ -43,11 +44,10 @@ int main()
       jorgeElCurioso.cargar_comandos(input);
     }
     if (funcion == "cargar_elementos"){
-
+      jorgeElCurioso.cargar_elementos(input);
     }
     if (funcion == "agregar_movimiento")
     {
-      //jorgeElCurioso.testfun();
       jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
@@ -60,7 +60,7 @@ int main()
       // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
     }
     if (funcion == "guardar"){
-
+      jorgeElCurioso.guardar(input);
     }
 
     if (input == "salir")
