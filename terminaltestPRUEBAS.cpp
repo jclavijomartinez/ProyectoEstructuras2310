@@ -60,7 +60,10 @@ int main()
       // jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
     }
     if (funcion == "guardar"){
-      jorgeElCurioso.guardar(input);
+      //jorgeElCurioso.guardar(input);
+    }
+    if (funcion == "ayuda"){
+      jorgeElCurioso.ayuda(input);
     }
 
     if (input == "salir")

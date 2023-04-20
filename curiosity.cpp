@@ -31,7 +31,7 @@ std::list<comandos> curiosity::cargar_comandos(std::string ruta)
   }
   else if (newfile.peek() == ifstream::traits_type::eof())
   {
-    cout << ruta << " no contiene elementos (está vacío)" << endl;
+    cout << ruta << " no contiene elementos (esta vacio)" << endl;
   }
   else if (newfile.is_open())
   {
@@ -152,8 +152,18 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
   }
 }
 
-void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems)
-{
+// void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
+/*void guardar(std::string input) {
+  std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+  }
+  std::string tipo = tokens[0];
+  std::string nombre = tokens[1];
+  //faltan las listas
   ofstream file2write(nombre);
   if (!file2write)
   {
@@ -180,7 +190,7 @@ void guardar(std::string tipo, std::string nombre, std::list<string> listacomand
     {
       if (listaelems.empty())
       {
-        cout << "La información requerida no está almacenada en memoria." << endl;
+        cout << "La informacion requerida no esta almacenada en memoria." << endl;
       }
       else
       {
@@ -196,7 +206,7 @@ void guardar(std::string tipo, std::string nombre, std::list<string> listacomand
       cout << "tipo de archivo invalido" << endl;
     }
   }
-}
+}*/
 
 movimientos curiosity::agregar_movimiento(std::string input)
 {
@@ -235,7 +245,7 @@ analisis curiosity::agregar_analisis(std::string input)
   std::string objeto;
   std::string comentario;
 
-  // Tokenización del input
+  // Tokenizacion del input
   std::getline(ss, token, ' ');
   tipo_analisis = token;
 
@@ -245,14 +255,14 @@ analisis curiosity::agregar_analisis(std::string input)
   std::getline(ss, token, '\'');
   std::getline(ss, comentario, '\'');
 
-  // Verificación de información completa
+  // Verificacion de informacion completa
   if (tipo_analisis.empty() || objeto.empty() || comentario.empty())
   {
-    std::cout << "Falta información para agregar el comando de análisis." << std::endl;
+    std::cout << "Falta informacion para agregar el comando de analisis." << std::endl;
     // return;
   }
 
-  // Creación del comando de análisis y agregado a la lista
+  // Creacion del comando de analisis y agregado a la lista
   analisis auxAnalisis;
   auxAnalisis.cosstructor(tipo_analisis, objeto, comentario);
   return auxAnalisis;
@@ -273,8 +283,8 @@ elemento curiosity::agregar_elemento(std::string input)
 
   if (tokens.size() != 5)
   {
-    // Si el input no tiene la información adecuada, no se puede agregar el elemento
-    cout << "La información del elemento es incompleta o incorrecta." << endl;
+    // Si el input no tiene la informacion adecuada, no se puede agregar el elemento
+    cout << "La informacion del elemento es incompleta o incorrecta." << endl;
     // return;
   }
 
@@ -292,6 +302,72 @@ elemento curiosity::agregar_elemento(std::string input)
 void curiosity::testfun()
 {
   std::cout << "un superduper texto" << endl;
+}
+
+void curiosity::ayuda(std::string input)
+{
+  std::string funcdeayuda = input.substr(input.find_last_of(" ") + 1);
+  if (input == "ayuda")
+  {
+    cout << "Estos son los comandos disponibles, si necesitas mas ayuda, no dudes en usar ayuda [Comando] " << endl;
+    cout << "" << endl;
+    cout << "cargar_elementos [ruta]: Carga los elementos desde el archivo ubicado en la ruta especificada." << endl;
+    cout << "" << endl;
+    cout << "cargar_comandos [ruta]: Carga los comandos de movimiento y analisis desde el archivo ubicado en la ruta especificada." << endl;
+    cout << "" << endl;
+    cout << "agregar_movimiento [tipo_mov] [magnitud] [unidad_med]: Agrega el comando de movimiento a la lista de comandos, siendo el movimiento de dos tipos: avanzar o girar, con su respectiva magnitud y unidad de medida. Si la informacion del comando no es completa o adecuada, se muestra un mensaje de error." << endl;
+    cout << "" << endl;
+    cout << "agregar_analisis [tipo_analisis] [objeto] [comentario]: Agregar comando de analisis a la lista de comandos del robot. El analisis puede ser de tres tipos: fotografiar, composicion o perforar. El objeto es el nombre del elemento que se quiere analizar (roca, arena, monticulo, ...). El comentario es opcional y se escribe entre comillas simples (ejemplo: 'roca_cuadrante_32')." << endl;
+    cout << "" << endl;
+    cout << "agregar_elemento [tipo_comp] tamanio [unidad_med] [coordX] [coordY]: Agregar elemento a la lista de puntos de interes del robot. Requiere tipo, tamanio, unidad, coordenadas x e y. Si la informacion no es completa o adecuada, no se agrega. Salida: Formato erroneo o Resultado exitoso." << endl;
+    cout << "" << endl;
+    cout << "guardar [tipo_archivo] [nombre_archivo]: Guarda en el archivo nombre_archivo la informacion solicitada de acuerdo al tipo de archivo: comandos almacena en el archivo la informacion de comandos de movimiento y de analisis que debe ejecutar el robot, elementos almacena en el archivo la informacion de los componentes o puntos de interes conocidos en el suelo marciano." << endl;
+    cout << "" << endl;
+    cout << "simular_comandos [coordX] [coordY]: Esta funcion simula los comandos de movimiento que se enviaran al robot. Muestra la nueva posicion del vehiculo en base a las coordenadas dadas. Solo se necesitan los comandos de movimiento para ejecutar la simulacion." << endl;
+    cout << "" << endl;
+    cout << "salir: Termina la ejecucion de la aplicacion." << endl;
+  }
+  else if (funcdeayuda == "cargar_elementos")
+  {
+    cout << "Descripción:" << endl;
+    cout << "Carga en memoria los comandos de desplazamiento contenidos en el archivo identificado por nombre_archivo, sobrescribiendo cualquier información previamente cargada en memoria" << endl;
+    cout << "Uso" << endl;
+    cout << "    - cargar_comandos [nombre_archivo]" << endl;
+    cout << "Parámetros" << endl;
+    cout << "    - [nombre_archivo]: el nombre o ruta del archivo que contiene los comandos de desplazamiento" << endl;
+    cout << "Salida en pantalla" << endl;
+    cout << "    - Si el archivo está vacío: [nombre_archivo] no contiene elementos" << endl;
+    cout << "    - Si no se puede abrir el archivo: [nombre_archivo] no se encuentra o no puede leerse" << endl;
+    cout << "    - Si se puede abrir el archivo exitosamente y cargar los comandos: n comandos cargados correctamente desde [nombre_archivo]" << endl;
+    cout << "Ejemplos de uso" << endl;
+    cout << "    - cargar_comandos comandos.csv" << endl;
+    cout << "    - cargar_comandos C:/Documentos/comandos.csv" << endl;
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else if (funcdeayuda == "")
+  {
+  }
+  else
+  {
+    cout << "Esa funcion no existe, revisa lo que escribiste!" << endl;
+  }
 }
 
 // Getters y Setters

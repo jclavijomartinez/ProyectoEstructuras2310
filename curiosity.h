@@ -21,7 +21,9 @@ public:
 
   std::list<elemento>cargar_elementos(std::string ruta);
 
-  void guardar(std::string tipo, std::string nombre, std::list<comandos> listacomandos, std::list<elemento> listaelems);
+  //void guardar(std::string input);
+
+  void ayuda(std::string input);
 
   std::list<comandos> ponerenlistacomandos(std::string comando);
 
