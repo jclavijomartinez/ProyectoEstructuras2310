@@ -117,9 +117,9 @@ elemento curiosity::agregar_elemento(string input)
   return elem;
 }
 
-void testfun()
+void curiosity::testfun()
 {
-  cout << "un superduper texto" << endl;
+  std::cout << "un superduper texto" << endl;
 }
 
 // Getters y Setters
