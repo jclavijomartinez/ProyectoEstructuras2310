@@ -29,7 +29,7 @@ int main()
 
   string input;
   string funcion;
-  curiosity nave1;
+  curiosity jorgeElCurioso;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -42,8 +42,8 @@ int main()
     // Ahora con el función entrar a un Switch o a puros if´s
     if (funcion == "agregar_movimiento")
     {
-      //nave1.testfun();
-      nave1.agregar_movimiento(input);
+      jorgeElCurioso.testfun();
+      //jorgeElCurioso.agregar_movimiento(input);
     }
     if (funcion == "agregar_analisis")
     {
