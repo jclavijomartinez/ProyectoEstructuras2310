@@ -50,3 +50,16 @@ string analisis::getTipo(){
 std::string analisis::getComentario() const {
     return this->comentario;
 }
+
+
+void analisis::setTipo(std::string elTipo){
+
+    tipo_analisis=elTipo;
+ 
+}
+     void analisis::setObjeto(std::string elObj){
+        objeto_analisis=elObj;
+     }
+     void analisis::setComentario(std::string elCom){
+        comentario =elCom;
+     }

@@ -1,4 +1,3 @@
-// EL CODIGO COMPLETO ESTA EN LECTURADEARCHIVOS/CURIOSITYPABLO.CPP
 #include "curiosity.h"
 #include "movimientos.cpp"
 #include "comandos.cpp"
@@ -19,49 +18,178 @@ curiosity curiosity::constructor()
 }
 
 // Funciones
-list<comandos> ponerenlistacomandos(string comando){
-  list<comandos> listacomandos;
-  //listacomandos.push_back(comando);
-  return listacomandos;
+std::list<comandos> curiosity::cargar_comandos(std::string ruta)
+{
+  fstream newfile;
+  std::list<comandos> listadev;
+  comandos elCum;
+
+  newfile.open(ruta, ios::in);
+  if (newfile.peek() == ifstream::traits_type::eof())
+  {
+    cout << ruta << " no contiene elementos (esta vacio)" << endl;
+  }
+  else if (newfile.is_open())
+  {
+    std::string infoarch;
+    int contador_comandos = 0;
+    while (getline(newfile, infoarch))
+    {
+      stringstream ss(infoarch);
+      string primera_palabra;
+      ss >> primera_palabra;
+      if (primera_palabra == "avanzar")
+      {
+        elCum.setComando(infoarch);
+        listadev.push_back(elCum);
+        contador_comandos++;
+      }
+      else if (primera_palabra == "girar")
+      {
+        elCum.setComando(infoarch);
+        listadev.push_back(elCum);
+        contador_comandos++;
+      }
+    }
+    cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
+    newfile.close();
+    return listadev;
+  }
+  else
+  {
+    cout << ruta << " no se encuentra o no puede leerse." << endl;
+  }
 }
 
-void cargar_comandos(std::string ruta){
+std::list<elemento> cargar_elementos(std::string ruta)
+{
   fstream newfile;
-    newfile.open(ruta, ios::in);
-    if (newfile.peek() == ifstream::traits_type::eof())
+  std::list<elemento> listadev;
+  elemento elelem;
+  newfile.open(ruta, ios::in);
+  if (newfile.peek() == ifstream::traits_type::eof())
+  {
+    cout << ruta << " no contiene elementos (esta vacio)" << endl;
+  }
+  else if (newfile.is_open())
+  {
+    std::string infoarch;
+    int contador_elementos = 0;
+    while (getline(newfile, infoarch))
     {
-        cout << ruta << " no contiene elementos (esta vacio)" << endl;
-    }
-    else if (newfile.is_open())
-    {
-        string infoarch;
-        int contador_comandos = 0;
-        while (getline(newfile, infoarch))
+      stringstream ss(infoarch);
+      std::string primera_palabra;
+      ss >> primera_palabra;
+      if (primera_palabra == "roca")
+      {
+        std::istringstream iss(infoarch);
+        std::vector<std::string> tokens;
+        std::string token;
+        while (iss >> token)
         {
-            stringstream ss(infoarch);
-            string primera_palabra;
-            ss >> primera_palabra;
-            if (primera_palabra == "avanzar")
-            {
-                ponerenlistacomandos(infoarch);
-                contador_comandos++;
-            }
-            else if (primera_palabra == "girar")
-            {
-                ponerenlistacomandos(infoarch);
-                contador_comandos++;
-            }
+          tokens.push_back(token);
         }
-        cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
-        newfile.close();
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        listadev.push_back(elelem);
+        contador_elementos++;
+      }
+      else if (primera_palabra == "crater")
+      {
+        std::istringstream iss(infoarch);
+        std::vector<std::string> tokens;
+        std::string token;
+        while (iss >> token)
+        {
+          tokens.push_back(token);
+        }
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        listadev.push_back(elelem);
+        contador_elementos++;
+      }
+      else if (primera_palabra == "monticulo")
+      {
+        std::istringstream iss(infoarch);
+        std::vector<std::string> tokens;
+        std::string token;
+        while (iss >> token)
+        {
+          tokens.push_back(token);
+        }
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        listadev.push_back(elelem);
+        contador_elementos++;
+      }
+      else if (primera_palabra == "duna")
+      {
+        std::istringstream iss(infoarch);
+        std::vector<std::string> tokens;
+        std::string token;
+        while (iss >> token)
+        {
+          tokens.push_back(token);
+        }
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        listadev.push_back(elelem);
+        contador_elementos++;
+      }
+    }
+    cout << contador_elementos << " elementos cargados correctamente desde " << ruta << endl;
+    newfile.close();
+    return listadev;
+  }
+  else
+  {
+    cout << ruta << " no se encuentra o no puede leerse." << endl;
+  }
+}
+
+void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems)
+{
+  ofstream file2write(nombre);
+  if (!file2write)
+  {
+    cout << "Error guardando en " << nombre << endl;
+  }
+  else
+  {
+    if (tipo == "comandos")
+    {
+      if (listacomandos.empty())
+      {
+        cout << "La informacion requerida no esta almacenada en memoria." << endl;
+      }
+      else
+      {
+        for (std::string cmd : listacomandos)
+        {
+          file2write << cmd << endl;
+        }
+        cout << "La informacion ha sido guardada en " << nombre << endl;
+      }
+    }
+    else if (tipo == "elementos")
+    {
+      if (listaelems.empty())
+      {
+        cout << "La información requerida no está almacenada en memoria." << endl;
+      }
+      else
+      {
+        for (std::string elem : listaelems)
+        {
+          file2write << elem << endl;
+        }
+        cout << "La informacion ha sido guardada en " << nombre << endl;
+      }
     }
     else
     {
-        cout << ruta << " no se encuentra o no puede leerse." << endl;
+      cout << "tipo de archivo invalido" << endl;
     }
+  }
 }
 
-movimientos curiosity::agregar_movimiento(string input)
+movimientos curiosity::agregar_movimiento(std::string input)
 {
 
   movimientos auxMov;
@@ -77,12 +205,11 @@ movimientos curiosity::agregar_movimiento(string input)
 
   if (tokens[1] == "avanzar" || tokens[1] == "girar")
   {
-    //cout<<"tipo: "<<tokens[1]<<"num"<< stoi(tokens[2])<<"tercer"<< tokens[3]<< endl;
-    
+    // cout<<"tipo: "<<tokens[1]<<"num"<< stoi(tokens[2])<<"tercer"<< tokens[3]<< endl;
+
     auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
-    
   }
   else
   {
@@ -95,7 +222,7 @@ analisis curiosity::agregar_analisis(std::string input)
   std::istringstream ss(input);
   std::string token;
 
-  string tipo_analisis;
+  std::string tipo_analisis;
   std::string objeto;
   std::string comentario;
 
@@ -122,14 +249,14 @@ analisis curiosity::agregar_analisis(std::string input)
   return auxAnalisis;
 }
 
-elemento curiosity::agregar_elemento(string input)
+elemento curiosity::agregar_elemento(std::string input)
 {
-  string tipo_comp, unidad_med;
+  std::string tipo_comp, unidad_med;
   int tamano, coordX, coordY;
 
   vector<string> tokens;
   istringstream iss(input);
-  string token;
+  std::string token;
   while (getline(iss, token, ' '))
   {
     tokens.push_back(token);
@@ -149,7 +276,7 @@ elemento curiosity::agregar_elemento(string input)
   coordY = stoi(tokens[4]);
 
   elemento elem;
-  elem.cosntructor(tipo_comp, tamano, unidad_med, coordX, coordY);
+  elem.constructor(tipo_comp, tamano, unidad_med, coordX, coordY);
   return elem;
 }
 

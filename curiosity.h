@@ -17,9 +17,15 @@ public:
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
 
-  void cargar_comandos(std::string ruta);
+  std::list<comandos> cargar_comandos(std::string ruta);
 
-  list<comandos> ponerenlistacomandos(string comando);
+  void cargar_elementos(std::string ruta);
+
+  void guardar(std::string tipo, std::string nombre, std::list<comandos> listacomandos, std::list<elemento> listaelems);
+
+  std::list<comandos> ponerenlistacomandos(std::string comando);
+
+  std::list<elemento> ponerenlistaelems(std::string comando);
 
   curiosity constructor();
 

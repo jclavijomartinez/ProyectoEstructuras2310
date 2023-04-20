@@ -40,7 +40,7 @@ int main()
     funcion = queQuiereConsola(input);
 
     if (funcion == "cargar_comandos"){
-      
+      jorgeElCurioso.cargar_comandos(input);
     }
     if (funcion == "cargar_elementos"){
 

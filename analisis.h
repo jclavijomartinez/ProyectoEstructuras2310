@@ -19,6 +19,12 @@ public:
      std::string getTipo();
      std::string getObjeto();
      std::string getComentario() const;
+
+     void setTipo(std::string elTipo);
+     void setObjeto(std::string elObj);
+     void setComentario(std::string elCom);
+
+
 };
 
 #endif
