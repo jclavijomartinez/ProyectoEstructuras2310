@@ -40,7 +40,7 @@ public:
 
   void testfun();
 
-  void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol);
+  void ubicar_elementos(std::list<elemento>& elementos, ArbolQuad& arbol);
 
   // Getters y Setters
 
