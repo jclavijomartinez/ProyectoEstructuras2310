@@ -38,6 +38,8 @@ public:
 
   elemento agregar_elemento(std::string input);
 
+  void simular_comandos(std::string input, std::list <movimientos> listaMovimiento);
+
   void testfun();
 
   void ubicar_elementos(std::list<elemento>& elementos, ArbolQuad& arbol);
