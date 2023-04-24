@@ -13,6 +13,7 @@ private:
 
 public:
   elemento constructor( std::string tipo, double tamano,  std::string unidad, int x, int y);
+  elemento constructor(elemento);
 
   void cargar_elemento( std::string input);
 

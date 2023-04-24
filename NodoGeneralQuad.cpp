@@ -7,8 +7,8 @@ NodoQuad::NodoQuad() {
   hijoInfDer = nullptr;
 }
 
-NodoQuad::NodoQuad(punto &val) {
-  dato = val;
+NodoQuad::NodoQuad(elemento &val) {
+  elElemen = val;
   hijoSupIzq = nullptr;
   hijoSupDer = nullptr;
   hijoInfIzq = nullptr;
@@ -22,12 +22,12 @@ NodoQuad::~NodoQuad() {
   delete hijoInfDer;
 }
 
-punto& NodoQuad::obtenerDato() {
-  return dato;
+elemento& NodoQuad::obtenerDato() {
+  return elElemen;
 }
 
-void NodoQuad::fijarDato(punto &val) {
-  dato = val;
+void NodoQuad::fijarDato(elemento &val) {
+  elElemen = val;
 }
 
 NodoQuad* NodoQuad::obtenerHijoSupIzq() {

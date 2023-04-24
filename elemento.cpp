@@ -16,7 +16,13 @@ elemento elemento::constructor(string tipo, double tamano, string unidad, int x,
                 this->coord_x=x;
             this->coord_y=y;
 }
-
+elemento elemento::constructor(elemento este){
+  this ->tipo_componente=este.getTipoComponente();
+            this->tamano=este.getTamano();
+                this->unidad_medida=este.getUnidadMedida();
+                this->coord_x=este.getCoordX();
+            this->coord_y=este.getCoordY();
+}
 
 void cargar_elemento( string input ) {
 	/*
