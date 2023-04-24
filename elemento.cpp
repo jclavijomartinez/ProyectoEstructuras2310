@@ -8,7 +8,7 @@ using namespace std;
 
 //Constructor
 
-elemento elemento::cosntructor(string tipo, double tamano, string unidad, int x, int y){
+elemento elemento::constructor(string tipo, double tamano, string unidad, int x, int y){
 
    this ->tipo_componente=tipo;
             this->tamano=tamano;
@@ -51,8 +51,42 @@ void cargar_elemento( string input ) {
         cout << "Tipo de componente invalido, solo se acepta r para Roca, c para Crater, m para Monticulo y d para Duna" << endl;
     }
 
-   /*elemento elElemento= elemento::cosntructor(tipo_componente, tamano, coord_x, coord_y );*/
+   /*elemento elElemento= elemento::constructor(tipo_componente, tamano, coord_x, coord_y );*/
 
 
 
 }
+
+std::string elemento::getTipoComponente(){
+return this->tipo_componente;
+}
+  double elemento::getTamano(){
+return this->tamano;
+  }
+   std::string elemento::getUnidadMedida(){
+return this->unidad_medida;
+   }
+  int elemento::getCoordX(){
+return this->coord_x;
+  }
+  int elemento::getCoordY(){
+return this->coord_y;
+  }
+
+void elemento::setTipo(std::string elTipo){
+
+    tipo_componente=elTipo;
+ 
+}
+     void elemento::setTamano(double eltamano){
+        tamano=eltamano;
+     }
+     void elemento::setUnidad(std::string laUni){
+        unidad_medida =laUni;
+     }
+      void elemento::setCoordX(int laX){
+        coord_x=laX;
+     }
+     void elemento::setCoordY(int laY){
+        coord_y =laY;
+     }

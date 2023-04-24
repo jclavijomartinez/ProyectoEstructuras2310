@@ -5,6 +5,7 @@
 #include "elemento.h"
 #include "movimientos.h"
 #include "analisis.h"
+#include "ArbolGeneralQuad.h"
 #include <list>
 #include <string>
 
@@ -17,9 +18,17 @@ public:
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
 
-  void cargar_comandos(std::string ruta);
+  std::list<comandos> cargar_comandos(std::string ruta);
 
-  list<comandos> ponerenlistacomandos(string comando);
+  std::list<elemento>cargar_elementos(std::string ruta);
+
+  void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen);
+
+  void ayuda(std::string input);
+
+  std::list<comandos> ponerenlistacomandos(std::string comando);
+
+  std::list<elemento> ponerenlistaelems(std::string comando);
 
   curiosity constructor();
 
@@ -29,9 +38,9 @@ public:
 
   elemento agregar_elemento(std::string input);
 
-  void testfun();
+  void simular_comandos(std::string input, std::list <movimientos> listaMovimiento);
 
-  //void simular_comandos(const string& archivo_entrada, list <comandos> comando);
+  void testfun();
 
   // Getters y Setters
 
