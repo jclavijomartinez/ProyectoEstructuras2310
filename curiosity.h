@@ -42,6 +42,7 @@ public:
   void simular_comandos(std::string input, std::list <movimientos> listaMovimiento);
 
   void testfun();
+
   
   //void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol);
 

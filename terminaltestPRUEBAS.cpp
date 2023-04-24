@@ -50,7 +50,7 @@ int main()
     }
     if (funcion == "agregar_analisis")
     {
-       jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
+      jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
     }
 
     if (funcion == "agregar_elemento")
