@@ -4,7 +4,7 @@ ArbolQuad::ArbolQuad() {
   raiz = nullptr;
 }
 
-ArbolQuad::ArbolQuad(punto &val) {
+ArbolQuad::ArbolQuad(elemento &val) {
   raiz = new NodoQuad(val);
 }
 
@@ -12,7 +12,7 @@ ArbolQuad::~ArbolQuad() {
   delete raiz;
 }
 
-punto& ArbolQuad::datoRaiz() {
+elemento& ArbolQuad::datoRaiz() {
   return raiz->obtenerDato();
 }
 
@@ -36,10 +36,8 @@ bool ArbolQuad::insertar(elemento &val) {
     NodoQuad* nodoActual = raiz;
     while (true) {
         elemento puntoActual = nodoActual->obtenerDato();
-        if (val.constructor(puntoActual)) {
-            return false; // el valor ya existe en el árbol
-        } else if (val.getCoordX < puntoActual.getCoordX) {
-            if (val.getCoordY < puntoActual.getCoordY) {
+      if (val.getCoordX() < puntoActual.getCoordX()) {
+            if (val.getCoordY() < puntoActual.getCoordY()) {
                 if (nodoActual->obtenerHijoInfIzq() == NULL) {
                     nodoActual->fijarHijoInfIzq(new NodoQuad(val));
                     return true;
@@ -53,7 +51,7 @@ bool ArbolQuad::insertar(elemento &val) {
                 nodoActual = nodoActual->obtenerHijoSupIzq();
             }
         } else {
-            if (val.getCoordY < puntoActual.getCoordY) {
+            if (val.getCoordY() < puntoActual.getCoordY()) {
                 if (nodoActual->obtenerHijoInfDer() == NULL) {
                     nodoActual->fijarHijoInfDer(new NodoQuad(val));
                     return true;

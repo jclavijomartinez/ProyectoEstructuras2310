@@ -16,7 +16,7 @@ elemento elemento::constructor(string tipo, double tamano, string unidad, int x,
                 this->coord_x=x;
             this->coord_y=y;
 }
-elemento elemento::constructor(elemento este){
+elemento elemento::consstructor(elemento este){
   this ->tipo_componente=este.getTipoComponente();
             this->tamano=este.getTamano();
                 this->unidad_medida=este.getUnidadMedida();

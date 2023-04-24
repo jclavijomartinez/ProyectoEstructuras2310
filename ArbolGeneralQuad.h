@@ -9,16 +9,16 @@ class ArbolQuad {
   public:
     //constructores
     ArbolQuad();
-    ArbolQuad(punto &val);
+    ArbolQuad(elemento &val);
     //destructor
     ~ArbolQuad();
     //manipuladores del arbol
-    punto& datoRaiz();
+    elemento& datoRaiz();
     NodoQuad* obtenerRaiz();
     void fijarRaiz(NodoQuad* n_raiz);
     //operaciones del arbol
     bool esVacio();
-    bool insertar(punto &val);
+    bool insertar(elemento &val);
     void preOrden();
     void inOrden();
     void posOrden();
