@@ -5,6 +5,7 @@
 #include "elemento.cpp"
 #include "ArbolGeneralQuad.cpp"
 #include "NodoGeneralQuad.cpp"
+#include "NodoGeneralQuad.cpp"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -22,11 +23,11 @@ curiosity curiosity::constructor()
 }
 
 // Funciones
-std::list<comandos> curiosity::cargar_comandos(std::string ruta)
+std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
 {
   fstream newfile;
-  std::list<comandos> listadev;
-  comandos elCum;
+  std::list<movimientos> listadev;
+  movimientos elCum;
   std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
   newfile.open(nombre_archivo, ios::in);
   if (!newfile.is_open())
@@ -48,13 +49,19 @@ std::list<comandos> curiosity::cargar_comandos(std::string ruta)
       ss >> primera_palabra;
       if (primera_palabra == "avanzar")
       {
-        elCum.setComando(infoarch);
+        elCum.setTipoMov(infoarch);
+        //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
+        // tendría la magnitud con la misma de str para convertirlo a float
+        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
         listadev.push_back(elCum);
         contador_comandos++;
       }
       else if (primera_palabra == "girar")
       {
-        elCum.setComando(infoarch);
+        elCum.setTipoMov(infoarch);
+                //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
+        // tendría la magnitud con la misma de str para convertirlo a float
+        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
         listadev.push_back(elCum);
         contador_comandos++;
       }
@@ -261,8 +268,9 @@ analisis curiosity::agregar_analisis(std::string input)
   // Verificacion de informacion completa
   if (tipo_analisis.empty() || objeto.empty() || comentario.empty())
   {
+
     std::cout << "Falta informacion para agregar el comando de analisis." << std::endl;
-    // return;
+    exit;
   }
 
   // Creacion del comando de analisis y agregado a la lista
@@ -1144,38 +1152,22 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles 
 
-/*void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
-    int num_procesados = 0;
-    int num_fallidos = 0;
-    NodoAGQ* nodo;
-    
-    for (int i = 0; i < elementos.longitud(); i++) {
-        elemento elem = elementos.iesimo(i);
-        nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
-        
-        if (nodo != nullptr) {
-            nodo->agregar_elemento(elem);
-            num_procesados++;
-        } else {
-            std::cout << "No se pudo ubicar el elemento " << i << " en el árbol." << std::endl;
-            num_fallidos++;
-        }
-    }
-    
-    if (num_procesados == 0) {
-        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
-    } else if (num_fallidos > 0) {
-        std::cout << "(Problemas con elementos) Los siguientes elementos no pudieron procesarse adecuadamente:" << std::endl;
-        for (int i = 0; i < elementos.longitud(); i++) {
-            elemento elem = elementos.iesimo(i);
-            nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
-            
-            if (nodo == nullptr) {
-                std::cout << "- " << elem.getTipoComponente() << " " << elem.getTamano() << " " << elem.getUnidadMedida() << " en (" << elem.getCoordX() << ", " << elem.getCoordY() << ")" << std::endl;
-            }
-        }
-        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
-    } else {
-        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
-    }
-}*/
+
+/*ArbolQuad curiosity::ubicar_elementos(list<elementos> elElem){
+
+ArbolQuad arbolDev;
+arbolDev();
+
+for mejorado para la lista{
+
+arbolDev.insertar(elementoFor);
+
+
+}
+
+return arbolDev;
+
+}
+*/
+
+

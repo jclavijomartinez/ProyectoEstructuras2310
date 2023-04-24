@@ -17,8 +17,9 @@ public:
   std::list<elemento> listElem;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
+  ArbolQuad arbol;
 
-  std::list<comandos> cargar_comandos(std::string ruta);
+  std::list<movimientos> cargar_comandos(std::string ruta);
 
   std::list<elemento>cargar_elementos(std::string ruta);
 
@@ -41,6 +42,8 @@ public:
   void simular_comandos(std::string input, std::list <movimientos> listaMovimiento);
 
   void testfun();
+  
+  //void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol);
 
   // Getters y Setters
 

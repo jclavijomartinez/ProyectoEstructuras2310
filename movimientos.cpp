@@ -36,3 +36,14 @@ std::string movimientos ::getUniMed(){
 	return uniMed;
 }
 
+    void movimientos::setTipoMov(std::string elTipoM){
+    tipoMov=elTipoM;
+
+    }
+     void movimientos::setMagnitud(double laMagnitud){
+magnitud=laMagnitud;
+     }
+     void movimientos::setUniMed(std::string laUniMed){
+uniMed=laUniMed;
+     }
+
