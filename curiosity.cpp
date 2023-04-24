@@ -21,11 +21,11 @@ curiosity curiosity::constructor()
 }
 
 // Funciones
-std::list<comandos> curiosity::cargar_comandos(std::string ruta)
+std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
 {
   fstream newfile;
-  std::list<comandos> listadev;
-  comandos elCum;
+  std::list<movimientos> listadev;
+  movimientos elCum;
   std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
   newfile.open(nombre_archivo, ios::in);
   if (!newfile.is_open())
@@ -47,13 +47,19 @@ std::list<comandos> curiosity::cargar_comandos(std::string ruta)
       ss >> primera_palabra;
       if (primera_palabra == "avanzar")
       {
-        elCum.setComando(infoarch);
+        elCum.setTipoMov(infoarch);
+        //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
+        // tendría la magnitud con la misma de str para convertirlo a float
+        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
         listadev.push_back(elCum);
         contador_comandos++;
       }
       else if (primera_palabra == "girar")
       {
-        elCum.setComando(infoarch);
+        elCum.setTipoMov(infoarch);
+                //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
+        // tendría la magnitud con la misma de str para convertirlo a float
+        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
         listadev.push_back(elCum);
         contador_comandos++;
       }
@@ -260,8 +266,9 @@ analisis curiosity::agregar_analisis(std::string input)
   // Verificacion de informacion completa
   if (tipo_analisis.empty() || objeto.empty() || comentario.empty())
   {
+
     std::cout << "Falta informacion para agregar el comando de analisis." << std::endl;
-    // return;
+    exit;
   }
 
   // Creacion del comando de analisis y agregado a la lista

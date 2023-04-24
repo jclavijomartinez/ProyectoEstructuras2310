@@ -4,7 +4,7 @@ ArbolQuad::ArbolQuad() {
   raiz = nullptr;
 }
 
-ArbolQuad::ArbolQuad(punto &val) {
+ArbolQuad::ArbolQuad(elemento &val) {
   raiz = new NodoQuad(val);
 }
 
@@ -12,7 +12,7 @@ ArbolQuad::~ArbolQuad() {
   delete raiz;
 }
 
-punto& ArbolQuad::datoRaiz() {
+elemento& ArbolQuad::datoRaiz() {
   return raiz->obtenerDato();
 }
 
@@ -28,18 +28,16 @@ bool ArbolQuad::esVacio() {
   return (raiz == nullptr);
 }
 
-bool ArbolQuad::insertar(punto &val) {
+bool ArbolQuad::insertar(elemento &val) {
     if (esVacio()) {
         raiz = new NodoQuad(val);
         return true;
     }
     NodoQuad* nodoActual = raiz;
     while (true) {
-        punto puntoActual = nodoActual->obtenerDato();
-        if (val == puntoActual) {
-            return false; // el valor ya existe en el árbol
-        } else if (val.x < puntoActual.x) {
-            if (val.y < puntoActual.y) {
+        elemento puntoActual = nodoActual->obtenerDato();
+      if (val.getCoordX() < puntoActual.getCoordX()) {
+            if (val.getCoordY() < puntoActual.getCoordY()) {
                 if (nodoActual->obtenerHijoInfIzq() == NULL) {
                     nodoActual->fijarHijoInfIzq(new NodoQuad(val));
                     return true;
@@ -53,7 +51,7 @@ bool ArbolQuad::insertar(punto &val) {
                 nodoActual = nodoActual->obtenerHijoSupIzq();
             }
         } else {
-            if (val.y < puntoActual.y) {
+            if (val.getCoordY() < puntoActual.getCoordY()) {
                 if (nodoActual->obtenerHijoInfDer() == NULL) {
                     nodoActual->fijarHijoInfDer(new NodoQuad(val));
                     return true;
@@ -77,7 +75,7 @@ void ArbolQuad::preOrden() {
 
 void ArbolQuad::preOrdenAux(NodoQuad* nodo) {
   if (nodo != nullptr) {
-    std::cout << nodo->obtenerDato() << " ";
+    nodo->obtenerDato();
     preOrdenAux(nodo->obtenerHijoSupIzq());
     preOrdenAux(nodo->obtenerHijoSupDer());
     preOrdenAux(nodo->obtenerHijoInfIzq());
@@ -93,7 +91,7 @@ void ArbolQuad::inOrden() {
 void ArbolQuad::inOrdenAux(NodoQuad* nodo) {
   if (nodo != nullptr) {
     inOrdenAux(nodo->obtenerHijoSupIzq());
-    std::cout << nodo->obtenerDato() << " ";
+    nodo->obtenerDato() ;
     inOrdenAux(nodo->obtenerHijoSupDer());
     inOrdenAux(nodo->obtenerHijoInfIzq());
     inOrdenAux(nodo->obtenerHijoInfDer());
@@ -111,6 +109,6 @@ void ArbolQuad::posOrdenAux(NodoQuad* nodo) {
     posOrdenAux(nodo->obtenerHijoSupDer());
     posOrdenAux(nodo->obtenerHijoInfIzq());
     posOrdenAux(nodo->obtenerHijoInfDer());
-    std::cout << nodo->obtenerDato() << " ";
+    nodo->obtenerDato() ;
   }
 }

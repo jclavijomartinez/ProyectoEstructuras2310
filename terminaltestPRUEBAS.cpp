@@ -25,6 +25,7 @@ int main()
   string input;
   string funcion;
   curiosity jorgeElCurioso;
+  ArbolQuad arbolAux;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -54,8 +55,6 @@ int main()
 
     if (funcion == "agregar_elemento")
     {
-      jorgeElCurioso.listElem.clear();
-      cout<<"lista limpiada correctamente"<<endl;
       jorgeElCurioso.listElem.push_back(jorgeElCurioso.agregar_elemento(input));
     }
     if (funcion == "guardar"){
@@ -67,6 +66,14 @@ int main()
 
     if (funcion == "ayuda"){
       jorgeElCurioso.ayuda(input);
+    }
+
+    if (funcion == "ubicar_elemento"){
+     
+      for (auto &elemento : jorgeElCurioso.listElem) {
+    jorgeElCurioso.arbol.insertar(elemento);
+  }
+  cout<<"Lista de Elementos guardada satisfactoriamente en el Arbol"<<endl;
     }
 
     if (input == "salir")
