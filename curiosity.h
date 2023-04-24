@@ -41,6 +41,7 @@ public:
 
   void testfun();
 
+  
   //void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol);
 
   // Getters y Setters
