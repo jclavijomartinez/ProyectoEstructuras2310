@@ -19,7 +19,7 @@ public:
   std::list<comandos> listCum;
   ArbolQuad arbol;
 
-  std::list<comandos> cargar_comandos(std::string ruta);
+  std::list<movimientos> cargar_comandos(std::string ruta);
 
   std::list<elemento>cargar_elementos(std::string ruta);
 
