@@ -25,7 +25,6 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
 {
   fstream newfile;
   std::list<movimientos> listadev;
-  movimientos elCum;
   std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
   newfile.open(nombre_archivo, ios::in);
   if (!newfile.is_open())
@@ -50,28 +49,34 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
         tokens.push_back(token);
       }
       std::string tipomov = tokens[0];
-      // std::cout << tokens[0] << endl;
+      std::cout << "tipo mov: " << tokens[0] << endl;
       std::string magnitud = tokens[1];
-      // std::cout << tokens[1] << endl;
+      std::cout << "magni: " << tokens[1] << endl;
       std::string unimed = tokens[2];
-      // std::cout << tokens[2] << endl;
+      std::cout << "unimed: " << tokens[2] << endl;
       if (tokens[0] == "avanzar")
       {
-        elCum.setTipoMov(tokens[0]);
-        elCum.setMagnitud(stod(tokens[1])); 
-        elCum.setUniMed(tokens[2]);         
-        listadev.push_back(elCum);
+        movimientos newmov;
+        newmov.setTipoMov(tokens[0]);
+        newmov.setMagnitud(stod(tokens[1]));
+        newmov.setUniMed(tokens[2]);
+        listadev.push_back(newmov);
         contador_comandos++;
       }
       else if (tokens[0] == "girar")
       {
-        elCum.setTipoMov(tokens[0]);
-        elCum.setMagnitud(stod(tokens[1])); 
-        elCum.setUniMed(tokens[2]);         
-        listadev.push_back(elCum);
+        movimientos newmov;
+        newmov.setTipoMov(tokens[0]);
+        newmov.setMagnitud(stod(tokens[1]));
+        newmov.setUniMed(tokens[2]);
+        listadev.push_back(newmov);
         contador_comandos++;
       }
-    } //aqui cierra abruptamente el programa
+      else if (tokens[0] == "roca" || tokens[0] == "crater"||tokens[0] == "monticulo"||tokens[0] == "duna")
+      {
+        break;
+      }
+    }
     cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
     newfile.close();
     return listadev;
