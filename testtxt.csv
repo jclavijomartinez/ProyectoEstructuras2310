@@ -1,11 +1,19 @@
-avanzar 10
-girar 90
-avanzar 10
-girar 90
-avanzar 10
-girar 90
-avanzar 10
-girar 90
+avanzar 10 cm
+girar 90 deg
+avanzar 10 cm
+girar 90 deg
+avanzar 10 cm
+girar 90 deg
+avanzar 10 cm
+girar 90 deg
+avanzar 10 m
+girar 90 deg
+avanzar 10 m
+girar 90 deg
+avanzar 10 m
+girar 90 deg
+avanzar 10 m
+girar 90 deg
 roca 50 cm 10 20
 crater 80 cm 20 10
 monticulo 60 m 30 30

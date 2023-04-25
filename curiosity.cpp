@@ -28,6 +28,7 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
   movimientos elCum;
   std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
   newfile.open(nombre_archivo, ios::in);
+  // cout << "si entra y reconoce el archivo " << nombre_archivo << endl;
   if (!newfile.is_open())
   {
     cout << "No se pudo abrir el archivo " << ruta << endl;
@@ -42,24 +43,33 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
     int contador_comandos = 0;
     while (getline(newfile, infoarch))
     {
-      stringstream ss(infoarch);
-      string primera_palabra;
-      ss >> primera_palabra;
-      if (primera_palabra == "avanzar")
+      std::istringstream iss(infoarch);
+      std::vector<std::string> tokens;
+      std::string token;
+      while (iss >> token)
       {
-        elCum.setTipoMov(infoarch);
-        //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
-        // tendría la magnitud con la misma de str para convertirlo a float
-        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
+        tokens.push_back(token);
+      }
+      std::string tipomov = tokens[0];
+      // cout << tokens[0] << endl;
+      std::string magnitud = tokens[1];
+      // cout << tokens[1] << endl;
+      std::string unimed = tokens[2];
+      // cout << tokens[2] << endl;
+      if (tokens[0] == "avanzar")
+      {
+        elCum.setTipoMov(tokens[0]);
+        elCum.setMagnitud(stod(tokens[1])); // Aquí agregas el infoarch[2] como en mi función que
+        elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
+        cout << "llega hasta aca" << endl;
         listadev.push_back(elCum);
         contador_comandos++;
       }
-      else if (primera_palabra == "girar")
+      else if (tokens[0] == "girar")
       {
-        elCum.setTipoMov(infoarch);
-                //elCum.setMagnitud();Aquí agregas el infoarch[2] como en mi función que
-        // tendría la magnitud con la misma de str para convertirlo a float
-        //elCum.setUniMed(); Igual aquí con el infoarch[3] o lo que sea, pero para la unidad
+        elCum.setTipoMov(tokens[0]);
+        elCum.setMagnitud(stod(tokens[1])); // Aquí agregas el infoarch[2] como en mi función que
+        elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
         listadev.push_back(elCum);
         contador_comandos++;
       }
@@ -161,8 +171,9 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
   }
 }
 
-//void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
-void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen) {
+// void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
+void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen)
+{
   std::istringstream iss(input);
   std::vector<std::string> tokens;
   std::string token;
@@ -172,7 +183,7 @@ void guardar(std::string input, std::list<comandos> listacomandos, std::list<ele
   }
   std::string tipo = tokens[0];
   std::string nombre = tokens[1];
-  //faltan las listas
+  // faltan las listas
   ofstream file2write(nombre);
   if (!file2write)
   {
@@ -308,38 +319,41 @@ elemento curiosity::agregar_elemento(std::string input)
   return elem;
 }
 
-void curiosity::simular_comandos(std::string input,list <movimientos> movimiento) {
+void curiosity::simular_comandos(std::string input, list<movimientos> movimiento)
+{
 
-    float pi = 3.141592;
-    int cambioA = 0;
-    float grados = 0.0;
-    int num_p;
-    int posX = 0,posY = 0;
-    int posXArch = 0, posYArch = 0;
-    bool validar = true;
-    int nuevas_coor [2]={0,0};
-    string d1,d2;
-    list<movimientos>::iterator itM;
-    list<elemento> elem;
-    list<elemento>::iterator itE;
+  float pi = 3.141592;
+  int cambioA = 0;
+  float grados = 0.0;
+  int num_p;
+  int posX = 0, posY = 0;
+  int posXArch = 0, posYArch = 0;
+  bool validar = true;
+  int nuevas_coor[2] = {0, 0};
+  string d1, d2;
+  list<movimientos>::iterator itM;
+  list<elemento> elem;
+  list<elemento>::iterator itE;
 
-    if (movimiento.empty()){
-        cout<<"Lista vacia"<<endl;
+  if (movimiento.empty())
+  {
+    cout << "Lista vacia" << endl;
+  }
+  else
+  {
+    // Que existan en la lista
+    for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
+    {
+      if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
+      {
+        validar = true;
+      }
     }
-    else{
-        // Que existan en la lista
-        for(itM = movimiento.begin(); itM != movimiento.end(); itM++){
-            if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
-            {
-                validar = true;
-            }
-                        
-        }
-    }
+  }
 
-    fstream newfile;
-    std::string nombre_archivo = input.substr(0);
-    newfile.open(nombre_archivo, ios::in);
+  fstream newfile;
+  std::string nombre_archivo = input.substr(0);
+  newfile.open(nombre_archivo, ios::in);
 
   if (newfile.peek() == ifstream::traits_type::eof())
   {
@@ -347,80 +361,90 @@ void curiosity::simular_comandos(std::string input,list <movimientos> movimiento
   }
   else if (newfile.is_open())
   {
-        std::string opcion;
-        while (getline(newfile, opcion)) {
+    std::string opcion;
+    while (getline(newfile, opcion))
+    {
 
-          if (!opcion.empty() && validar == true) {
-            /*stringstream ss(opcion);
-            ss >> posXArch;*/
+      if (!opcion.empty() && validar == true)
+      {
+        /*stringstream ss(opcion);
+        ss >> posXArch;*/
 
-            stringstream input_stringstream(opcion);  // Separar datos del archivo despues de un espacio
-            getline(input_stringstream, d1, ' ');
-            getline(input_stringstream, d2, ' ');
+        stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
+        getline(input_stringstream, d1, ' ');
+        getline(input_stringstream, d2, ' ');
 
-                    posXArch = stoi(d1);   // Convertir los datos a enteros 
-                    posYArch = stoi(d2);
+        posXArch = stoi(d1); // Convertir los datos a enteros
+        posYArch = stoi(d2);
 
-                    cout<<"\n Posicion x: "<< posX;
-                    cout<<"\n Posicion y: "<< posY;  
+        cout << "\n Posicion x: " << posX;
+        cout << "\n Posicion y: " << posY;
 
-                    cout<<"\n Posicion Archivo x: "<< posXArch;
-                    cout<<"\n Posicion Archivo y: "<< posYArch;             
+        cout << "\n Posicion Archivo x: " << posXArch;
+        cout << "\n Posicion Archivo y: " << posYArch;
 
-                for(itM = movimiento.begin(); itM != movimiento.end(); itM++){
-                    nuevas_coor[0] = posX + posXArch;
-                    nuevas_coor[1] = posY + posYArch;
+        for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
+        {
+          nuevas_coor[0] = posX + posXArch;
+          nuevas_coor[1] = posY + posYArch;
 
-                    if (itM->getTipoMov() == "a" ) {
-                        // Si son cm
-                        
-                        if (itM->getUniMed() == "c"){   
-                            cambioA = itM->getMagnitud() / 100;
-                        }
-                        // Si son metros
-                        else if (itM->getUniMed() == "m"){
-                            cambioA = itM->getMagnitud();
-                        }
-                        else{
-                            cout<<"Error en la unidad de medida";
-                        }
-                        
-                        /*nuevas_coor[0] +=  cambioA * cos(grados);
-                        nuevas_coor[1] +=  cambioA * sin(grados);*/
-                    
-                    }
-                    else if (itM->getTipoMov() == "g"){
-                        // si son grados
-                        grados += itM->getMagnitud() * (pi/180);
-                       
-                    }
-                    else {
-                        cout<<"Error en el tipo de movimiento";
-                    }
+          if (itM->getTipoMov() == "a")
+          {
+            // Si son cm
 
-                    nuevas_coor[0] +=  cambioA * cos(grados);
-                    nuevas_coor[1] +=  cambioA * sin(grados);   
-                }
-
-                cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-                <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
-                << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
-                << endl;
-                for(itE = elem.begin(); itE != elem.end(); itE++){
-                  itE->setCoordX(nuevas_coor[0]);
-                  itE->setCoordY(nuevas_coor[1]);
-                }
+            if (itM->getUniMed() == "c")
+            {
+              cambioA = itM->getMagnitud() / 100;
             }
-            else {
-                cout << "\nLa estructura del comando es incorrecta";
+            // Si son metros
+            else if (itM->getUniMed() == "m")
+            {
+              cambioA = itM->getMagnitud();
             }
+            else
+            {
+              cout << "Error en la unidad de medida";
+            }
+
+            /*nuevas_coor[0] +=  cambioA * cos(grados);
+            nuevas_coor[1] +=  cambioA * sin(grados);*/
+          }
+          else if (itM->getTipoMov() == "g")
+          {
+            // si son grados
+            grados += itM->getMagnitud() * (pi / 180);
+          }
+          else
+          {
+            cout << "Error en el tipo de movimiento";
+          }
+
+          nuevas_coor[0] += cambioA * cos(grados);
+          nuevas_coor[1] += cambioA * sin(grados);
         }
 
-        newfile.close();
+        cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+             << posX << ", " << posY << "), deja al robot en la nueva posicion ("
+             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
+             << endl;
+        for (itE = elem.begin(); itE != elem.end(); itE++)
+        {
+          itE->setCoordX(nuevas_coor[0]);
+          itE->setCoordY(nuevas_coor[1]);
+        }
+      }
+      else
+      {
+        cout << "\nLa estructura del comando es incorrecta";
+      }
     }
-    else {
-        cout << "No se pudo abrir el archivo: " << input << endl;
-    }
+
+    newfile.close();
+  }
+  else
+  {
+    cout << "No se pudo abrir el archivo: " << input << endl;
+  }
 }
 
 void curiosity::testfun()
@@ -618,10 +642,7 @@ std::list<comandos> curiosity::getCums()
   return listCum;
 }
 
-
-
-/// 2ndo Componente Árboles 
-
+/// 2ndo Componente Árboles
 
 /*ArbolQuad curiosity::ubicar_elementos(list<elementos> elElem){
 
@@ -639,5 +660,3 @@ return arbolDev;
 
 }
 */
-
-

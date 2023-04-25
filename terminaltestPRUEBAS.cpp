@@ -37,7 +37,9 @@ int main()
     funcion = queQuiereConsola(input);
 
     if (funcion == "cargar_comandos"){
+      cout << "antes de llamado" << endl;
       jorgeElCurioso.cargar_comandos(input);
+      cout << "despues de llamado" << endl;
     }
     if (funcion == "cargar_elementos"){
       jorgeElCurioso.cargar_elementos(input);
