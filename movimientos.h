@@ -19,6 +19,10 @@ public:
    std::string getTipoMov();
   float getMagnitud();
    std::string getUniMed();
+
+   void setTipoMov(std::string elTipoM);
+     void setMagnitud(double laMagnitud);
+     void setUniMed(std::string laUniMed);
 };
 
 #endif
