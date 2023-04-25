@@ -6,14 +6,16 @@
 #include "ArbolGeneralQuad.cpp"
 #include "NodoGeneralQuad.cpp"
 #include <iostream>
-#include <list>
 #include <string>
 #include <sstream>
 #include <cstring>
 #include <vector>
 #include <fstream>
+#include <cmath>
+#include <list>
 
 using namespace std;
+
 curiosity curiosity::constructor()
 {
 }
@@ -304,6 +306,121 @@ elemento curiosity::agregar_elemento(std::string input)
   elemento elem;
   elem.constructor(tipo_comp, tamano, unidad_med, coordX, coordY);
   return elem;
+}
+
+void curiosity::simular_comandos(std::string input,list <movimientos> movimiento) {
+
+    float pi = 3.141592;
+    int cambioA = 0;
+    float grados = 0.0;
+    int num_p;
+    int posX = 0,posY = 0;
+    int posXArch = 0, posYArch = 0;
+    bool validar = true;
+    int nuevas_coor [2]={0,0};
+    string d1,d2;
+    list<movimientos>::iterator itM;
+    list<elemento> elem;
+    list<elemento>::iterator itE;
+
+    if (movimiento.empty()){
+        cout<<"Lista vacia"<<endl;
+    }
+    else{
+        // Que existan en la lista
+        for(itM = movimiento.begin(); itM != movimiento.end(); itM++){
+            if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
+            {
+                validar = true;
+            }
+                        
+        }
+    }
+
+    fstream newfile;
+    std::string nombre_archivo = input.substr(0);
+    newfile.open(nombre_archivo, ios::in);
+
+  if (newfile.peek() == ifstream::traits_type::eof())
+  {
+    cout << input << " no contiene elementos (esta vacio)" << endl;
+  }
+  else if (newfile.is_open())
+  {
+        std::string opcion;
+        while (getline(newfile, opcion)) {
+
+          if (!opcion.empty() && validar == true) {
+            /*stringstream ss(opcion);
+            ss >> posXArch;*/
+
+            stringstream input_stringstream(opcion);  // Separar datos del archivo despues de un espacio
+            getline(input_stringstream, d1, ' ');
+            getline(input_stringstream, d2, ' ');
+
+                    posXArch = stoi(d1);   // Convertir los datos a enteros 
+                    posYArch = stoi(d2);
+
+                    cout<<"\n Posicion x: "<< posX;
+                    cout<<"\n Posicion y: "<< posY;  
+
+                    cout<<"\n Posicion Archivo x: "<< posXArch;
+                    cout<<"\n Posicion Archivo y: "<< posYArch;             
+
+                for(itM = movimiento.begin(); itM != movimiento.end(); itM++){
+                    nuevas_coor[0] = posX + posXArch;
+                    nuevas_coor[1] = posY + posYArch;
+
+                    if (itM->getTipoMov() == "a" ) {
+                        // Si son cm
+                        
+                        if (itM->getUniMed() == "c"){   
+                            cambioA = itM->getMagnitud() / 100;
+                        }
+                        // Si son metros
+                        else if (itM->getUniMed() == "m"){
+                            cambioA = itM->getMagnitud();
+                        }
+                        else{
+                            cout<<"Error en la unidad de medida";
+                        }
+                        
+                        /*nuevas_coor[0] +=  cambioA * cos(grados);
+                        nuevas_coor[1] +=  cambioA * sin(grados);*/
+                    
+                    }
+                    else if (itM->getTipoMov() == "g"){
+                        // si son grados
+                        grados += itM->getMagnitud() * (pi/180);
+                       
+                    }
+                    else {
+                        cout<<"Error en el tipo de movimiento";
+                    }
+
+                    nuevas_coor[0] +=  cambioA * cos(grados);
+                    nuevas_coor[1] +=  cambioA * sin(grados);   
+                }
+
+                cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+                <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
+                << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
+                << endl;
+                for(itE = elem.begin(); itE != elem.end(); itE++){
+                  itE->setCoordX(nuevas_coor[0]);
+                  itE->setCoordY(nuevas_coor[1]);
+                }
+            }
+            else {
+                cout << "\nLa estructura del comando es incorrecta";
+            }
+        }
+
+        newfile.close();
+    }
+    else {
+        cout << "No se pudo abrir el archivo: " << input << endl;
+    }
 }
 
 void curiosity::testfun()
