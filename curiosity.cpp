@@ -41,29 +41,30 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
   {
     std::string infoarch;
     int contador_comandos = 0;
+    int i = 0;
+    std::istringstream iss(infoarch);
+    std::vector<std::string> tokens;
+    std::string token;
     while (getline(newfile, infoarch))
     {
-      std::istringstream iss(infoarch);
-      std::vector<std::string> tokens;
-      std::string token;
       while (iss >> token)
       {
         tokens.push_back(token);
       }
-      std::string tipomov = tokens[0];
-      // cout << tokens[0] << endl;
-      std::string magnitud = tokens[1];
-      // cout << tokens[1] << endl;
-      std::string unimed = tokens[2];
-      // cout << tokens[2] << endl;
+      // std::string tipomov = tokens[i];
+      cout << tokens[0] << endl;
+      // std::string magnitud = tokens[i+1];
+      cout << tokens[1] << endl;
+      // std::string unimed = tokens[i+2];
+      cout << tokens[2] << endl;
       if (tokens[0] == "avanzar")
       {
         elCum.setTipoMov(tokens[0]);
         elCum.setMagnitud(stod(tokens[1])); // Aquí agregas el infoarch[2] como en mi función que
         elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
-        cout << "llega hasta aca" << endl;
         listadev.push_back(elCum);
         contador_comandos++;
+        // i+3;
       }
       else if (tokens[0] == "girar")
       {
@@ -72,7 +73,9 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
         elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
         listadev.push_back(elCum);
         contador_comandos++;
+        // i+3;
       }
+      cout << "llega hasta aca" << endl;
     }
     cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
     newfile.close();
