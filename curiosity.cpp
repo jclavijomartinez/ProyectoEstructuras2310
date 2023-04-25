@@ -28,7 +28,6 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
   movimientos elCum;
   std::string nombre_archivo = ruta.substr(ruta.find_last_of(" ") + 1);
   newfile.open(nombre_archivo, ios::in);
-  // cout << "si entra y reconoce el archivo " << nombre_archivo << endl;
   if (!newfile.is_open())
   {
     cout << "No se pudo abrir el archivo " << ruta << endl;
@@ -41,42 +40,38 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
   {
     std::string infoarch;
     int contador_comandos = 0;
-    int i = 0;
-    std::istringstream iss(infoarch);
-    std::vector<std::string> tokens;
-    std::string token;
     while (getline(newfile, infoarch))
     {
+      std::istringstream iss(infoarch);
+      std::vector<std::string> tokens;
+      std::string token;
       while (iss >> token)
       {
         tokens.push_back(token);
       }
-      // std::string tipomov = tokens[i];
-      cout << tokens[0] << endl;
-      // std::string magnitud = tokens[i+1];
-      cout << tokens[1] << endl;
-      // std::string unimed = tokens[i+2];
-      cout << tokens[2] << endl;
+      std::string tipomov = tokens[0];
+      // std::cout << tokens[0] << endl;
+      std::string magnitud = tokens[1];
+      // std::cout << tokens[1] << endl;
+      std::string unimed = tokens[2];
+      // std::cout << tokens[2] << endl;
       if (tokens[0] == "avanzar")
       {
         elCum.setTipoMov(tokens[0]);
-        elCum.setMagnitud(stod(tokens[1])); // Aquí agregas el infoarch[2] como en mi función que
-        elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
+        elCum.setMagnitud(stod(tokens[1])); 
+        elCum.setUniMed(tokens[2]);         
         listadev.push_back(elCum);
         contador_comandos++;
-        // i+3;
       }
       else if (tokens[0] == "girar")
       {
         elCum.setTipoMov(tokens[0]);
-        elCum.setMagnitud(stod(tokens[1])); // Aquí agregas el infoarch[2] como en mi función que
-        elCum.setUniMed(tokens[2]);         // Aquí agregas el infoarch[2] como en mi función que
+        elCum.setMagnitud(stod(tokens[1])); 
+        elCum.setUniMed(tokens[2]);         
         listadev.push_back(elCum);
         contador_comandos++;
-        // i+3;
       }
-      cout << "llega hasta aca" << endl;
-    }
+    } //aqui cierra abruptamente el programa
     cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
     newfile.close();
     return listadev;
