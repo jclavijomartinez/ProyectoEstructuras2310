@@ -382,7 +382,7 @@ void curiosity::simular_comandos(std::string input, std::list<movimientos> movim
           nuevas_coor[1] =posY + posYArch;
           copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
           if (aux.empty()) {
-            std::cout << "(No hay información) La información requerida no está almacenada en memoria.\n";
+            std::cout << "(No hay informacion) La informacion requerida no esta almacenada en memoria.\n";
           }
 
           else{                      
@@ -476,10 +476,13 @@ void curiosity::simular_comandos(std::string input, std::list<movimientos> movim
                 
         }    
         else {
-            cout << "No se pudo abrir el archivo: " << input << endl;
+            cout << "Archivo vacio: " << input << endl;
         }
         archivo.close();
       }
+    }
+    else{
+      cout<<"No abre el archivo"<< input <<endl;
     }
 }
 
