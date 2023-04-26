@@ -15,16 +15,14 @@ public:
     
    void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
-  void agregar_mov(std::string input); // AGREGAR MOVIMIENTO
-
   // Getters y Setters
    std::string getTipoMov();
-  float getMagnitud();
+   float getMagnitud();
    std::string getUniMed();
 
    void setTipoMov(std::string elTipoM);
-     void setMagnitud(double laMagnitud);
-     void setUniMed(std::string laUniMed);
+    void setMagnitud(float laMagnitud);
+    void setUniMed(std::string laUniMed);
 };
 
 #endif

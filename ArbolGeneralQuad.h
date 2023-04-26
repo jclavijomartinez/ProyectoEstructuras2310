@@ -1,4 +1,4 @@
-#ifndef __ARBOLGENERALQUAD__H__
+/*#ifndef __ARBOLGENERALQUAD__H__
 #define __ARBOLGENERALQUAD__H__
 
 #include "NodoGeneralQuad.h"
@@ -28,4 +28,4 @@ class ArbolQuad {
     void preOrdenAux(NodoQuad* nodo);
 };
 
-#endif
+#endif*/

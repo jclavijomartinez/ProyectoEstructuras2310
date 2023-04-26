@@ -25,7 +25,7 @@ int main()
   string input;
   string funcion;
   curiosity jorgeElCurioso;
-  ArbolQuad arbolAux;
+  //ArbolQuad arbolAux;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -71,7 +71,7 @@ int main()
     }
     if (funcion == "simular_comandos")
     {
-      jorgeElCurioso.simular_comandos(input, jorgeElCurioso.listMov);
+      jorgeElCurioso.simular_comandos("coortxt.csv", jorgeElCurioso.cargar_comandos(input));
     }
 
     if (funcion == "ayuda")
@@ -84,7 +84,7 @@ int main()
 
       for (auto &elemento : jorgeElCurioso.listElem)
       {
-        jorgeElCurioso.arbol.insertar(elemento);
+        //jorgeElCurioso.arbol.insertar(elemento);
       }
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
     }
@@ -102,7 +102,7 @@ int main()
 
       std::list<elemento> listaElementos;
       // Recorremos el árbol utilizando un ciclo for mejorado
-      NodoQuad *actual = jorgeElCurioso.arbol.obtenerRaiz();
+      /*NodoQuad *actual = jorgeElCurioso.arbol.obtenerRaiz();
       list<NodoQuad *> pila;
       bool fin = false;
 
@@ -150,7 +150,7 @@ int main()
         {
           fin = true;
         }
-      }
+      }*/
 
     }
 

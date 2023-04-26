@@ -1,4 +1,4 @@
-#include "ArbolGeneralQuad.h"
+/*#include "ArbolGeneralQuad.h"
 
 ArbolQuad::ArbolQuad() {
   raiz = nullptr;
@@ -111,4 +111,4 @@ void ArbolQuad::posOrdenAux(NodoQuad* nodo) {
     posOrdenAux(nodo->obtenerHijoInfDer());
     nodo->obtenerDato() ;
   }
-}
+}*/

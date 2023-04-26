@@ -1,4 +1,4 @@
-#include "NodoGeneralQuad.h"
+/*#include "NodoGeneralQuad.h"
 
 NodoQuad::NodoQuad() {
   hijoSupIzq = nullptr;
@@ -64,4 +64,4 @@ void NodoQuad::fijarHijoInfDer(NodoQuad* ider) {
 
 bool NodoQuad::esHoja() {
   return (hijoSupIzq == nullptr && hijoSupDer == nullptr && hijoInfIzq == nullptr && hijoInfDer == nullptr);
-}
+}*/

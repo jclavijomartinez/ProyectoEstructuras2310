@@ -1,4 +1,4 @@
-#ifndef __NODOGENERALQUAD__H__
+/*#ifndef __NODOGENERALQUAD__H__
 #define __NODOGENERALQUAD__H__
 
 #include <iostream>
@@ -32,4 +32,4 @@ class NodoQuad {
     bool esHoja();
 };
 
-#endif 
+#endif */

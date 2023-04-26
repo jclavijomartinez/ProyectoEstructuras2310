@@ -15,17 +15,6 @@ movimientos movimientos::constructor(std::string tipoMov,float magnitud, std::st
 
 }
 
-
-void movimientos ::setTipoMov(std::string c){
-	tipoMov=c;
-}
-void movimientos ::setMagnitud(float c){
-	magnitud=c;
-}
-void movimientos ::setUniMed(std::string c){
-	uniMed=c;
-}
-
 std::string movimientos ::getTipoMov(){
 	return tipoMov;
 }
@@ -37,10 +26,10 @@ std::string movimientos ::getUniMed(){
 }
 
     void movimientos::setTipoMov(std::string elTipoM){
-    tipoMov=elTipoM;
+    tipoMov = elTipoM;
 
     }
-     void movimientos::setMagnitud(double laMagnitud){
+     void movimientos::setMagnitud(float laMagnitud){
 magnitud=laMagnitud;
      }
      void movimientos::setUniMed(std::string laUniMed){

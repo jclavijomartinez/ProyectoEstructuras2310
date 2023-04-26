@@ -17,7 +17,7 @@ public:
   std::list<elemento> listElem;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
-  ArbolQuad arbol;
+  //ArbolQuad arbol;
 
   std::list<movimientos> cargar_comandos(std::string ruta);
 

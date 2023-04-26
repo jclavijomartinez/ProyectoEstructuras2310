@@ -251,7 +251,7 @@ movimientos curiosity::agregar_movimiento(std::string input)
   {
     // cout<<"tipo: "<<tokens[1]<<"num"<< stoi(tokens[2])<<"tercer"<< tokens[3]<< endl;
 
-    auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
+    auxMov.constructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
   }
@@ -367,23 +367,6 @@ void curiosity::simular_comandos(std::string input, std::list<movimientos> movim
           copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
           
           for (it = aux.begin();it!=aux.end();it++){
-            /*stringstream ss(it->getTipoMov());
-            string palabra;
-            list<std::string> palabras;
-
-            // Dividir la cadena en palabras
-            while (ss >> palabra) {
-              palabras.push_back(palabra);
-            }
-
-            // Obtener la primera, segunda y última palabra de la lista de movimientos
-            std::string ultima_palabra = palabras.back();
-            std::string primera_palabra = palabras.front();
-            std::list<std::string>::iterator it = palabras.begin();
-            std::advance(it, 1);
-
-            // Obtener el segundo comando de la lista
-            int segunda_palabra = stoi(*it);*/
             
             if (it->getTipoMov() == "avanzar" ) {
               // Si son cm
@@ -627,7 +610,7 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles 
 
-<<<<<<<<< Temporary merge branch 1
+//<<<<<<<<< Temporary merge branch 1
 /*void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
     int num_procesados = 0;
     int num_fallidos = 0;
@@ -663,7 +646,7 @@ std::list<comandos> curiosity::getCums()
         std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
     }
 }*/
-=========
+//=========
 
 /*ArbolQuad curiosity::ubicar_elementos(list<elementos> elElem){
 
@@ -683,4 +666,4 @@ return arbolDev;
 */
 
 
->>>>>>>>> Temporary merge branch 2
+//>>>>>>>>> Temporary merge branch 2
