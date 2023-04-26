@@ -71,7 +71,7 @@ int main()
     }
     if (funcion == "simular_comandos")
     {
-      jorgeElCurioso.simular_comandos("coortxt.csv", jorgeElCurioso.cargar_comandos(input));
+      jorgeElCurioso.simular_comandos("coortxt.csv", jorgeElCurioso.cargar_comandos(input),jorgeElCurioso.cargar_elementos(input));
     }
 
     if (funcion == "ayuda")
