@@ -23,7 +23,7 @@ public:
 
   std::list<elemento>cargar_elementos(std::string ruta);
 
-  void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen);
+  void guardar(std::string input, std::list<movimientos> listacomandos, std::list<elemento> listaelemen);
 
   void ayuda(std::string input);
 
