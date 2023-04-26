@@ -365,36 +365,43 @@ void curiosity::simular_comandos(std::string input, std::list<movimientos> movim
           nuevas_coor[0] = posX + posXArch;
           nuevas_coor[1] = posY + posYArch;
           copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
-          
-          for (it = aux.begin();it!=aux.end();it++){
-            
-            if (it->getTipoMov() == "avanzar" ) {
-              // Si son cm
-              if (it->getUniMed() == "cm"){   
-                cambioA = it->getMagnitud() / 100;
-                
-              }
-              // Si son metros
-
-              else if (it->getUniMed() == "m"){
-                cambioA = it->getMagnitud();
-              }
-              else{
-                cout<<"\nError en la unidad de medida"<<endl;
-              }             
-            }
-            else if (it->getTipoMov() == "girar" ){
-              // si son grados
-              grados += it->getMagnitud() * 360.0 / pow(2, 32);             
-            }
-
-            else {
-              cout << "\nLa estructura del comando es incorrecta"<<endl;
-            }
-                
+          if (aux.empty()) {
+            std::cout << "(No hay información) La información requerida no está almacenada en memoria.\n";
           }
-          nuevas_coor[0] +=  cambioA + cos(grados);
-          nuevas_coor[1] +=  cambioA + sin(grados);   
+
+          else{                      
+            for (it = aux.begin();it!=aux.end();it++){
+              
+              if (it->getTipoMov() == "avanzar" ) {
+                // Si son cm
+                if (it->getUniMed() == "cm"){   
+                  cambioA = it->getMagnitud() / 100;
+                  
+                }
+                // Si son metros
+
+                else if (it->getUniMed() == "m"){
+                  cambioA = it->getMagnitud();
+                }
+                else{
+                  cout<<"\nError en la unidad de medida"<<endl;
+                }             
+              }
+              else if (it->getTipoMov() == "girar" ){
+                // si son grados
+                grados += it->getMagnitud() * 360.0 / pow(2, 32);             
+              }
+
+              else {
+                cout << "\nLa estructura del comando es incorrecta"<<endl;
+              }
+                  
+            }
+            nuevas_coor[0] +=  cambioA + cos(grados);
+            nuevas_coor[1] +=  cambioA + sin(grados);  
+
+          }
+ 
                   
 
           cout << "\nLa simulacion de los comandos, a partir de la posicion ("
