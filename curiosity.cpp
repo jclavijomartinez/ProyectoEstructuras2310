@@ -651,19 +651,75 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles
 
-/*ArbolQuad curiosity::ubicar_elementos(list<elementos> elElem){
-
-ArbolQuad arbolDev;
-arbolDev();
-
-for mejorado para la lista{
-
-arbolDev.insertar(elementoFor);
-
-
+void curiosity::ubicar_elementos(list<elemento>& elElem){
+for (auto &elemento : elElem)
+      {
+        this->arbol.insertar(elemento);
+      }
+      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
 }
 
-return arbolDev;
+void curiosity::enCoordenada(string input){
+  
+      std::istringstream iss(input);
+      std::vector<std::string> tokens;
+      std::string token;
+      while (iss >> token)
+      {
+        tokens.push_back(token);
+      }
 
+      std::list<elemento> listaElementos;
+      // Recorremos el árbol utilizando un ciclo for mejorado
+      NodoQuad *actual = this->arbol.obtenerRaiz();
+      list<NodoQuad *> pila;
+      bool fin = false;
+
+      while (!fin)
+      {
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoSupIzq();
+        }
+        else if (!pila.empty())
+        {
+          actual = pila.back();
+
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoSupDer();
+        }
+
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoInfIzq();
+        }
+        else if (!pila.empty())
+        {
+          actual = pila.back();
+
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoInfDer();
+        }
+
+        else
+        {
+          fin = true;
+        }
+      }
+      this->listElem.splice(this->listElem.end(), listaElementos);
+      
 }
-*/
