@@ -49,11 +49,11 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
         tokens.push_back(token);
       }
       std::string tipomov = tokens[0];
-      std::cout << "tipo mov: " << tokens[0] << endl;
+      //std::cout << "tipo mov: " << tokens[0] << endl;
       std::string magnitud = tokens[1];
-      std::cout << "magni: " << tokens[1] << endl;
+      //std::cout << "magni: " << tokens[1] << endl;
       std::string unimed = tokens[2];
-      std::cout << "unimed: " << tokens[2] << endl;
+      //std::cout << "unimed: " << tokens[2] << endl;
       if (tokens[0] == "avanzar")
       {
         movimientos newmov;
@@ -175,7 +175,7 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
 }
 
 // void guardar(std::string tipo, std::string nombre, std::list<string> listacomandos, std::list<string> listaelems);
-void guardar(std::string input, std::list<comandos> listacomandos, std::list<elemento> listaelemen)
+void curiosity::guardar(std::string input, std::list<movimientos> listacomandos, std::list<elemento> listaelemen)
 {
   std::istringstream iss(input);
   std::vector<std::string> tokens;
@@ -184,8 +184,9 @@ void guardar(std::string input, std::list<comandos> listacomandos, std::list<ele
   {
     tokens.push_back(token);
   }
-  std::string tipo = tokens[0];
-  std::string nombre = tokens[1];
+  std::string tipo = tokens[1];
+  std::string nombre = tokens[2];
+  //std::cout << "nombre es: "<<nombre;
   // faltan las listas
   ofstream file2write(nombre);
   if (!file2write)
@@ -202,9 +203,9 @@ void guardar(std::string input, std::list<comandos> listacomandos, std::list<ele
       }
       else
       {
-        for (comandos cmd : listacomandos)
+        for (movimientos cmd : listacomandos)
         {
-          file2write << cmd.getComando() << endl;
+          file2write << cmd.getTipoMov() << " " << cmd.getMagnitud() << " " << cmd.getUniMed() << endl;
         }
         cout << "La informacion ha sido guardada en " << nombre << endl;
       }
@@ -260,35 +261,38 @@ movimientos curiosity::agregar_movimiento(std::string input)
 
 analisis curiosity::agregar_analisis(std::string input)
 {
-  std::istringstream ss(input);
-  std::string token;
-
   std::string tipo_analisis;
-  std::string objeto;
-  std::string comentario;
+     std::string objeto_analisis;
+     std::string comentario;
+  
 
-  // Tokenizacion del input
-  std::getline(ss, token, ' ');
-  tipo_analisis = token;
+  vector<string> tokens;
+  istringstream iss(input);
+  std::string token;
+  while (getline(iss, token, ' '))
+  {
+    tokens.push_back(token);
+  }
 
-  std::getline(ss, token, ' ');
-  objeto = token;
-
-  std::getline(ss, token, '\'');
-  std::getline(ss, comentario, '\'');
-
-  // Verificacion de informacion completa
-  if (tipo_analisis.empty() || objeto.empty() || comentario.empty())
+  if (tipo_analisis.empty() || objeto_analisis.empty() || comentario.empty())
   {
 
     std::cout << "Falta informacion para agregar el comando de analisis." << std::endl;
     exit;
   }
 
-  // Creacion del comando de analisis y agregado a la lista
-  analisis auxAnalisis;
-  auxAnalisis.cosstructor(tipo_analisis, objeto, comentario);
-  return auxAnalisis;
+  tipo_analisis = tokens[0];
+  objeto_analisis = stoi(tokens[1]);
+  comentario = tokens[2];
+ 
+
+  analisis anal;
+  anal.cosstructor(tipo_analisis, objeto_analisis, comentario);
+  return anal;
+
+////////
+std::cout << "Análisis agregado correctamente. MD1" << std::endl;
+ 
 }
 
 elemento curiosity::agregar_elemento(std::string input)
@@ -597,7 +601,7 @@ void curiosity::ayuda(std::string input)
     cout << "Ejemplo de uso:" << endl;
     cout << "    guardar comandos comandos.txt" << endl;
   }
-  else if (funcdeayuda == "simular")
+  else if (funcdeayuda == "simular_comandos")
   {
     cout << "Descripcion:" << endl;
     cout << "Permite simular el resultado de los comandos de movimiento que se enviaran al robot  Curiosity  desde la Tierra, facilitando asi la validacion de la nueva posicion en la que podria ubicarse. " << endl;
