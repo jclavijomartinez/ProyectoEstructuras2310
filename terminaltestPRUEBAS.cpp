@@ -55,6 +55,8 @@ int main()
       jorgeElCurioso.listAnalisis.clear();
       cout << "lista limpiada correctamente" << endl;
       jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
+      std::cout << "Análisis agregado correctamente. MD2" << std::endl;
+ 
     }
 
     if (funcion == "agregar_elemento")
