@@ -682,60 +682,56 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles 
 
-//<<<<<<<<< Temporary merge branch 1
-/*void curiosity::ubicar_elementos(list<elemento>& elementos, ArbolQuad& arbol) {
-    int num_procesados = 0;
-    int num_fallidos = 0;
-    NodoAGQ* nodo;
-    
-    for (int i = 0; i < elementos.longitud(); i++) {
-        elemento elem = elementos.iesimo(i);
-        nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
-        
-        if (nodo != nullptr) {
-            nodo->agregar_elemento(elem);
-            num_procesados++;
-        } else {
-            std::cout << "No se pudo ubicar el elemento " << i << " en el árbol." << std::endl;
-            num_fallidos++;
-        }
-    }
-    
-    if (num_procesados == 0) {
-        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
-    } else if (num_fallidos > 0) {
-        std::cout << "(Problemas con elementos) Los siguientes elementos no pudieron procesarse adecuadamente:" << std::endl;
-        for (int i = 0; i < elementos.longitud(); i++) {
-            elemento elem = elementos.iesimo(i);
-            nodo = arbol.buscar(elem.getCoordX(), elem.getCoordY());
-            
-            if (nodo == nullptr) {
-                std::cout << "- " << elem.getTipoComponente() << " " << elem.getTamano() << " " << elem.getUnidadMedida() << " en (" << elem.getCoordX() << ", " << elem.getCoordY() << ")" << std::endl;
-            }
-        }
-        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
-    } else {
-        std::cout << "(Resultado exitoso) Los elementos han sido procesados exitosamente." << std::endl;
-    }
-}*/
-//=========
-
 /*ArbolQuad curiosity::ubicar_elementos(list<elementos> elElem){
 
 ArbolQuad arbolDev;
 arbolDev();
 
-for mejorado para la lista{
+      while (!fin)
+      {
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoSupIzq();
+        }
+        else if (!pila.empty())
+        {
+          actual = pila.back();
 
-arbolDev.insertar(elementoFor);
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoSupDer();
+        }
 
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoInfIzq();
+        }
+        else if (!pila.empty())
+        {
+          actual = pila.back();
 
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoInfDer();
+        }
+
+        else
+        {
+          fin = true;
+        }
+      }
+      this->listElem.splice(this->listElem.end(), listaElementos);
+      
 }
-
-return arbolDev;
-
-}
-*/
-
-
-//>>>>>>>>> Temporary merge branch 2

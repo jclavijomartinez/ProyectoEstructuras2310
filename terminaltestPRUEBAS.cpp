@@ -82,75 +82,14 @@ int main()
     if (funcion == "ubicar_elementos")
     {
 
-      for (auto &elemento : jorgeElCurioso.listElem)
-      {
-        //jorgeElCurioso.arbol.insertar(elemento);
-      }
+      jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
     }
 
     if (funcion == "en_cuadrante")
     {
-
-      std::istringstream iss(input);
-      std::vector<std::string> tokens;
-      std::string token;
-      while (iss >> token)
-      {
-        tokens.push_back(token);
-      }
-
-      std::list<elemento> listaElementos;
-      // Recorremos el árbol utilizando un ciclo for mejorado
-      /*NodoQuad *actual = jorgeElCurioso.arbol.obtenerRaiz();
-      list<NodoQuad *> pila;
-      bool fin = false;
-
-      while (!fin)
-      {
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoSupIzq();
-        }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoSupDer();
-        }
-
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoInfIzq();
-        }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoInfDer();
-        }
-
-        else
-        {
-          fin = true;
-        }
-      }*/
+      
+jorgeElCurioso.enCoordenada(input);
 
     }
 
