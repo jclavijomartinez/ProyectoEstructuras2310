@@ -76,6 +76,18 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
       {
         break;
       }
+      else {
+        std::istringstream iss(infoarch);
+        std::vector<std::string> tokens;
+        std::string token;
+        while (iss >> token)
+        {
+          tokens.push_back(token);
+        }
+        analisis alan;
+        alan.cosstructor(tokens[0], tokens[1], tokens[2]);
+        this->listAnalisis.push_back(alan);
+      }
     }
     cout << contador_comandos << " comandos cargados correctamente desde " << ruta << endl;
     newfile.close();
