@@ -659,7 +659,7 @@ for (auto &elemento : elElem)
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
 }
 
-void curiosity::enCoordenada(string input){
+void curiosity::enCoordenada(std::string input){
   
       std::istringstream iss(input);
       std::vector<std::string> tokens;

@@ -38,11 +38,11 @@ int main()
 
     if (funcion == "cargar_comandos")
     {
-     jorgeElCurioso.listMov.splice( jorgeElCurioso.listMov.end(),jorgeElCurioso.cargar_comandos(input));
+      jorgeElCurioso.listMov.splice(jorgeElCurioso.listMov.end(), jorgeElCurioso.cargar_comandos(input));
     }
     if (funcion == "cargar_elementos")
     {
-     jorgeElCurioso.listElem.splice(jorgeElCurioso.listElem.end(), jorgeElCurioso.cargar_elementos(input));
+      jorgeElCurioso.listElem.splice(jorgeElCurioso.listElem.end(), jorgeElCurioso.cargar_elementos(input));
     }
     if (funcion == "agregar_movimiento")
     {
@@ -56,7 +56,6 @@ int main()
       cout << "lista limpiada correctamente" << endl;
       jorgeElCurioso.listAnalisis.push_back(jorgeElCurioso.agregar_analisis(input));
       std::cout << "Análisis agregado correctamente. MD2" << std::endl;
- 
     }
 
     if (funcion == "agregar_elemento")
@@ -67,7 +66,7 @@ int main()
     }
     if (funcion == "guardar")
     {
-      jorgeElCurioso.guardar(input,jorgeElCurioso.listMov,jorgeElCurioso.listElem);
+      jorgeElCurioso.guardar(input, jorgeElCurioso.listMov, jorgeElCurioso.listElem);
     }
     if (funcion == "simular_comandos")
     {
@@ -81,16 +80,14 @@ int main()
 
     if (funcion == "ubicar_elementos")
     {
-
       jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
     }
 
     if (funcion == "en_cuadrante")
     {
-      
-jorgeElCurioso.enCoordenada(input);
 
+      jorgeElCurioso.enCoordenada(input);
     }
 
     if (input == "salir")
