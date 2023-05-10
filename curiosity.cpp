@@ -374,98 +374,98 @@ void curiosity::simular_comandos(std::string input, std::list<movimientos> movim
     cout<<"\n Posicion Archivo y: "<< posYArch<<endl;
     
 
-          nuevas_coor[0] =posX + posXArch;
-          nuevas_coor[1] =posY + posYArch;
-          copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
-          if (aux.empty()) {
-            std::cout << "(No hay informacion) La informacion requerida de movimientos no esta almacenada en memoria.\n";
-          }
+    nuevas_coor[0] =posX + posXArch;
+    nuevas_coor[1] =posY + posYArch;
+    copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
+    if (aux.empty()) {
+      std::cout << "(No hay informacion) La informacion requerida de movimientos no esta almacenada en memoria.\n";
+    }
 
-          else{                      
-            for (it = aux.begin();it!=aux.end();it++){
+    else{                      
+      for (it = aux.begin();it!=aux.end();it++){
 
-              if (it->getTipoMov() == "girar" ){
-                // si son grados
-                grados = it->getMagnitud();            
-              }
-              
-              else if (it->getTipoMov() == "avanzar" ) {
-                switch (grados)
-                {  
-                  case 90:
-                    nuevas_coor[1] += it->getMagnitud();
-                    break;
+        if (it->getTipoMov() == "girar" ){
+          // si son grados
+          grados = it->getMagnitud();            
+        }
+        
+        else if (it->getTipoMov() == "avanzar" ) {
+          switch (grados)
+          {  
+            case 90:
+              nuevas_coor[1] += it->getMagnitud();
+              break;
 
-                  case 180:   
-                      nuevas_coor[0] = nuevas_coor[0] -it->getMagnitud();   
-                  break;
+            case 180:   
+                nuevas_coor[0] = nuevas_coor[0] -it->getMagnitud();   
+            break;
 
-                  case 270:
-                      
-                      nuevas_coor[1] = nuevas_coor[1]-it->getMagnitud();                    
-                  
-                  break;
-
-                  case 45:
-
-                      nuevas_coor[0] +=it->getMagnitud();
-                      nuevas_coor[1] += it->getMagnitud();
-                    
-                  
-                  break;
-                  case 135:
-
-                      nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-                      nuevas_coor[1] = nuevas_coor[1] + it->getMagnitud();
-                    
-                  
-                  break;
-                  case 225:
-
-                      
-                      nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
-                      nuevas_coor[1]=nuevas_coor[1]-it->getMagnitud();
-                      
-                  
-                  break;
-                  case 315:
-  
-                      nuevas_coor[0]=nuevas_coor[0]+it->getMagnitud();
-                      nuevas_coor[1]=nuevas_coor[1]-it->getMagnitud();
-                  
-
-                  
-                  break;
-                  case 0:
-
-                      nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
-                    
-                  
-                  break;
-                  case 360:
+            case 270:
                 
-                      nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
-                      
-                  break;
+                nuevas_coor[1] = nuevas_coor[1]-it->getMagnitud();                    
+            
+            break;
+
+            case 45:
+
+                nuevas_coor[0] +=it->getMagnitud();
+                nuevas_coor[1] += it->getMagnitud();
               
-                }   
+            
+            break;
+            case 135:
+
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+                nuevas_coor[1] = nuevas_coor[1] + it->getMagnitud();
+              
+            
+            break;
+            case 225:
+
                 
-              }
-              else {
-                cout << "\nLa estructura del comando es incorrecta"<<endl;
-              }
-                  
-            }
-          }
+                nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
+                nuevas_coor[1]=nuevas_coor[1]-it->getMagnitud();
+                
+            
+            break;
+            case 315:
 
-          cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-          <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
-          << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."<< endl<<endl;
+                nuevas_coor[0]=nuevas_coor[0]+it->getMagnitud();
+                nuevas_coor[1]=nuevas_coor[1]-it->getMagnitud();
+            
 
-          for (itE = listaE.begin();itE!=listaE.end();itE++){
-            itE->setCoordX(nuevas_coor[0]);
-            itE->setCoordY(nuevas_coor[1]);
-          }    
+            
+            break;
+            case 0:
+
+                nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
+              
+            
+            break;
+            case 360:
+          
+                nuevas_coor[0]=nuevas_coor[0]-it->getMagnitud();
+                
+            break;
+        
+          }   
+          
+        }
+        else {
+          cout << "\nLa estructura del comando es incorrecta"<<endl;
+        }
+            
+      }
+    }
+
+    cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+    <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
+    << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."<< endl<<endl;
+
+    for (itE = listaE.begin();itE!=listaE.end();itE++){
+      itE->setCoordX(nuevas_coor[0]);
+      itE->setCoordY(nuevas_coor[1]);
+    }    
 }
 
 void curiosity::testfun()
