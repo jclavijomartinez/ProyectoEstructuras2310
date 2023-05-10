@@ -71,7 +71,7 @@ int main()
     }
     if (funcion == "simular_comandos")
     {
-      jorgeElCurioso.simular_comandos("coortxt.csv", jorgeElCurioso.cargar_comandos(input),jorgeElCurioso.cargar_elementos(input));
+      jorgeElCurioso.simular_comandos(input, jorgeElCurioso.listMov,jorgeElCurioso.listElem);
     }
 
     if (funcion == "ayuda")
@@ -82,14 +82,14 @@ int main()
     if (funcion == "ubicar_elementos")
     {
 
-      jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);
+      /*jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);*/
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
     }
 
     if (funcion == "en_cuadrante")
     {
       
-jorgeElCurioso.enCoordenada(input);
+//jorgeElCurioso.enCoordenada(input);
 
     }
 

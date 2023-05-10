@@ -45,7 +45,7 @@ public:
 
   
   void ubicar_elementos(std::list<elemento>& elElem);
-  void enCoordenada(string input);
+  //void enCoordenada(string input);
 
   // Getters y Setters
 
