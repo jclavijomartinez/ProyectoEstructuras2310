@@ -71,7 +71,7 @@ int main()
     }
     if (funcion == "simular_comandos")
     {
-      jorgeElCurioso.simular_comandos(input, jorgeElCurioso.listMov,jorgeElCurioso.listElem);
+      jorgeElCurioso.simular_comandos(input, jorgeElCurioso.listMov);
     }
 
     if (funcion == "ayuda")

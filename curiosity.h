@@ -39,7 +39,7 @@ public:
 
   elemento agregar_elemento(std::string input);
 
-  void simular_comandos(std::string input, std::list <movimientos> listaMovimiento,std::list<elemento> listaelemen);
+  void simular_comandos(std::string input, std::list <movimientos> listaMovimiento);
 
   void testfun();
 
