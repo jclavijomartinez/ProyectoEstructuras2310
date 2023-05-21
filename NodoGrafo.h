@@ -4,23 +4,24 @@
 #include <iostream>
 #include <vector>
 
-template<typename T>
 
+template<typename T>
+class Arco {
+public:
+    int verticeDestino;
+    int costo;
+
+    Arco(int destino, int costo) : verticeDestino(destino), costo(costo) {}
+};
+
+template<typename T>
 class NodoG {
 private:
     T infoVertice;
     bool marcado;
-    std::vector<Arco> arcos;
+    std::vector<Arco<T>> arcos;
 
 public:
-    class Arco {
-    public:
-        int verticeDestino;
-        int costo;
-
-        Arco(int destino, int costo) : verticeDestino(destino), costo(costo) {}
-    };
-
     NodoG() : marcado(false) {}
 
     T getInfoVertice() const;
@@ -29,7 +30,7 @@ public:
     bool getMarcado() const;
     void setMarcado(bool value);
 
-    std::vector<Arco> getArcos() const;
-    void setArcos(const std::vector<Arco>& listaArcos);
+    std::vector<Arco<T>> getArcos() const;
+    void setArcos(const std::vector<Arco<T>>& listaArcos);
 };
 #endif
