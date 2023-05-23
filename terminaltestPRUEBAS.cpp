@@ -81,16 +81,12 @@ int main()
 
     if (funcion == "ubicar_elementos")
     {
-
-      /*jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);*/
-      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+      jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);
     }
 
     if (funcion == "en_cuadrante")
     {
-      
-//jorgeElCurioso.enCoordenada(input);
-
+      jorgeElCurioso.en_cuadrante(input);
     }
 
     if (input == "salir")

@@ -17,7 +17,7 @@ public:
   std::list<elemento> listElem;
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
-  //ArbolQuad arbol;
+  ArbolQuad arbol;
 
   std::list<movimientos> cargar_comandos(std::string ruta);
 
@@ -45,7 +45,7 @@ public:
 
   
   void ubicar_elementos(std::list<elemento>& elElem);
-  //void enCoordenada(string input);
+  void en_cuadrante(std::string input);
 
   // Getters y Setters
 

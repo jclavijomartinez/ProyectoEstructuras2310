@@ -8,7 +8,7 @@ using namespace std;
 
 //Constructor
 
-elemento elemento::constructor(string tipo, double tamano, string unidad, int x, int y){
+elemento elemento::constructor(string tipo, double tamano, string unidad, float x, float y){
 
    this ->tipo_componente=tipo;
             this->tamano=tamano;
@@ -72,10 +72,10 @@ return this->tamano;
    std::string elemento::getUnidadMedida(){
 return this->unidad_medida;
    }
-  int elemento::getCoordX(){
+  float elemento::getCoordX(){
 return this->coord_x;
   }
-  int elemento::getCoordY(){
+  float elemento::getCoordY(){
 return this->coord_y;
   }
 
@@ -90,9 +90,9 @@ void elemento::setTipo(std::string elTipo){
      void elemento::setUnidad(std::string laUni){
         unidad_medida =laUni;
      }
-      void elemento::setCoordX(int laX){
+      void elemento::setCoordX(float laX){
         coord_x=laX;
      }
-     void elemento::setCoordY(int laY){
+     void elemento::setCoordY(float laY){
         coord_y =laY;
      }

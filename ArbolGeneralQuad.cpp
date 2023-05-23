@@ -1,4 +1,5 @@
-/*#include "ArbolGeneralQuad.h"
+#include "ArbolGeneralQuad.h"
+#include <list>
 
 ArbolQuad::ArbolQuad() {
   raiz = nullptr;
@@ -17,7 +18,7 @@ elemento& ArbolQuad::datoRaiz() {
 }
 
 NodoQuad* ArbolQuad::obtenerRaiz() {
-  return raiz;
+  return this->raiz;
 }
 
 void ArbolQuad::fijarRaiz(NodoQuad* n_raiz) {
@@ -111,4 +112,20 @@ void ArbolQuad::posOrdenAux(NodoQuad* nodo) {
     posOrdenAux(nodo->obtenerHijoInfDer());
     nodo->obtenerDato() ;
   }
-}*/
+}
+
+void ArbolQuad::buscarCuadrante(NodoQuad *nodo_actual, float x1, float y1, float x2, float y2, std::list<elemento> &elementos_e)
+{
+  if (nodo_actual == NULL) {
+      return;
+  }
+  elemento punto_actual = nodo_actual->obtenerDato();
+  if (punto_actual.getCoordX() >= x1 && punto_actual.getCoordX() <= x2 &&
+      punto_actual.getCoordY() >= y1 && punto_actual.getCoordY() <= y2) {
+      elementos_e.push_back(punto_actual);
+  }
+  buscarCuadrante(nodo_actual->obtenerHijoSupIzq(), x1, y1, x2, y2, elementos_e);
+  buscarCuadrante(nodo_actual->obtenerHijoSupDer(), x1, y1, x2, y2, elementos_e);
+  buscarCuadrante(nodo_actual->obtenerHijoInfIzq(), x1, y1, x2, y2, elementos_e);
+  buscarCuadrante(nodo_actual->obtenerHijoInfDer(), x1, y1, x2, y2, elementos_e);
+}

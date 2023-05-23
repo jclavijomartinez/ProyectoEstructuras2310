@@ -1,8 +1,8 @@
-/*#ifndef __NODOGENERALQUAD__H__
+#ifndef __NODOGENERALQUAD__H__
 #define __NODOGENERALQUAD__H__
 
 #include <iostream>
-
+#include "elemento.h"
 
 class NodoQuad {
   protected:
@@ -32,4 +32,4 @@ class NodoQuad {
     bool esHoja();
 };
 
-#endif */
+#endif 

@@ -1,7 +1,8 @@
-/*#ifndef __ARBOLGENERALQUAD__H__
+#ifndef __ARBOLGENERALQUAD__H__
 #define __ARBOLGENERALQUAD__H__
 
 #include "NodoGeneralQuad.h"
+#include <list>
 
 class ArbolQuad {
   protected:
@@ -26,6 +27,7 @@ class ArbolQuad {
     void inOrdenAux(NodoQuad* nodo);
     void posOrdenAux(NodoQuad* nodo);
     void preOrdenAux(NodoQuad* nodo);
+    void buscarCuadrante(NodoQuad* nodo_actual, float x1, float y1, float x2, float y2, std::list<elemento> &elementos);
 };
 
-#endif*/
+#endif
