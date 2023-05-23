@@ -49,11 +49,11 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
         tokens.push_back(token);
       }
       std::string tipomov = tokens[0];
-      //std::cout << "tipo mov: " << tokens[0] << endl;
+      // std::cout << "tipo mov: " << tokens[0] << endl;
       std::string magnitud = tokens[1];
-      //std::cout << "magni: " << tokens[1] << endl;
+      // std::cout << "magni: " << tokens[1] << endl;
       std::string unimed = tokens[2];
-      //std::cout << "unimed: " << tokens[2] << endl;
+      // std::cout << "unimed: " << tokens[2] << endl;
       if (tokens[0] == "avanzar")
       {
         movimientos newmov;
@@ -72,11 +72,12 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
         listadev.push_back(newmov);
         contador_comandos++;
       }
-      else if (tokens[0] == "roca" || tokens[0] == "crater"||tokens[0] == "monticulo"||tokens[0] == "duna")
+      else if (tokens[0] == "roca" || tokens[0] == "crater" || tokens[0] == "monticulo" || tokens[0] == "duna")
       {
         break;
       }
-      else {
+      else
+      {
         std::istringstream iss(infoarch);
         std::vector<std::string> tokens;
         std::string token;
@@ -198,8 +199,8 @@ void curiosity::guardar(std::string input, std::list<movimientos> listacomandos,
   }
   std::string tipo = tokens[1];
   std::string nombre = tokens[2];
-  //std::cout << "nombre es: "<<nombre;
-  // faltan las listas
+  // std::cout << "nombre es: "<<nombre;
+  //  faltan las listas
   ofstream file2write(nombre);
   if (!file2write)
   {
@@ -274,9 +275,8 @@ movimientos curiosity::agregar_movimiento(std::string input)
 analisis curiosity::agregar_analisis(std::string input)
 {
   std::string tipo_analisis;
-     std::string objeto_analisis;
-     std::string comentario;
-  
+  std::string objeto_analisis;
+  std::string comentario;
 
   vector<string> tokens;
   istringstream iss(input);
@@ -296,15 +296,13 @@ analisis curiosity::agregar_analisis(std::string input)
   tipo_analisis = tokens[0];
   objeto_analisis = stoi(tokens[1]);
   comentario = tokens[2];
- 
 
   analisis anal;
   anal.cosstructor(tipo_analisis, objeto_analisis, comentario);
   return anal;
 
-////////
-std::cout << "Análisis agregado correctamente. MD1" << std::endl;
- 
+  ////////
+  std::cout << "Análisis agregado correctamente. MD1" << std::endl;
 }
 
 elemento curiosity::agregar_elemento(std::string input)
@@ -338,115 +336,158 @@ elemento curiosity::agregar_elemento(std::string input)
   return elem;
 }
 
-void curiosity::simular_comandos(std::string input, list<movimientos> movimiento)
+void curiosity::simular_comandos(std::string input, std::list<movimientos> movimiento, std::list<elemento> listaelemen)
 {
+  /*std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+  }
+  int coordX = stoi(tokens[1]);
+  int coordY = stoi(tokens[2]);
+  
+  cout << "la coordX es: " << coordX << endl;
+  cout << "la coordX es: " << coordY << endl;*/
 
-  float pi = 3.141592;
   int cambioA = 0;
-  float grados = 0.0;
+  int grados = 0;
   int num_p;
   int posX = 0, posY = 0;
   int posXArch = 0, posYArch = 0;
-  bool validar = true;
   int nuevas_coor[2] = {0, 0};
   string d1, d2;
-  list<movimientos>::iterator itM;
-  list<elemento> elem;
+  elemento elem;
+  list<elemento> listaE;
+  copy(listaelemen.begin(), listaelemen.end(), std::back_inserter(listaE));
   list<elemento>::iterator itE;
+  list<movimientos>::iterator it;
+  list<movimientos> aux;
 
-  if (movimiento.empty())
+  for (itE = listaE.begin(); itE != listaE.end(); itE++)
   {
-    cout << "Lista vacia" << endl;
-  }
-  else
-  {
-    // Que existan en la lista
-    for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
-    {
-      if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
-      {
-        validar = true;
-      }
-    }
+    posX = itE->getCoordX();
+    posY = itE->getCoordY();
   }
 
-  fstream newfile;
-  std::string nombre_archivo = input.substr(0);
-  newfile.open(nombre_archivo, ios::in);
+  fstream archivo;
+  archivo.open(input, ios::in);
 
-  if (newfile.peek() == ifstream::traits_type::eof())
-  {
-    cout << input << " no contiene elementos (esta vacio)" << endl;
-  }
-  else if (newfile.is_open())
+  if (archivo.is_open())
   {
     std::string opcion;
-    while (getline(newfile, opcion))
+    while (getline(archivo, opcion))
     {
 
-      if (!opcion.empty() && validar == true)
+      if (!opcion.empty())
       {
-        /*stringstream ss(opcion);
-        ss >> posXArch;*/
-
-        stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
-        getline(input_stringstream, d1, ' ');
-        getline(input_stringstream, d2, ' ');
-
-        posXArch = stoi(d1); // Convertir los datos a enteros
-        posYArch = stoi(d2);
-
-        cout << "\n Posicion x: " << posX;
-        cout << "\n Posicion y: " << posY;
-
-        cout << "\n Posicion Archivo x: " << posXArch;
-        cout << "\n Posicion Archivo y: " << posYArch;
-
-        for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
+        try
         {
-          nuevas_coor[0] = posX + posXArch;
-          nuevas_coor[1] = posY + posYArch;
+          stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
+          getline(input_stringstream, d1, ' ');
+          getline(input_stringstream, d2, ' ');
 
-          if (itM->getTipoMov() == "a")
+          posXArch = stoi(d1); // Convertir los datos a enteros
+          posYArch = stoi(d2);
+          cout << "\n Posicion x: " << posX;
+          cout << "\n Posicion y: " << posY;
+
+          cout << "\n Posicion Archivo x: " << posXArch;
+          cout << "\n Posicion Archivo y: " << posYArch << endl;
+        }
+        catch (std::invalid_argument &e)
+        {
+          cout << "Las coordenas no son numeros enteros";
+          exit(1);
+        }
+
+        nuevas_coor[0] = posX + posXArch;
+        nuevas_coor[1] = posY + posYArch;
+        copy(movimiento.begin(), movimiento.end(), std::back_inserter(aux)); // copiar la lista de movimientos en aux
+        if (aux.empty())
+        {
+          std::cout << "(No hay informacion) La informacion requerida no esta almacenada en memoria.\n";
+        }
+
+        else
+        {
+          for (it = aux.begin(); it != aux.end(); it++)
           {
-            // Si son cm
 
-            if (itM->getUniMed() == "c")
+            if (it->getTipoMov() == "girar")
             {
-              cambioA = itM->getMagnitud() / 100;
+              // si son grados
+              grados = it->getMagnitud();
             }
-            // Si son metros
-            else if (itM->getUniMed() == "m")
+
+            else if (it->getTipoMov() == "avanzar")
             {
-              cambioA = itM->getMagnitud();
+              switch (grados)
+              {
+              case 90:
+                nuevas_coor[1] += it->getMagnitud();
+                break;
+
+              case 180:
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+                break;
+
+              case 270:
+
+                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
+
+                break;
+
+              case 45:
+
+                nuevas_coor[0] += it->getMagnitud();
+                nuevas_coor[1] += it->getMagnitud();
+
+                break;
+              case 135:
+
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+                nuevas_coor[1] = nuevas_coor[1] + it->getMagnitud();
+
+                break;
+              case 225:
+
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
+
+                break;
+              case 315:
+
+                nuevas_coor[0] = nuevas_coor[0] + it->getMagnitud();
+                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
+
+                break;
+              case 0:
+
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+
+                break;
+              case 360:
+
+                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
+
+                break;
+              }
             }
             else
             {
-              cout << "Error en la unidad de medida";
+              cout << "\nLa estructura del comando es incorrecta" << endl;
             }
-
-            /*nuevas_coor[0] +=  cambioA * cos(grados);
-            nuevas_coor[1] +=  cambioA * sin(grados);*/
           }
-          else if (itM->getTipoMov() == "g")
-          {
-            // si son grados
-            grados += itM->getMagnitud() * (pi / 180);
-          }
-          else
-          {
-            cout << "Error en el tipo de movimiento";
-          }
-
-          nuevas_coor[0] += cambioA * cos(grados);
-          nuevas_coor[1] += cambioA * sin(grados);
         }
 
         cout << "\nLa simulacion de los comandos, a partir de la posicion ("
              << posX << ", " << posY << "), deja al robot en la nueva posicion ("
-             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
+             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ." << endl
              << endl;
-        for (itE = elem.begin(); itE != elem.end(); itE++)
+
+        for (itE = listaE.begin(); itE != listaE.end(); itE++)
         {
           itE->setCoordX(nuevas_coor[0]);
           itE->setCoordY(nuevas_coor[1]);
@@ -454,15 +495,14 @@ void curiosity::simular_comandos(std::string input, list<movimientos> movimiento
       }
       else
       {
-        cout << "\nLa estructura del comando es incorrecta";
+        cout << "Archivo vacio: " << input << endl;
       }
+      archivo.close();
     }
-
-    newfile.close();
   }
   else
   {
-    cout << "No se pudo abrir el archivo: " << input << endl;
+    cout << "No abre el archivo" << input << endl;
   }
 }
 
@@ -663,75 +703,77 @@ std::list<comandos> curiosity::getCums()
 
 /// 2ndo Componente Árboles
 
-void curiosity::ubicar_elementos(list<elemento>& elElem){
-for (auto &elemento : elElem)
-      {
-        this->arbol.insertar(elemento);
-      }
-      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+void curiosity::ubicar_elementos(list<elemento> &elElem)
+{
+  for (auto &elemento : elElem)
+  {
+    this->arbol.insertar(elemento);
+  }
+  cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
 }
 
-void curiosity::enCoordenada(std::string input){
-  
-      std::istringstream iss(input);
-      std::vector<std::string> tokens;
-      std::string token;
-      while (iss >> token)
+void curiosity::enCoordenada(std::string input)
+{
+
+  std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+  }
+
+  std::list<elemento> listaElementos;
+  // Recorremos el árbol utilizando un ciclo for mejorado
+  NodoQuad *actual = this->arbol.obtenerRaiz();
+  list<NodoQuad *> pila;
+  bool fin = false;
+
+  while (!fin)
+  {
+    if (actual != nullptr)
+    {
+      pila.push_back(actual);
+      actual = actual->obtenerHijoSupIzq();
+    }
+    else if (!pila.empty())
+    {
+      actual = pila.back();
+
+      elemento elemento = actual->obtenerDato();
+      if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+          elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
       {
-        tokens.push_back(token);
+        cout << elemento.getCoordX() << "x" << elemento.getCoordY() << "y";
+        listaElementos.push_back(elemento);
       }
+      actual = actual->obtenerHijoSupDer();
+    }
 
-      std::list<elemento> listaElementos;
-      // Recorremos el árbol utilizando un ciclo for mejorado
-      NodoQuad *actual = this->arbol.obtenerRaiz();
-      list<NodoQuad *> pila;
-      bool fin = false;
+    if (actual != nullptr)
+    {
+      pila.push_back(actual);
+      actual = actual->obtenerHijoInfIzq();
+    }
+    else if (!pila.empty())
+    {
+      actual = pila.back();
 
-      while (!fin)
+      elemento elemento = actual->obtenerDato();
+      if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+          elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
       {
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoSupIzq();
-        }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoSupDer();
-        }
-
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoInfIzq();
-        }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoInfDer();
-        }
-
-        else
-        {
-          fin = true;
-        }
+        cout << elemento.getCoordX() << "xexterno" << elemento.getCoordY() << "yexterno";
+        listaElementos.push_back(elemento);
       }
-      this->listElem.splice(this->listElem.end(), listaElementos);
-      
+      actual = actual->obtenerHijoInfDer();
+    }
+
+    else
+    {
+      fin = true;
+    }
+  }
+  this->listElem.splice(this->listElem.end(), listaElementos);
+  cout<<"cant elementos= "<<this->listElem.size()<<endl;
 }
