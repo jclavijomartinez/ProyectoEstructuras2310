@@ -670,70 +670,44 @@ for (auto &elemento : elElem)
       cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
 }
 
-void curiosity::enCoordenada(string input){
+void curiosity::en_cuadrante(std::string input){
+
+  std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+  }
+  float coordX1 = stod(tokens[1]), coordX2 = stod(tokens[2]) , coordY1 = stod(tokens[3]), coordY2 = stod(tokens[4]);
+  cout<<"COORDENADAS:\n"<<coordX1<<coordX2<<coordY1<<coordY2<<endl;
   
-      std::istringstream iss(input);
-      std::vector<std::string> tokens;
-      std::string token;
-      while (iss >> token)
-      {
-        tokens.push_back(token);
-      }
+  if (coordX1 >= coordX2 || coordY1 >= coordY2) 
+  {
+    std::cout << "La información del cuadrante no corresponde a los datos esperados (x_min, x_max, y_min, y_max)\n";
+    return;
+  }
+  if (arbol.esVacio()) 
+  {
+    std::cout << "Los elementos no han sido ubicados todavía (con el comando ubicar_elementos)\n";
+    return;
+  }
+  std::list<elemento> listaElementos;
+  std::list<elemento> ::iterator it;
 
-      std::list<elemento> listaElementos;
-      // Recorremos el árbol utilizando un ciclo for mejorado
-      NodoQuad *actual = this->arbol.obtenerRaiz();
-      list<NodoQuad *> pila;
-      bool fin = false;
-
-      while (!fin)
-      {
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoSupIzq();
+  arbol.buscarCuadrante(arbol.obtenerRaiz(), coordX1, coordY1, coordX2, coordY2, listaElementos);
+  
+  if (listaElementos.empty()) {
+        std::cout << "No se encontraron elementos dentro del cuadrante especificado\n";
+    }
+    else {
+        std::cout << "Los elementos ubicados en el cuadrante solicitado son:\n";
+        for (it = listaElementos.begin(); it != listaElementos.end(); ++it) {
+            std::cout << "- " << it->getTipoComponente() << " (" << it->getCoordX() << ", " << it->getCoordY() << ")\n";
         }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoSupDer();
-        }
-
-        if (actual != nullptr)
-        {
-          pila.push_back(actual);
-          actual = actual->obtenerHijoInfIzq();
-        }
-        else if (!pila.empty())
-        {
-          actual = pila.back();
-
-          elemento elemento = actual->obtenerDato();
-          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-          {
-            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
-            listaElementos.push_back(elemento);
-          }
-          actual = actual->obtenerHijoInfDer();
-        }
-
-        else
-        {
-          fin = true;
-        }
-      }
-      this->listElem.splice(this->listElem.end(), listaElementos);
-      
+    }      
 }
+
 /*
 double distancia_euclidiana(const elemento& elem1, const elemento& elem2) {
     float dx = elem1.getCoordX() - elem2.getCoordX();
