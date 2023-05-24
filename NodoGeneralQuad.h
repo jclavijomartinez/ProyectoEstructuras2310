@@ -2,7 +2,7 @@
 #define __NODOGENERALQUAD__H__
 
 #include <iostream>
-
+#include "elemento.h"
 
 class NodoQuad {
   protected:

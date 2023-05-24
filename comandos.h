@@ -2,9 +2,11 @@
 #define COMANDOS_H
 
 #include <string>
+#include "movimientos.h"
 class comandos {
 private:
     std::string ruta;
+    movimientos Movimientos;
 public:
    comandos consstructor(std::string comando);
     

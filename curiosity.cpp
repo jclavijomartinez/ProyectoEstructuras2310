@@ -133,7 +133,7 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
         {
           tokens.push_back(token);
         }
-        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stod(tokens[3]), stod(tokens[4]));
         listadev.push_back(elelem);
         contador_elementos++;
       }
@@ -146,7 +146,7 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
         {
           tokens.push_back(token);
         }
-        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stod(tokens[3]), stod(tokens[4]));
         listadev.push_back(elelem);
         contador_elementos++;
       }
@@ -159,7 +159,7 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
         {
           tokens.push_back(token);
         }
-        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stod(tokens[3]), stod(tokens[4]));
         listadev.push_back(elelem);
         contador_elementos++;
       }
@@ -172,7 +172,7 @@ std::list<elemento> curiosity::cargar_elementos(std::string ruta)
         {
           tokens.push_back(token);
         }
-        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stoi(tokens[3]), stoi(tokens[4]));
+        elelem.constructor(primera_palabra, stod(tokens[1]), tokens[2], stod(tokens[3]), stod(tokens[4]));
         listadev.push_back(elelem);
         contador_elementos++;
       }
@@ -262,7 +262,7 @@ movimientos curiosity::agregar_movimiento(std::string input)
   {
     // cout<<"tipo: "<<tokens[1]<<"num"<< stoi(tokens[2])<<"tercer"<< tokens[3]<< endl;
 
-    auxMov.consstructor(tokens[1], stoi(tokens[2]), tokens[3]);
+    auxMov.constructor(tokens[1], stoi(tokens[2]), tokens[3]);
     std::cout << "Movimiento agregado correctamente" << std::endl;
     return auxMov;
   }
@@ -336,174 +336,62 @@ elemento curiosity::agregar_elemento(std::string input)
   return elem;
 }
 
-void curiosity::simular_comandos(std::string input, std::list<movimientos> movimiento, std::list<elemento> listaelemen)
-{
-  /*std::istringstream iss(input);
-  std::vector<std::string> tokens;
-  std::string token;
-  while (iss >> token)
-  {
-    tokens.push_back(token);
-  }
-  int coordX = stoi(tokens[1]);
-  int coordY = stoi(tokens[2]);
-  
-  cout << "la coordX es: " << coordX << endl;
-  cout << "la coordX es: " << coordY << endl;*/
+void curiosity::simular_comandos(std::string input, std::list<movimientos> movimiento) {
 
-  int cambioA = 0;
-  int grados = 0;
-  int num_p;
-  int posX = 0, posY = 0;
-  int posXArch = 0, posYArch = 0;
-  int nuevas_coor[2] = {0, 0};
-  string d1, d2;
-  elemento elem;
-  list<elemento> listaE;
-  copy(listaelemen.begin(), listaelemen.end(), std::back_inserter(listaE));
-  list<elemento>::iterator itE;
-  list<movimientos>::iterator it;
-  list<movimientos> aux;
-
-  for (itE = listaE.begin(); itE != listaE.end(); itE++)
-  {
-    posX = itE->getCoordX();
-    posY = itE->getCoordY();
-  }
-
-  fstream archivo;
-  archivo.open(input, ios::in);
-
-  if (archivo.is_open())
-  {
-    std::string opcion;
-    while (getline(archivo, opcion))
+    float posXArch = 0, posYArch = 0;
+    string d1,d2;
+    list<movimientos> :: iterator it;
+    list<movimientos> aux;
+    std::istringstream iss(input);
+    std::vector<std::string> tokens;
+    std::string token;
+    while (iss >> token)
     {
-
-      if (!opcion.empty())
-      {
-        try
-        {
-          stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
-          getline(input_stringstream, d1, ' ');
-          getline(input_stringstream, d2, ' ');
-
-          posXArch = stoi(d1); // Convertir los datos a enteros
-          posYArch = stoi(d2);
-          cout << "\n Posicion x: " << posX;
-          cout << "\n Posicion y: " << posY;
-
-          cout << "\n Posicion Archivo x: " << posXArch;
-          cout << "\n Posicion Archivo y: " << posYArch << endl;
-        }
-        catch (std::invalid_argument &e)
-        {
-          cout << "Las coordenas no son numeros enteros";
-          exit(1);
-        }
-
-        nuevas_coor[0] = posX + posXArch;
-        nuevas_coor[1] = posY + posYArch;
-        copy(movimiento.begin(), movimiento.end(), std::back_inserter(aux)); // copiar la lista de movimientos en aux
-        if (aux.empty())
-        {
-          std::cout << "(No hay informacion) La informacion requerida no esta almacenada en memoria.\n";
-        }
-
-        else
-        {
-          for (it = aux.begin(); it != aux.end(); it++)
-          {
-
-            if (it->getTipoMov() == "girar")
-            {
-              // si son grados
-              grados = it->getMagnitud();
-            }
-
-            else if (it->getTipoMov() == "avanzar")
-            {
-              switch (grados)
-              {
-              case 90:
-                nuevas_coor[1] += it->getMagnitud();
-                break;
-
-              case 180:
-                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-                break;
-
-              case 270:
-
-                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
-
-                break;
-
-              case 45:
-
-                nuevas_coor[0] += it->getMagnitud();
-                nuevas_coor[1] += it->getMagnitud();
-
-                break;
-              case 135:
-
-                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-                nuevas_coor[1] = nuevas_coor[1] + it->getMagnitud();
-
-                break;
-              case 225:
-
-                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
-
-                break;
-              case 315:
-
-                nuevas_coor[0] = nuevas_coor[0] + it->getMagnitud();
-                nuevas_coor[1] = nuevas_coor[1] - it->getMagnitud();
-
-                break;
-              case 0:
-
-                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-
-                break;
-              case 360:
-
-                nuevas_coor[0] = nuevas_coor[0] - it->getMagnitud();
-
-                break;
-              }
-            }
-            else
-            {
-              cout << "\nLa estructura del comando es incorrecta" << endl;
-            }
-          }
-        }
-
-        cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-             << posX << ", " << posY << "), deja al robot en la nueva posicion ("
-             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ." << endl
-             << endl;
-
-        for (itE = listaE.begin(); itE != listaE.end(); itE++)
-        {
-          itE->setCoordX(nuevas_coor[0]);
-          itE->setCoordY(nuevas_coor[1]);
-        }
-      }
-      else
-      {
-        cout << "Archivo vacio: " << input << endl;
-      }
-      archivo.close();
+      tokens.push_back(token);
     }
-  }
-  else
-  {
-    cout << "No abre el archivo" << input << endl;
-  }
+    try{
+      posXArch = stod(tokens[1]);
+      posYArch = stod(tokens[2]);
+    }
+    catch(std::invalid_argument& e)
+    {
+      cout<<"Las coordenas no son numeros enteros o decimales";
+      exit(1);
+    } 
+
+    float auxX=1,auxY=0, posX = posXArch, posY=posYArch,giro=0;
+
+    copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
+    if (aux.empty()) {
+      std::cout << "(No hay informacion) La informacion requerida de movimientos no esta almacenada en memoria.\n";
+    }
+
+    else{                      
+      for (it = aux.begin();it!=aux.end();it++){
+
+        if (it->getTipoMov() == "avanzar" ){
+          if(it->getUniMed() == "metros"){
+            posXArch += it->getMagnitud() * std::cos(giro*3.141592654/180);
+            posYArch += it->getMagnitud() * std::sin(giro*3.141592654/180);
+          }
+          else if(it->getUniMed() == "cm"){
+            posXArch += (it->getMagnitud()/1000 )* std::cos(giro*3.141592654/180);
+            posYArch += (it->getMagnitud()/1000) * std::sin(giro*3.141592654/180);
+          }
+
+          }        
+        else if (it->getTipoMov() == "girar" ) {
+          giro +=it->getMagnitud();          
+        }
+        else {
+          cout << "\nLa estructura del comando es incorrecta"<<endl;
+        }
+            
+      }
+      cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+      <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
+      << posXArch << ", " << posYArch << ") ."<< endl<<endl; 
+    }  
 }
 
 void curiosity::testfun()
@@ -680,40 +568,47 @@ void curiosity::ayuda(std::string input)
   }
 }
 
-// Getters y Setters
-std::list<movimientos> curiosity::getMovs()
-{
-  return listMov;
-}
+//Getters y Setters
+    std::list<movimientos> curiosity::getMovs(){
+        return listMov;
+    }
 
 std::list<elemento> curiosity::getElems()
 {
-  return listElem;
+    return listElem;
 }
 
 std::list<analisis> curiosity::getAnals()
 {
-  return listAnalisis;
+    return listAnalisis;
 }
 
 std::list<comandos> curiosity::getCums()
 {
-  return listCum;
+    return listCum;
 }
-
 /// 2ndo Componente Árboles
 
-void curiosity::ubicar_elementos(list<elemento> &elElem)
-{
-  for (auto &elemento : elElem)
+void curiosity::ubicar_elementos(list<elemento>& elElem){
+  if (elElem.empty()) 
   {
-    this->arbol.insertar(elemento);
+    std::cout << "La información requerida no está almacenada en memoria.\n";
+    return;
   }
-  cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+  else
+  {
+    for (auto &elemento : elElem)
+    {
+      this->arbol.insertar(elemento);
+    }
+    cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+
+  }
+
+  
 }
 
-void curiosity::enCoordenada(std::string input)
-{
+void curiosity::en_cuadrante(std::string input){
 
   std::istringstream iss(input);
   std::vector<std::string> tokens;
@@ -722,58 +617,31 @@ void curiosity::enCoordenada(std::string input)
   {
     tokens.push_back(token);
   }
-
-  std::list<elemento> listaElementos;
-  // Recorremos el árbol utilizando un ciclo for mejorado
-  NodoQuad *actual = this->arbol.obtenerRaiz();
-  list<NodoQuad *> pila;
-  bool fin = false;
-
-  while (!fin)
+  float coordX1 = stod(tokens[1]), coordX2 = stod(tokens[2]) , coordY1 = stod(tokens[3]), coordY2 = stod(tokens[4]);
+  cout<<"COORDENADAS:\n"<<coordX1<<coordX2<<coordY1<<coordY2<<endl;
+  
+  if (coordX1 >= coordX2 || coordY1 >= coordY2) 
   {
-    if (actual != nullptr)
-    {
-      pila.push_back(actual);
-      actual = actual->obtenerHijoSupIzq();
-    }
-    else if (!pila.empty())
-    {
-      actual = pila.back();
-
-      elemento elemento = actual->obtenerDato();
-      if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-          elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-      {
-        cout << elemento.getCoordX() << "x" << elemento.getCoordY() << "y";
-        listaElementos.push_back(elemento);
-      }
-      actual = actual->obtenerHijoSupDer();
-    }
-
-    if (actual != nullptr)
-    {
-      pila.push_back(actual);
-      actual = actual->obtenerHijoInfIzq();
-    }
-    else if (!pila.empty())
-    {
-      actual = pila.back();
-
-      elemento elemento = actual->obtenerDato();
-      if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
-          elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
-      {
-        cout << elemento.getCoordX() << "xexterno" << elemento.getCoordY() << "yexterno";
-        listaElementos.push_back(elemento);
-      }
-      actual = actual->obtenerHijoInfDer();
-    }
-
-    else
-    {
-      fin = true;
-    }
+    std::cout << "La información del cuadrante no corresponde a los datos esperados (x_min, x_max, y_min, y_max)\n";
+    return;
   }
-  this->listElem.splice(this->listElem.end(), listaElementos);
-  cout<<"cant elementos= "<<this->listElem.size()<<endl;
+  if (arbol.esVacio()) 
+  {
+    std::cout << "Los elementos no han sido ubicados todavía (con el comando ubicar_elementos)\n";
+    return;
+  }
+  std::list<elemento> listaElementos;
+  std::list<elemento> ::iterator it;
+
+  arbol.buscarCuadrante(arbol.obtenerRaiz(), coordX1, coordY1, coordX2, coordY2, listaElementos);
+  
+  if (listaElementos.empty()) {
+        std::cout << "No se encontraron elementos dentro del cuadrante especificado\n";
+    }
+    else {
+        std::cout << "Los elementos ubicados en el cuadrante solicitado son:\n";
+        for (it = listaElementos.begin(); it != listaElementos.end(); ++it) {
+            std::cout << "- " << it->getTipoComponente() << " (" << it->getCoordX() << ", " << it->getCoordY() << ")\n";
+        }
+    }      
 }

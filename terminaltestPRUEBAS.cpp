@@ -25,7 +25,7 @@ int main()
   string input;
   string funcion;
   curiosity jorgeElCurioso;
-  ArbolQuad arbolAux;
+  //ArbolQuad arbolAux;
   while (true)
   {
     // Conseguir la linea de comandos
@@ -81,13 +81,11 @@ int main()
     if (funcion == "ubicar_elementos")
     {
       jorgeElCurioso.ubicar_elementos(jorgeElCurioso.listElem);
-      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
     }
 
     if (funcion == "en_cuadrante")
     {
-
-      jorgeElCurioso.enCoordenada(input);
+      jorgeElCurioso.en_cuadrante(input);
     }
 
     if (input == "salir")
@@ -95,3 +93,4 @@ int main()
   }
   return 0;
 } // Cierre Main
+//test commnet A

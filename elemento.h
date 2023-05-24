@@ -9,10 +9,10 @@ private:
    std::string tipo_componente;
   double tamano;
    std::string unidad_medida;
-  int coord_x, coord_y;
+  float coord_x, coord_y;
 
 public:
-  elemento constructor( std::string tipo, double tamano,  std::string unidad, int x, int y);
+  elemento constructor( std::string tipo, double tamano,  std::string unidad, float x, float y);
   elemento consstructor(elemento);
 
   void cargar_elemento( std::string input);
@@ -21,14 +21,14 @@ public:
    std::string getTipoComponente();
   double getTamano();
    std::string getUnidadMedida();
-  int getCoordX();
-  int getCoordY();
+  float getCoordX();
+  float getCoordY();
 
       void setTipo(std::string elTipo);
      void setTamano(double tamano);
      void setUnidad(std::string laUni);
-     void setCoordX(int laX);
-     void setCoordY(int laY);
+     void setCoordX(float laX);
+     void setCoordY(float laY);
      
 };
 

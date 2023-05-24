@@ -23,7 +23,7 @@ NodoQuad::~NodoQuad() {
 }
 
 elemento& NodoQuad::obtenerDato() {
-  return elElemen;
+  return this->elElemen;
 }
 
 void NodoQuad::fijarDato(elemento &val) {
@@ -31,19 +31,19 @@ void NodoQuad::fijarDato(elemento &val) {
 }
 
 NodoQuad* NodoQuad::obtenerHijoSupIzq() {
-  return hijoSupIzq;
+  return this->hijoSupIzq;
 }
 
 NodoQuad* NodoQuad::obtenerHijoSupDer() {
-  return hijoSupDer;
+  return this->hijoSupDer;
 }
 
 NodoQuad* NodoQuad::obtenerHijoInfIzq() {
-  return hijoInfIzq;
+  return this->hijoInfIzq;
 }
 
 NodoQuad* NodoQuad::obtenerHijoInfDer() {
-  return hijoInfDer;
+  return this->hijoInfDer;
 }
 
 void NodoQuad::fijarHijoSupIzq(NodoQuad* sizq) {

@@ -8,21 +8,21 @@ class movimientos
 private:
    std::string tipoMov;
   float magnitud;
-   std::string uniMed;
+  std::string uniMed;
 
 public:
-  movimientos consstructor( std::string tipoMov, float magnitud,  std::string uniMed);
-
-  void agregar_mov(std::string input); // AGREGAR MOVIMIENTO
+  movimientos constructor(std::string tipoMov, float magnitud, std::string uniMed);
+    
+   void agregar_mov (std::string input); //AGREGAR MOVIMIENTO
 
   // Getters y Setters
    std::string getTipoMov();
-  float getMagnitud();
+   float getMagnitud();
    std::string getUniMed();
 
    void setTipoMov(std::string elTipoM);
-     void setMagnitud(double laMagnitud);
-     void setUniMed(std::string laUniMed);
+    void setMagnitud(float laMagnitud);
+    void setUniMed(std::string laUniMed);
 };
 
 #endif
