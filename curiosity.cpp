@@ -5,6 +5,7 @@
 #include "elemento.cpp"
 #include "ArbolGeneralQuad.cpp"
 #include "NodoGeneralQuad.cpp"
+#include "Grafo.cpp"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -336,62 +337,133 @@ elemento curiosity::agregar_elemento(std::string input)
   return elem;
 }
 
-void curiosity::simular_comandos(std::string input, std::list<movimientos> movimiento) {
+void curiosity::simular_comandos(std::string input, list<movimientos> movimiento)
+{
 
-    float posXArch = 0, posYArch = 0;
-    string d1,d2;
-    list<movimientos> :: iterator it;
-    list<movimientos> aux;
-    std::istringstream iss(input);
-    std::vector<std::string> tokens;
-    std::string token;
-    while (iss >> token)
+  float pi = 3.141592;
+  int cambioA = 0;
+  float grados = 0.0;
+  int num_p;
+  int posX = 0, posY = 0;
+  int posXArch = 0, posYArch = 0;
+  bool validar = true;
+  int nuevas_coor[2] = {0, 0};
+  string d1, d2;
+  list<movimientos>::iterator itM;
+  list<elemento> elem;
+  list<elemento>::iterator itE;
+
+  if (movimiento.empty())
+  {
+    cout << "Lista vacia" << endl;
+  }
+  else
+  {
+    // Que existan en la lista
+    for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
     {
-      tokens.push_back(token);
+      if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
+      {
+        validar = true;
+      }
     }
-    try{
-      posXArch = stod(tokens[1]);
-      posYArch = stod(tokens[2]);
-    }
-    catch(std::invalid_argument& e)
+  }
+
+  fstream newfile;
+  std::string nombre_archivo = input.substr(0);
+  newfile.open(nombre_archivo, ios::in);
+
+  if (newfile.peek() == ifstream::traits_type::eof())
+  {
+    cout << input << " no contiene elementos (esta vacio)" << endl;
+  }
+  else if (newfile.is_open())
+  {
+    std::string opcion;
+    while (getline(newfile, opcion))
     {
-      cout<<"Las coordenas no son numeros enteros o decimales";
-      exit(1);
-    } 
 
-    float auxX=1,auxY=0, posX = posXArch, posY=posYArch,giro=0;
+      if (!opcion.empty() && validar == true)
+      {
+        /*stringstream ss(opcion);
+        ss >> posXArch;*/
 
-    copy(movimiento.begin(),movimiento.end(),std::back_inserter(aux));//copiar la lista de movimientos en aux
-    if (aux.empty()) {
-      std::cout << "(No hay informacion) La informacion requerida de movimientos no esta almacenada en memoria.\n";
-    }
+        stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
+        getline(input_stringstream, d1, ' ');
+        getline(input_stringstream, d2, ' ');
 
-    else{                      
-      for (it = aux.begin();it!=aux.end();it++){
+        posXArch = stoi(d1); // Convertir los datos a enteros
+        posYArch = stoi(d2);
 
-        if (it->getTipoMov() == "avanzar" ){
-          if(it->getUniMed() == "metros"){
-            posXArch += it->getMagnitud() * std::cos(giro*3.141592654/180);
-            posYArch += it->getMagnitud() * std::sin(giro*3.141592654/180);
+        cout << "\n Posicion x: " << posX;
+        cout << "\n Posicion y: " << posY;
+
+        cout << "\n Posicion Archivo x: " << posXArch;
+        cout << "\n Posicion Archivo y: " << posYArch;
+
+        for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
+        {
+          nuevas_coor[0] = posX + posXArch;
+          nuevas_coor[1] = posY + posYArch;
+
+          if (itM->getTipoMov() == "a")
+          {
+            // Si son cm
+
+            if (itM->getUniMed() == "c")
+            {
+              cambioA = itM->getMagnitud() / 100;
+            }
+            // Si son metros
+            else if (itM->getUniMed() == "m")
+            {
+              cambioA = itM->getMagnitud();
+            }
+            else
+            {
+              cout << "Error en la unidad de medida";
+            }
+
+            /*nuevas_coor[0] +=  cambioA * cos(grados);
+            nuevas_coor[1] +=  cambioA * sin(grados);*/
           }
-          else if(it->getUniMed() == "cm"){
-            posXArch += (it->getMagnitud()/1000 )* std::cos(giro*3.141592654/180);
-            posYArch += (it->getMagnitud()/1000) * std::sin(giro*3.141592654/180);
+          else if (itM->getTipoMov() == "g")
+          {
+            // si son grados
+            grados += itM->getMagnitud() * (pi / 180);
+          }
+          else
+          {
+            cout << "Error en el tipo de movimiento";
           }
 
-          }        
-        else if (it->getTipoMov() == "girar" ) {
-          giro +=it->getMagnitud();          
+          nuevas_coor[0] += cambioA * cos(grados);
+          nuevas_coor[1] += cambioA * sin(grados);
         }
-        else {
-          cout << "\nLa estructura del comando es incorrecta"<<endl;
+
+        cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+             << posX << ", " << posY << "), deja al robot en la nueva posicion ("
+             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
+             << endl;
+        for (itE = elem.begin(); itE != elem.end(); itE++)
+        {
+          itE->setCoordX(nuevas_coor[0]);
+          itE->setCoordY(nuevas_coor[1]);
         }
             
       }
-      cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-      <<posX<< ", "<< posY<< "), deja al robot en la nueva posicion ("
-      << posXArch << ", " << posYArch << ") ."<< endl<<endl; 
-    }  
+      else
+      {
+        cout << "\nLa estructura del comando es incorrecta";
+      }
+    }
+
+    newfile.close();
+  }
+  else
+  {
+    cout << "No se pudo abrir el archivo: " << input << endl;
+  }
 }
 
 void curiosity::testfun()
@@ -590,58 +662,128 @@ std::list<comandos> curiosity::getCums()
 /// 2ndo Componente Árboles
 
 void curiosity::ubicar_elementos(list<elemento>& elElem){
-  if (elElem.empty()) 
-  {
-    std::cout << "La información requerida no está almacenada en memoria.\n";
-    return;
-  }
-  else
-  {
-    for (auto &elemento : elElem)
-    {
-      this->arbol.insertar(elemento);
-    }
-    cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
-
-  }
-
-  
+for (auto &elemento : elElem)
+      {
+        this->arbol.insertar(elemento);
+      }
+      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
 }
 
-void curiosity::en_cuadrante(std::string input){
-
-  std::istringstream iss(input);
-  std::vector<std::string> tokens;
-  std::string token;
-  while (iss >> token)
-  {
-    tokens.push_back(token);
-  }
-  float coordX1 = stod(tokens[1]), coordX2 = stod(tokens[2]) , coordY1 = stod(tokens[3]), coordY2 = stod(tokens[4]);
-  cout<<"COORDENADAS:\n"<<coordX1<<coordX2<<coordY1<<coordY2<<endl;
+void curiosity::enCoordenada(string input){
   
-  if (coordX1 >= coordX2 || coordY1 >= coordY2) 
-  {
-    std::cout << "La información del cuadrante no corresponde a los datos esperados (x_min, x_max, y_min, y_max)\n";
-    return;
-  }
-  if (arbol.esVacio()) 
-  {
-    std::cout << "Los elementos no han sido ubicados todavía (con el comando ubicar_elementos)\n";
-    return;
-  }
-  std::list<elemento> listaElementos;
-  std::list<elemento> ::iterator it;
+      std::istringstream iss(input);
+      std::vector<std::string> tokens;
+      std::string token;
+      while (iss >> token)
+      {
+        tokens.push_back(token);
+      }
 
-  arbol.buscarCuadrante(arbol.obtenerRaiz(), coordX1, coordY1, coordX2, coordY2, listaElementos);
-  
-  if (listaElementos.empty()) {
-        std::cout << "No se encontraron elementos dentro del cuadrante especificado\n";
-    }
-    else {
-        std::cout << "Los elementos ubicados en el cuadrante solicitado son:\n";
-        for (it = listaElementos.begin(); it != listaElementos.end(); ++it) {
-            std::cout << "- " << it->getTipoComponente() << " (" << it->getCoordX() << ", " << it->getCoordY() << ")\n";
+      std::list<elemento> listaElementos;
+      // Recorremos el árbol utilizando un ciclo for mejorado
+      NodoQuad *actual = this->arbol.obtenerRaiz();
+      list<NodoQuad *> pila;
+      bool fin = false;
+
+      while (!fin)
+      {
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoSupIzq();
         }
-    }      
+        else if (!pila.empty())
+        {
+          actual = pila.back();
+
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"x"<<elemento.getCoordY()<<"y";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoSupDer();
+        }
+
+        if (actual != nullptr)
+        {
+          pila.push_back(actual);
+          actual = actual->obtenerHijoInfIzq();
+        }
+        else if (!pila.empty())
+        {
+          actual = pila.back();
+
+          elemento elemento = actual->obtenerDato();
+          if (elemento.getCoordX() >= stoi(tokens[1]) && elemento.getCoordX() <= stoi(tokens[2]) &&
+              elemento.getCoordY() >= stoi(tokens[3]) && elemento.getCoordY() <= stoi(tokens[4]))
+          {
+            cout<<elemento.getCoordX()<<"xexterno"<<elemento.getCoordY()<<"yexterno";
+            listaElementos.push_back(elemento);
+          }
+          actual = actual->obtenerHijoInfDer();
+        }
+
+        else
+        {
+          fin = true;
+        }
+      }
+      this->listElem.splice(this->listElem.end(), listaElementos);
+      
 }
+/*
+double distancia_euclidiana(const elemento& elem1, const elemento& elem2) {
+    float dx = elem1.getCoordX() - elem2.getCoordX();
+    float dy = elem1.getCoordY() - elem2.getCoordY();
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+void crear_mapa(const std::vector<elemento>& lista_elementos, double coeficiente_conectividad) {
+    int total_elementos = lista_elementos.size();
+    int num_vecinos = static_cast<int>(total_elementos * coeficiente_conectividad);
+
+    if (total_elementos == 0) {
+        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
+        return;
+    }
+
+    Grafo mapa;
+
+    // Agregar nodos al mapa
+    for (const elemento& elem : lista_elementos) {
+        mapa.InsVertice(elem.getTipoComponente());
+    }
+
+    // Conectar nodos en el mapa
+    for (int i = 0; i < total_elementos; ++i) {
+        const elemento& nodo_actual = lista_elementos[i];
+
+        // Calcular distancias a otros nodos
+        std::vector<std::pair<int, double>> distancias; // Par (índice, distancia)
+        for (int j = 0; j < total_elementos; ++j) {
+            if (j != i) {
+                const elemento& nodo_vecino = lista_elementos[j];
+                double distancia = distancia_euclidiana(nodo_actual, nodo_vecino);
+                distancias.push_back(std::make_pair(j, distancia));
+            }
+        }
+
+        // Ordenar las distancias de menor a mayor
+        std::sort(distancias.begin(), distancias.end(), [](const auto& a, const auto& b) {
+            return a.second < b.second;
+        });
+
+        // Conectar con los nodos más cercanos según el número de vecinos requeridos
+        for (int k = 0; k < num_vecinos; ++k) {
+            int indice_vecino = distancias[k].first;
+            double distancia_vecino = distancias[k].second;
+            const elemento& nodo_vecino = lista_elementos[indice_vecino];
+
+            mapa.InsArco(i, indice_vecino, distancia_vecino);
+        }
+    }
+
+    std::cout << "(Resultado exitoso) El mapa se ha generado exitosamente. Cada elemento tiene " << num_vecinos << " vecinos." << std::endl;
+}*/

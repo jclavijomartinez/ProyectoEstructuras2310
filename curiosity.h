@@ -6,6 +6,7 @@
 #include "movimientos.h"
 #include "analisis.h"
 #include "ArbolGeneralQuad.h"
+#include "Grafo.h"
 #include <list>
 #include <string>
 
@@ -39,7 +40,7 @@ public:
 
   elemento agregar_elemento(std::string input);
 
-  void simular_comandos(std::string input, std::list <movimientos> listaMovimiento,std::list<elemento> listaelemen);
+  void simular_comandos(std::string input, std::list<movimientos> movimiento);
 
   void testfun();
 
@@ -47,7 +48,7 @@ public:
   void ubicar_elementos(std::list<elemento>& elElem);
   void enCoordenada(std::string input);
   void en_cuadrante(std::string input);
-
+  void crear_mapa(Grafo<elemento>& mapa, double coeficiente_conectividad);
   // Getters y Setters
 
   std::list<movimientos> getMovs();

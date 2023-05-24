@@ -70,7 +70,7 @@ int main()
     }
     if (funcion == "simular_comandos")
     {
-      jorgeElCurioso.simular_comandos("coortxt.csv", jorgeElCurioso.cargar_comandos(input),jorgeElCurioso.cargar_elementos(input));
+      jorgeElCurioso.simular_comandos(input,jorgeElCurioso.listMov);
     }
 
     if (funcion == "ayuda")
@@ -85,7 +85,7 @@ int main()
 
     if (funcion == "en_cuadrante")
     {
-      jorgeElCurioso.en_cuadrante(input);
+      jorgeElCurioso.enCoordenada(input);
     }
 
     if (input == "salir")
