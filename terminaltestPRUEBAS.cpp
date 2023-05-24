@@ -42,7 +42,11 @@ int main()
     }
     if (funcion == "cargar_elementos")
     {
+      cout<<"entra al if"<<endl;
+
       jorgeElCurioso.listElem.splice(jorgeElCurioso.listElem.end(), jorgeElCurioso.cargar_elementos(input));
+    
+    cout<<"sale de la función"<<endl;
     }
     if (funcion == "agregar_movimiento")
     {

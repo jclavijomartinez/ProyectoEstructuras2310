@@ -103,6 +103,7 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
 
 std::list<elemento> curiosity::cargar_elementos(std::string ruta)
 {
+  cout<<"entra a la funcion"<<endl;
   fstream newfile;
   std::list<elemento> listadev;
   elemento elelem;
