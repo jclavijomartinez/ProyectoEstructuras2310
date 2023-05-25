@@ -89,8 +89,13 @@ int main()
 
     if (funcion == "en_cuadrante")
     {
-      jorgeElCurioso.enCoordenada(input);
+      jorgeElCurioso.en_cuadrante(input);
     }
+    if (funcion == "crear_mapa")
+    {
+      jorgeElCurioso.crear_mapa(input);
+    }
+   
 
     if (input == "salir")
       break;

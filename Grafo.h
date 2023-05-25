@@ -13,7 +13,7 @@ class Grafo {
 	public:
 		Grafo();
 		void InsVertice(T v);
-		void InsArco(int v1, int v2, int c);
+		void InsArco(T v1, T v2, double c);
 		void ElimArco(int v1, int v2);
 		void ElimVertice(int v);
 		void MarcarVertice(int v);

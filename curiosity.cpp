@@ -103,7 +103,7 @@ std::list<movimientos> curiosity::cargar_comandos(std::string ruta)
 
 std::list<elemento> curiosity::cargar_elementos(std::string ruta)
 {
-  cout<<"entra a la funcion"<<endl;
+  cout << "entra a la funcion" << endl;
   fstream newfile;
   std::list<elemento> listadev;
   elemento elelem;
@@ -338,138 +338,71 @@ elemento curiosity::agregar_elemento(std::string input)
   return elem;
 }
 
-void curiosity::simular_comandos(std::string input, list<movimientos> movimiento)
+void curiosity::simular_comandos(std::string input, std::list<movimientos> movimiento)
 {
 
-  float pi = 3.141592;
-  int cambioA = 0;
-  float grados = 0.0;
-  int num_p;
-  int posX = 0, posY = 0;
-  int posXArch = 0, posYArch = 0;
-  bool validar = true;
-  int nuevas_coor[2] = {0, 0};
+  float posXArch = 0, posYArch = 0;
   string d1, d2;
-  list<movimientos>::iterator itM;
-  list<elemento> elem;
-  list<elemento>::iterator itE;
-
-  if (movimiento.empty())
+  list<movimientos>::iterator it;
+  list<movimientos> aux;
+  std::istringstream iss(input);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
   {
-    cout << "Lista vacia" << endl;
+    tokens.push_back(token);
   }
+  try
+  {
+    posXArch = stod(tokens[1]);
+    posYArch = stod(tokens[2]);
+  }
+  catch (std::invalid_argument &e)
+  {
+    cout << "Las coordenas no son numeros enteros o decimales";
+    exit(1);
+  }
+
+  float auxX = 1, auxY = 0, posX = posXArch, posY = posYArch, giro = 0;
+
+  copy(movimiento.begin(), movimiento.end(), std::back_inserter(aux)); // copiar la lista de movimientos en aux
+  if (aux.empty())
+  {
+    std::cout << "(No hay informacion) La informacion requerida de movimientos no esta almacenada en memoria.\n";
+  }
+
   else
   {
-    // Que existan en la lista
-    for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
+    for (it = aux.begin(); it != aux.end(); it++)
     {
-      if (itM->getTipoMov() == "a" || itM->getTipoMov() == "g")
+
+      if (it->getTipoMov() == "avanzar")
       {
-        validar = true;
+        if (it->getUniMed() == "metros")
+        {
+          posXArch += it->getMagnitud() * std::cos(giro * 3.141592654 / 180);
+          posYArch += it->getMagnitud() * std::sin(giro * 3.141592654 / 180);
+        }
+        else if (it->getUniMed() == "cm")
+        {
+          posXArch += (it->getMagnitud() / 1000) * std::cos(giro * 3.141592654 / 180);
+          posYArch += (it->getMagnitud() / 1000) * std::sin(giro * 3.141592654 / 180);
+        }
       }
-    }
-  }
-
-  fstream newfile;
-  std::string nombre_archivo = input.substr(0);
-  newfile.open(nombre_archivo, ios::in);
-
-  if (newfile.peek() == ifstream::traits_type::eof())
-  {
-    cout << input << " no contiene elementos (esta vacio)" << endl;
-  }
-  else if (newfile.is_open())
-  {
-    std::string opcion;
-    while (getline(newfile, opcion))
-    {
-
-      if (!opcion.empty() && validar == true)
+      else if (it->getTipoMov() == "girar")
       {
-        /*stringstream ss(opcion);
-        ss >> posXArch;*/
-
-        stringstream input_stringstream(opcion); // Separar datos del archivo despues de un espacio
-        getline(input_stringstream, d1, ' ');
-        getline(input_stringstream, d2, ' ');
-
-        posXArch = stoi(d1); // Convertir los datos a enteros
-        posYArch = stoi(d2);
-
-        cout << "\n Posicion x: " << posX;
-        cout << "\n Posicion y: " << posY;
-
-        cout << "\n Posicion Archivo x: " << posXArch;
-        cout << "\n Posicion Archivo y: " << posYArch;
-
-        for (itM = movimiento.begin(); itM != movimiento.end(); itM++)
-        {
-          nuevas_coor[0] = posX + posXArch;
-          nuevas_coor[1] = posY + posYArch;
-
-          if (itM->getTipoMov() == "a")
-          {
-            // Si son cm
-
-            if (itM->getUniMed() == "c")
-            {
-              cambioA = itM->getMagnitud() / 100;
-            }
-            // Si son metros
-            else if (itM->getUniMed() == "m")
-            {
-              cambioA = itM->getMagnitud();
-            }
-            else
-            {
-              cout << "Error en la unidad de medida";
-            }
-
-            /*nuevas_coor[0] +=  cambioA * cos(grados);
-            nuevas_coor[1] +=  cambioA * sin(grados);*/
-          }
-          else if (itM->getTipoMov() == "g")
-          {
-            // si son grados
-            grados += itM->getMagnitud() * (pi / 180);
-          }
-          else
-          {
-            cout << "Error en el tipo de movimiento";
-          }
-
-          nuevas_coor[0] += cambioA * cos(grados);
-          nuevas_coor[1] += cambioA * sin(grados);
-        }
-
-        cout << "\nLa simulacion de los comandos, a partir de la posicion ("
-             << posX << ", " << posY << "), deja al robot en la nueva posicion ("
-             << nuevas_coor[0] << ", " << nuevas_coor[1] << ") ."
-             << endl;
-        for (itE = elem.begin(); itE != elem.end(); itE++)
-        {
-          itE->setCoordX(nuevas_coor[0]);
-          itE->setCoordY(nuevas_coor[1]);
-        }
-            
+        giro += it->getMagnitud();
       }
       else
       {
-        cout << "\nLa estructura del comando es incorrecta";
+        cout << "\nLa estructura del comando es incorrecta" << endl;
       }
     }
-
-    newfile.close();
+    cout << "\nLa simulacion de los comandos, a partir de la posicion ("
+         << posX << ", " << posY << "), deja al robot en la nueva posicion ("
+         << posXArch << ", " << posYArch << ") ." << endl
+         << endl;
   }
-  else
-  {
-    cout << "No se pudo abrir el archivo: " << input << endl;
-  }
-}
-
-void curiosity::testfun()
-{
-  std::cout << "un superduper texto" << endl;
 }
 
 void curiosity::ayuda(std::string input)
@@ -641,36 +574,48 @@ void curiosity::ayuda(std::string input)
   }
 }
 
-//Getters y Setters
-    std::list<movimientos> curiosity::getMovs(){
-        return listMov;
-    }
+// Getters y Setters
+std::list<movimientos> curiosity::getMovs()
+{
+  return listMov;
+}
 
 std::list<elemento> curiosity::getElems()
 {
-    return listElem;
+  return listElem;
 }
 
 std::list<analisis> curiosity::getAnals()
 {
-    return listAnalisis;
+  return listAnalisis;
 }
 
 std::list<comandos> curiosity::getCums()
 {
-    return listCum;
+  return listCum;
 }
 /// 2ndo Componente Árboles
 
 void curiosity::ubicar_elementos(list<elemento>& elElem){
-for (auto &elemento : elElem)
-      {
-        this->arbol.insertar(elemento);
-      }
-      cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+  if (elElem.empty()) 
+  {
+    std::cout << "La información requerida no está almacenada en memoria.\n";
+    return;
+  }
+  else
+  {
+    for (auto &elemento : elElem)
+    {
+      this->arbol.insertar(elemento);
+    }
+    cout << "Lista de Elementos guardada satisfactoriamente en el Arbol" << endl;
+
+  }
 }
 
-void curiosity::en_cuadrante(std::string input){
+
+void curiosity::en_cuadrante(std::string input)
+{
 
   std::istringstream iss(input);
   std::vector<std::string> tokens;
@@ -679,86 +624,186 @@ void curiosity::en_cuadrante(std::string input){
   {
     tokens.push_back(token);
   }
-  float coordX1 = stod(tokens[1]), coordX2 = stod(tokens[2]) , coordY1 = stod(tokens[3]), coordY2 = stod(tokens[4]);
-  cout<<"COORDENADAS:\n"<<coordX1<<coordX2<<coordY1<<coordY2<<endl;
-  
-  if (coordX1 >= coordX2 || coordY1 >= coordY2) 
+  float coordX1 = stod(tokens[1]), coordX2 = stod(tokens[2]), coordY1 = stod(tokens[3]), coordY2 = stod(tokens[4]);
+  cout << "COORDENADAS:\n"
+       << coordX1 << coordX2 << coordY1 << coordY2 << endl;
+
+  if (coordX1 >= coordX2 || coordY1 >= coordY2)
   {
     std::cout << "La información del cuadrante no corresponde a los datos esperados (x_min, x_max, y_min, y_max)\n";
     return;
   }
-  if (arbol.esVacio()) 
+  if (arbol.esVacio())
   {
     std::cout << "Los elementos no han sido ubicados todavía (con el comando ubicar_elementos)\n";
     return;
   }
   std::list<elemento> listaElementos;
-  std::list<elemento> ::iterator it;
+  std::list<elemento>::iterator it;
 
   arbol.buscarCuadrante(arbol.obtenerRaiz(), coordX1, coordY1, coordX2, coordY2, listaElementos);
-  
-  if (listaElementos.empty()) {
-        std::cout << "No se encontraron elementos dentro del cuadrante especificado\n";
+
+  if (listaElementos.empty())
+  {
+    std::cout << "No se encontraron elementos dentro del cuadrante especificado\n";
+  }
+  else
+  {
+    std::cout << "Los elementos ubicados en el cuadrante solicitado son:\n";
+    for (it = listaElementos.begin(); it != listaElementos.end(); ++it)
+    {
+      std::cout << "- " << it->getTipoComponente() << " (" << it->getCoordX() << ", " << it->getCoordY() << ")\n";
     }
-    else {
-        std::cout << "Los elementos ubicados en el cuadrante solicitado son:\n";
-        for (it = listaElementos.begin(); it != listaElementos.end(); ++it) {
-            std::cout << "- " << it->getTipoComponente() << " (" << it->getCoordX() << ", " << it->getCoordY() << ")\n";
+  }
+}
+
+double distancia_euclidiana(elemento elem1, elemento elem2)
+{
+  float dx = elem1.getCoordX() - elem2.getCoordX();
+  float dy = elem1.getCoordY() - elem2.getCoordY();
+  return std::sqrt(dx * dx + dy * dy);
+}
+
+
+void curiosity::crear_mapa(std::string params) {
+    // Paso 1: COnseguir el coficiente en el input
+   std::istringstream iss(params);
+  std::vector<std::string> tokens;
+  std::string token;
+  while (iss >> token)
+  {
+    tokens.push_back(token);
+    cout<<token<<endl;
+  }
+  
+
+double coeficiente_conectividad = stod(tokens[1]);
+
+
+  
+   
+    int cont=0;
+    for (const elemento& elemento1 : listElem){
+cont++;
+    }
+
+    // Paso 2: Calcular la cantidad de vecinos que debe tener cada elemento
+    int total_elementos = cont;
+    int cantidad_vecinos = total_elementos * coeficiente_conectividad;
+
+   
+std::vector<elemento> distancias;
+    // Paso 3: Conectar los elementos en el grafo
+    for (const elemento& elemento1 : listElem) {
+        // Calcular la distancia euclidiana entre el elemento y los demás elementos
+       
+        for (const elemento& otro_elemento : listElem) {
+          
+                int distancia = distancia_euclidiana(elemento1, otro_elemento);
+                distancias[distancia] = otro_elemento;
+            
         }
-    }      
+
+        // Seleccionar los 'n' elementos más cercanos como vecinos
+        std::list<elemento> vecinos;
+        int contador_vecinos = 0;
+        for (const auto& distancia_elemento : distancias) {
+            if (contador_vecinos == cantidad_vecinos) {
+                break;
+            }
+            vecinos.push_back(distancia_elemento);
+            contador_vecinos++;
+        }
+
+        // Agregar arcos al grafo para conectar el elemento con sus vecinos
+        for (const elemento& vecinoE : vecinos) {
+            double distancia = distancia_euclidiana(elemento1, vecinoE);
+            elPapa.InsArco(elemento1, vecinoE, distancia);
+        }
+    }
+
+    // Paso 4: Mostrar el resultado
+    if (!elPapa.getvertices().empty()) {
+        std::cout << "El mapa se ha generado exitosamente. Cada elemento tiene " << cantidad_vecinos << " vecinos." << std::endl;
+    } else {
+        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
+    }
+    
 }
 
 /*
-double distancia_euclidiana(const elemento& elem1, const elemento& elem2) {
-    float dx = elem1.getCoordX() - elem2.getCoordX();
-    float dy = elem1.getCoordY() - elem2.getCoordY();
-    return std::sqrt(dx * dx + dy * dy);
-}
-
-void crear_mapa(const std::vector<elemento>& lista_elementos, double coeficiente_conectividad) {
-    int total_elementos = lista_elementos.size();
-    int num_vecinos = static_cast<int>(total_elementos * coeficiente_conectividad);
-
-    if (total_elementos == 0) {
-        std::cout << "(No hay información) La información requerida no está almacenada en memoria." << std::endl;
+void curiosity::ruta_mas_larga(const Grafo<elemento>& grafo) {
+    // Verificar si el mapa ha sido generado previamente
+    if (elPapa.getvertices().empty()) {
+        std::cout << "(No hay información) El mapa no ha sido generado todavía (con el comando crear_mapa)." << std::endl;
         return;
     }
 
-    Grafo mapa;
+    // Variables para almacenar la ruta más larga encontrada
+    int maxima_longitud = 0;
+    std::list<elemento> ruta_maxima;
+int i=0;
+    // Bucle para realizar una búsqueda en profundidad (DFS) desde cada vértice del grafo
+    for (const auto& vertice : elPapa.getvertices()) {
+        std::list<elemento> ruta_actual;
+        std::vector<elemento, bool> visitados;
 
-    // Agregar nodos al mapa
-    for (const elemento& elem : lista_elementos) {
-        mapa.InsVertice(elem.getTipoComponente());
-    }
-
-    // Conectar nodos en el mapa
-    for (int i = 0; i < total_elementos; ++i) {
-        const elemento& nodo_actual = lista_elementos[i];
-
-        // Calcular distancias a otros nodos
-        std::vector<std::pair<int, double>> distancias; // Par (índice, distancia)
-        for (int j = 0; j < total_elementos; ++j) {
-            if (j != i) {
-                const elemento& nodo_vecino = lista_elementos[j];
-                double distancia = distancia_euclidiana(nodo_actual, nodo_vecino);
-                distancias.push_back(std::make_pair(j, distancia));
-            }
+        // Bucle para marcar todos los vértices como no visitados
+        for (const auto& v : elPapa.getvertices()) {
+            i++;
+            visitados[i] = false;
         }
 
-        // Ordenar las distancias de menor a mayor
-        std::sort(distancias.begin(), distancias.end(), [](const auto& a, const auto& b) {
-            return a.second < b.second;
-        });
+        // Llamar a la función de búsqueda en profundidad para encontrar la ruta más larga desde el vértice actual
+        encontrar_ruta_mas_larga(grafo, vertice, ruta_actual, visitados, maxima_longitud, ruta_maxima);
+    }
 
-        // Conectar con los nodos más cercanos según el número de vecinos requeridos
-        for (int k = 0; k < num_vecinos; ++k) {
-            int indice_vecino = distancias[k].first;
-            double distancia_vecino = distancias[k].second;
-            const elemento& nodo_vecino = lista_elementos[indice_vecino];
+    // Mostrar el resultado
+    if (maxima_longitud > 0) {
+        std::cout << "Los puntos de interés más alejados entre sí son " << ruta_maxima.front() << " y " << ruta_maxima.back() << "." << std::endl;
+        std::cout << "La ruta que los conecta tiene una longitud total de " << maxima_longitud << " y pasa por los siguientes elementos:" << std::endl;
+        for ( auto& elemento : ruta_maxima) {
+            std::cout<< elemento.getTipoComponente() << " ";
+        }
+        std::cout << std::endl;
+    } else {
+        std::cout << "(No hay información) No se encontró ninguna ruta en el mapa." << std::endl;
+    }
+}
+*/
+/*
+void encontrar_ruta_mas_larga(const Grafo<elemento>& grafo, elemento& vertice_actual, std::list<elemento>& ruta_actual, std::vector<elemento, bool>& visitados, int& maxima_longitud, std::list<elemento>& ruta_maxima) {
+    // Marcar el vértice actual como visitado
+    for (const auto& v : ) {
+           
+            visitados[i] = false;
+        }
 
-            mapa.InsArco(i, indice_vecino, distancia_vecino);
+    // Agregar el vértice actual a la ruta actual
+    ruta_actual.push_back(vertice_actual);
+
+    // Comprobar si se ha encontrado una ruta más larga
+    if (ruta_actual.size() > maxima_longitud) {
+        maxima_longitud = ruta_actual.size();
+        ruta_maxima = ruta_actual;
+    }
+
+    // Explorar los sucesores del vértice actual
+    for (const auto& sucesor : grafo.sucesores(vertice_actual)) {
+        if (!visitados[sucesor]) {
+            // Realizar una llamada recursiva para el sucesor no visitado
+            encontrar_ruta_mas_larga(grafo, sucesor, ruta_actual, visitados, maxima_longitud, ruta_maxima);
         }
     }
 
-    std::cout << "(Resultado exitoso) El mapa se ha generado exitosamente. Cada elemento tiene " << num_vecinos << " vecinos." << std::endl;
-}*/
+    // Eliminar el vértice actual de la ruta actual y desmarcarlo como visitado
+    ruta_actual.pop_back();
+    visitados[vertice_actual] = false;
+}
+
+
+*/
+
+
+
+  

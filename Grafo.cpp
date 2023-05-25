@@ -16,7 +16,7 @@ void Grafo<T>::InsVertice(T v)
 }
 
 template<typename T>
-void Grafo<T>::InsArco(int v1, int v2, int c) {
+void Grafo<T>::InsArco(T v1, T v2, double c) {
     for (auto& nodo : vertices) {
         if (nodo.getInfoVertice() == v1) {
             nodo.setArcos(nodo.getArcos().push_back(typename NodoG<T>::Arco(v2, c)));

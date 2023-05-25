@@ -19,6 +19,7 @@ public:
   std::list<analisis> listAnalisis;
   std::list<comandos> listCum;
   ArbolQuad arbol;
+  Grafo<elemento> elPapa;
 
   std::list<movimientos> cargar_comandos(std::string ruta);
 
@@ -48,7 +49,8 @@ public:
   void ubicar_elementos(std::list<elemento>& elElem);
   void enCoordenada(std::string input);
   void en_cuadrante(std::string input);
-  void crear_mapa(Grafo<elemento>& mapa, double coeficiente_conectividad);
+  void crear_mapa(std::string params);
+  void ruta_mas_larga();
   // Getters y Setters
 
   std::list<movimientos> getMovs();
